@@ -9,10 +9,12 @@ import com.gquartet.GroupProject.models.Role;
 import com.gquartet.GroupProject.services.CustomerService;
 import com.gquartet.GroupProject.services.RoleService;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +38,59 @@ public class CustomerController {
     }
 
     @PostMapping("/doregister")
-    public String doRegister(@ModelAttribute("registeruser") RegisterCustomerDto dto) {
-        Customer c = new Customer();
+    public String doRegister(@Valid @ModelAttribute("registeruser") RegisterCustomerDto dto, BindingResult result, ModelMap mm) {
 
+        String username = dto.getUsername();
+        String email = dto.getEmail();
+        String pass = dto.getPassword();
+        String pass2 = dto.getPassword2();
+        Customer customerUsername = customerService.getCustomerByUsername(username);//elegx an to username uparxei hdh sth bash
+        Customer customerEmail = customerService.getCustomerByEmail(email);//elegxw an to email uparxei hdh sth bash
+
+//***************************ELEGXW AN TA STOIXEIA POU MOU DINEI O XRHSTHS EINAI SWSTA**************************************       
+        if (customerUsername != null) {// wrong username
+            mm.addAttribute("wrongusername", "Username already exists");
+            return "register";
+        }
+        if (username == null) {
+            mm.addAttribute("wrongusername", "Username must not be blank");
+            return "register";
+        }
+        if (username.length() < 3) {
+            mm.addAttribute("wrongusername", "Username is less than 3 characters");
+            return "register";
+        }
+        if (customerEmail != null) {
+            mm.addAttribute("wrongemail", "This Email already exists");
+            return "register";
+        }
+        if (email == null) {
+            mm.addAttribute("wrongemail", "Email must not be blank");
+            return "register";
+        }
+        if (!iscompleteEmail(email)) {
+            mm.addAttribute("wrongemail", "Not Valid Email");
+            return "register";
+        }
+        if (pass == null) {
+            mm.addAttribute("wrongpass", "Password must not be blank");
+            return "register";
+        }
+        if (pass.length() < 7) {
+            mm.addAttribute("wrongpass", "Password is less than 7 characters");
+            return "register";
+        }
+        if (pass2 == null) {
+            mm.addAttribute("wrongpass2", "Confirm Password must not be blank");
+            return "register";
+        }
+        if (!pass.equals(pass2)) {
+            mm.addAttribute("wrongpass2", "Confirm Password doesn't match with Password");
+            return "register";
+        }
+//***************************EAN TA STOIXEIA POU DINEI O XRHSTHS EINAI SWSTA TOTE BAZW TON XRHSTH STH BASH**************************************   
+
+        Customer c = new Customer();
         //TODO Check if username already exists
         c.setUsername(dto.getUsername());
         //TODO check if email already exists
@@ -49,6 +101,13 @@ public class CustomerController {
         c.setRoleId(role);
         customerService.saveCustomer(c);
         return "redirect:/"; // Με αυτήν την εντολή θα ανοίξει την index
+    }
+
+    public boolean iscompleteEmail(String email) {
+        if (email.matches("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$")) {
+            return true;
+        }
+        return false;
     }
 
     @PostMapping("/dologin")

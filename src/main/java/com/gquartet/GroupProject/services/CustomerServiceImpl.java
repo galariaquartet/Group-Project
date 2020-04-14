@@ -5,6 +5,7 @@ package com.gquartet.GroupProject.services;
 
 import com.gquartet.GroupProject.models.Customer;
 import com.gquartet.GroupProject.repos.CustomerRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,15 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerByUsername(String username) {
         return customerRepository.findByUsername(username);
     }
-    
+
+    @Override
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
+
+
+
+
+ 
 }
