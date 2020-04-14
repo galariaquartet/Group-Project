@@ -80,6 +80,7 @@ public class CustomerController {
             mm.addAttribute("wrongpass", "Password is less than 7 characters");
             return "register";
         }
+        //na baleis na mhn pairnei xarakthres***********************************************************
         if (pass2 == null) {
             mm.addAttribute("wrongpass2", "Confirm Password must not be blank");
             return "register";
@@ -96,7 +97,7 @@ public class CustomerController {
         //TODO check if email already exists    --> check
         c.setEmail(dto.getEmail());
         //TODO Check 2 passwords             --> check
-        c.setPassword(passwordEncoder.encode(dto.getPassword()));
+        c.setPassword(passwordEncoder.encode(dto.getPassword())); //kwdikopoioume to password sth bash
         Role role = roleService.getCustomerRole();
         c.setRoleId(role);
         customerService.saveCustomer(c);
