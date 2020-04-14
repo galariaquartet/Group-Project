@@ -91,11 +91,11 @@ public class CustomerController {
 //***************************EAN TA STOIXEIA POU DINEI O XRHSTHS EINAI SWSTA TOTE BAZW TON XRHSTH STH BASH**************************************   
 
         Customer c = new Customer();
-        //TODO Check if username already exists
+        //TODO Check if username already exists   --> check
         c.setUsername(dto.getUsername());
-        //TODO check if email already exists
+        //TODO check if email already exists    --> check
         c.setEmail(dto.getEmail());
-        //TODO Check 2 passwords
+        //TODO Check 2 passwords             --> check
         c.setPassword(passwordEncoder.encode(dto.getPassword()));
         Role role = roleService.getCustomerRole();
         c.setRoleId(role);
