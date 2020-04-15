@@ -1,6 +1,3 @@
-/*
- * Created on 12/04/2020 at 22:12:45 GMT+2
- */
 package com.gquartet.GroupProject.controllers;
 
 import com.gquartet.GroupProject.dtos.RegisterCustomerDto;
@@ -8,6 +5,7 @@ import com.gquartet.GroupProject.models.Customer;
 import com.gquartet.GroupProject.models.Role;
 import com.gquartet.GroupProject.services.CustomerService;
 import com.gquartet.GroupProject.services.RoleService;
+import com.gquartet.GroupProject.validators.CustomerValidator;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +30,15 @@ public class CustomerController {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    CustomerValidator customerValidator;
+
+    //pairnei to antikeimeno k tou leme oti exei ena validator etsi kolame to controller sto validator
+    @InitBinder
+    private void initBinder(WebDataBinder binder) {//WebDataBinder is a DataBinder that binds request parameter to JavaBean objects.
+        binder.addValidators(customerValidator);
+    }
+
     @GetMapping("/preregister")
     public String preRegister(ModelMap mm) {
         RegisterCustomerDto registerUserDto = new RegisterCustomerDto();
@@ -38,7 +47,7 @@ public class CustomerController {
     }
 
     @PostMapping("/doregister")
-    public String doRegister(@Valid @ModelAttribute("registeruser") RegisterCustomerDto dto, BindingResult result, ModelMap mm) {
+    public String doRegister(@Valid @ModelAttribute("registeruser") RegisterCustomerDto dto, BindingResult bindingResult, ModelMap mm) {
 
         String username = dto.getUsername();
         String email = dto.getEmail();
@@ -47,50 +56,13 @@ public class CustomerController {
         Customer customerUsername = customerService.getCustomerByUsername(username);//elegx an to username uparxei hdh sth bash
         Customer customerEmail = customerService.getCustomerByEmail(email);//elegxw an to email uparxei hdh sth bash
 
-//***************************ELEGXW AN TA STOIXEIA POU MOU DINEI O XRHSTHS EINAI SWSTA**************************************       
-        if (customerUsername != null) {// wrong username
-            mm.addAttribute("wrongusername", "Username already exists");
-            return "register";
+//***************************ELEGXW AN TA STOIXEIA POU MOU DINEI O XRHSTHS EINAI SWSTA************************************** 
+        if (bindingResult.hasErrors()) {
+            return "register"; //3anadeixnei thn index alla pleon me ta errors sthn 8esh pou tous exei upodei3ei o xrhsths
         }
-        if (username == null) {
-            mm.addAttribute("wrongusername", "Username must not be blank");
-            return "register";
-        }
-        if (username.length() < 3) {
-            mm.addAttribute("wrongusername", "Username is less than 3 characters");
-            return "register";
-        }
-        if (customerEmail != null) {
-            mm.addAttribute("wrongemail", "This Email already exists");
-            return "register";
-        }
-        if (email == null) {
-            mm.addAttribute("wrongemail", "Email must not be blank");
-            return "register";
-        }
-        if (!iscompleteEmail(email)) {
-            mm.addAttribute("wrongemail", "Not Valid Email");
-            return "register";
-        }
-        if (pass == null) {
-            mm.addAttribute("wrongpass", "Password must not be blank");
-            return "register";
-        }
-        if (pass.length() < 7) {
-            mm.addAttribute("wrongpass", "Password is less than 7 characters");
-            return "register";
-        }
-        //na baleis na mhn pairnei xarakthres***********************************************************
-        if (pass2 == null) {
-            mm.addAttribute("wrongpass2", "Confirm Password must not be blank");
-            return "register";
-        }
-        if (!pass.equals(pass2)) {
-            mm.addAttribute("wrongpass2", "Confirm Password doesn't match with Password");
-            return "register";
-        }
-//***************************EAN TA STOIXEIA POU DINEI O XRHSTHS EINAI SWSTA TOTE BAZW TON XRHSTH STH BASH**************************************   
+//        //na baleis na mhn pairnei xarakthres***********************************************************
 
+//***************************EAN TA STOIXEIA POU DINEI O XRHSTHS EINAI SWSTA TOTE BAZW TON XRHSTH STH BASH**************************************   
         Customer c = new Customer();
         //TODO Check if username already exists   --> check
         c.setUsername(dto.getUsername());
@@ -104,12 +76,7 @@ public class CustomerController {
         return "redirect:/"; // Με αυτήν την εντολή θα ανοίξει την index
     }
 
-    public boolean iscompleteEmail(String email) {
-        if (email.matches("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$")) {
-            return true;
-        }
-        return false;
-    }
+
 
     @PostMapping("/dologin")
     public String login(@RequestParam("username") String username,

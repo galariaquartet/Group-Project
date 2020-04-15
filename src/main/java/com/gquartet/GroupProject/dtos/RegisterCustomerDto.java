@@ -3,11 +3,21 @@
  */
 package com.gquartet.GroupProject.dtos;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class RegisterCustomerDto {
 
+  //  @NotBlank(message = "Username must not be blank")
+ //   @Size(min = 3, max = 45, message = "Username must be between 4 and 45")
     private String username;
+    @Pattern(regexp = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$", message = "Not valid email")
+    @Email(message = "Not email")
     private String email;
     private String password;
+   // @NotBlank(message = "Confirm Password required")
     private String password2;
 
     public String getUsername() {

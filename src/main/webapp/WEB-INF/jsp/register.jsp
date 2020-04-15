@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form"
+           prefix="springForm"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,6 +54,7 @@
                                 <div class="controls">
                                     <form:input path="username" cssClass="input-xlarge" id="username"/><spann id="checkresult"></spann>
                                     <span style="color: red"><strong>${wrongusername}</strong></span>
+                                    <td><springForm:errors path="username" cssClass="error"/></td> 
                                 </div>
                             </div>
                             <div class="control-group">
@@ -60,6 +63,7 @@
                                 <div class="controls">
                                     <form:input path="email" cssClass="input-xlarge" type="email"/>
                                      <span style="color: red"><strong>${wrongemail}</strong></span>
+                                      <td><springForm:errors path="email" cssClass="error" /></td>
                                 </div>
                             </div> 
                             <div class="control-group">
@@ -68,6 +72,7 @@
                                 <div class="controls">
                                     <form:input path="password" cssClass="input-xlarge" type="password"/>
                                      <span style="color: red"><strong>${wrongpass}</strong></span>
+                                      <td><springForm:errors path="password" cssClass="error" /></td>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -76,6 +81,7 @@
                                 <div class="controls">
                                     <form:input path="password2" cssClass="input-xlarge" type="password"/>
                                     <span style="color: red"><strong>${wrongpass2}</strong></span>
+                                    <td><springForm:errors path="password2" cssClass="error" /></td>
                                 </div>
                             </div>
                             <br><br>
