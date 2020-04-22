@@ -49,13 +49,6 @@ public class CustomerController {
     @PostMapping("/doregister")
     public String doRegister(@Valid @ModelAttribute("registeruser") RegisterCustomerDto dto, BindingResult bindingResult, ModelMap mm) {
 
-        String username = dto.getUsername();
-        String email = dto.getEmail();
-        String pass = dto.getPassword();
-        String pass2 = dto.getPassword2();
-        Customer customerUsername = customerService.getCustomerByUsername(username);//elegx an to username uparxei hdh sth bash
-        Customer customerEmail = customerService.getCustomerByEmail(email);//elegxw an to email uparxei hdh sth bash
-
 //***************************ELEGXW AN TA STOIXEIA POU MOU DINEI O XRHSTHS EINAI SWSTA************************************** 
         if (bindingResult.hasErrors()) {
             return "register"; //3anadeixnei thn index alla pleon me ta errors sthn 8esh pou tous exei upodei3ei o xrhsths

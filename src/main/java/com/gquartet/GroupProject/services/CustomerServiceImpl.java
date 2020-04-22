@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    
+
     @Autowired
     private CustomerRepository customerRepository;
-    
+
     @Override
-    public void saveCustomer(Customer customer){
+    public void saveCustomer(Customer customer) {
         customerRepository.save(customer);
     }
 
@@ -26,13 +26,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerByEmail(String email) {
-        return customerRepository.findByEmail(email);
+    public boolean existsCustomerUsername(String username) {
+        if (customerRepository.findByUsername(username) != null) {
+            return true;
+        }
+        return false;
     }
 
+    @Override
+    public boolean existsCustomerEmail(String email) {
+        if (customerRepository.findByEmail(email) != null) {
+            return true;
+        }
+        return false;
+    }
 
-
-
-
- 
 }
