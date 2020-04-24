@@ -3,6 +3,7 @@
  */
 package com.gquartet.GroupProject.services;
 
+import com.gquartet.GroupProject.dtos.CustomerDto;
 import com.gquartet.GroupProject.models.Customer;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface CustomerService {
     public Customer getCustomerByUsername(String username);
     
     public boolean existsCustomerUsername(String username);
+    
+    public List<CustomerDto> listUsernameEmail(); 
     
     public boolean existsCustomerEmail(String email);
     

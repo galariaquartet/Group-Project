@@ -1,8 +1,6 @@
-/*
- * Created on 12/04/2020 at 22:24:05 GMT+2
- */
 package com.gquartet.GroupProject.services;
 
+import com.gquartet.GroupProject.dtos.CustomerDto;
 import com.gquartet.GroupProject.models.Customer;
 import com.gquartet.GroupProject.repos.CustomerRepository;
 import java.util.List;
@@ -25,6 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findByUsername(username);
     }
 
+    //elegxei an uparxei to onoma mesa sth bash k epistrefei true/false
     @Override
     public boolean existsCustomerUsername(String username) {
         if (customerRepository.findByUsername(username) != null) {
@@ -33,12 +32,20 @@ public class CustomerServiceImpl implements CustomerService {
         return false;
     }
 
+    //elegxei an uparxei to email mesa sth bash k epistrefei true/false
     @Override
     public boolean existsCustomerEmail(String email) {
         if (customerRepository.findByEmail(email) != null) {
             return true;
         }
         return false;
+    }
+
+    //epistrefei olh th lista me ta omomata twn customer 
+    @Override
+    public List<CustomerDto> listUsernameEmail() {
+        List<CustomerDto> usernamesEmails = customerRepository.getCustomerUsernameEmail();
+        return usernamesEmails;
     }
 
 }

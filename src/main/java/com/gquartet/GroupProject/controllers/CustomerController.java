@@ -1,11 +1,13 @@
 package com.gquartet.GroupProject.controllers;
 
+import com.gquartet.GroupProject.dtos.CustomerDto;
 import com.gquartet.GroupProject.dtos.RegisterCustomerDto;
 import com.gquartet.GroupProject.models.Customer;
 import com.gquartet.GroupProject.models.Role;
 import com.gquartet.GroupProject.services.CustomerService;
 import com.gquartet.GroupProject.services.RoleService;
 import com.gquartet.GroupProject.validators.CustomerValidator;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/demo")
+//@Controller
 public class CustomerController {
 
     @Autowired
@@ -50,10 +57,10 @@ public class CustomerController {
     public String doRegister(@Valid @ModelAttribute("registeruser") RegisterCustomerDto dto, BindingResult bindingResult, ModelMap mm) {
 
 //***************************ELEGXW AN TA STOIXEIA POU MOU DINEI O XRHSTHS EINAI SWSTA************************************** 
+//me th sunarthsh auth phgainei ston validator k elegxei an ta dedomena einai la8os h oxi 
         if (bindingResult.hasErrors()) {
             return "register"; //3anadeixnei thn index alla pleon me ta errors sthn 8esh pou tous exei upodei3ei o xrhsths
         }
-//        //na baleis na mhn pairnei xarakthres***********************************************************
 
 //***************************EAN TA STOIXEIA POU DINEI O XRHSTHS EINAI SWSTA TOTE BAZW TON XRHSTH STH BASH**************************************   
         Customer c = new Customer();
@@ -68,8 +75,6 @@ public class CustomerController {
         customerService.saveCustomer(c);
         return "redirect:/"; // Με αυτήν την εντολή θα ανοίξει την index
     }
-
-
 
     @PostMapping("/dologin")
     public String login(@RequestParam("username") String username,
@@ -102,5 +107,13 @@ public class CustomerController {
             return "index";
         }
         return "problem";
+    }
+
+    //epistrefei mia lista me to username k to email tou customer se json morfh
+    @ResponseBody
+    @GetMapping("/foo")
+    public List<CustomerDto> allCustomersUsernames() {
+        List<CustomerDto> usernamesEmails = customerService.listUsernameEmail();
+        return usernamesEmails;
     }
 }
