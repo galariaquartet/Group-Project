@@ -33,15 +33,14 @@
                 </thead>
                 <tbody>
                     <script>
-                        var x =[];
+                        var products = new Array();
                     </script>
                     
                     <c:forEach var="pr" items="${listproducts}">
                     
                     <script>
-                        x.push("${pr}");
-                        x.push("${pr.productDescription}");
-                        console.log(x);
+                        products.push("${pr.productId}, ${pr.productName}, ${pr.productDescription}, ${pr.productStock}, ${pr.productPrice}, ${pr.categoryId}, ${pr.categoryName}");
+                        console.log(products);
                     </script>
                         <tr>
                             <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
