@@ -17,8 +17,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CustomerController {
@@ -33,7 +35,6 @@ public class CustomerController {
     @Autowired
     CustomerValidator customerValidator;
 
-    //pairnei to antikeimeno k tou leme oti exei ena validator etsi kolame to controller sto validator
     @InitBinder
     private void initBinder(WebDataBinder binder) {//WebDataBinder is a DataBinder that binds request parameter to JavaBean objects.
         binder.addValidators(customerValidator);
@@ -49,13 +50,11 @@ public class CustomerController {
     @PostMapping("/doregister")
     public String doRegister(@Valid @ModelAttribute("registeruser") RegisterCustomerDto dto, BindingResult bindingResult, ModelMap mm) {
 
-//***************************ELEGXW AN TA STOIXEIA POU MOU DINEI O XRHSTHS EINAI SWSTA************************************** 
         if (bindingResult.hasErrors()) {
-            return "register"; //3anadeixnei thn index alla pleon me ta errors sthn 8esh pou tous exei upodei3ei o xrhsths
+            return "register";
         }
-//        //na baleis na mhn pairnei xarakthres***********************************************************
+        //na baleis na mhn pairnei xarakthres***********************************************************
 
-//***************************EAN TA STOIXEIA POU DINEI O XRHSTHS EINAI SWSTA TOTE BAZW TON XRHSTH STH BASH**************************************   
         Customer c = new Customer();
         //TODO Check if username already exists   --> check
         c.setUsername(dto.getUsername());
@@ -102,5 +101,27 @@ public class CustomerController {
             return "index";
         }
         return "problem";
+    }
+    
+    @ResponseBody
+    @GetMapping(value = "checkusername/{name}")
+    public String checkUsername(@PathVariable("name") String name){
+        Customer customer = new Customer();
+        customer = customerService.getCustomerByUsername(name);
+        if (customer == null){
+            return "ok";
+        }
+        return "already exists";
+    }
+    
+    @ResponseBody
+    @GetMapping(value = "checkemail/{email}")
+    public String checkEmail (@PathVariable("email") String email){
+        Customer customer = new Customer();
+        customer = customerService.getCustomerByEmail(email);
+        if (customer == null){
+            return "ok";
+        }
+        return "already exists";
     }
 }

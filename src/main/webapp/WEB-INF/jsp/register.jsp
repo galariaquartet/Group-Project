@@ -16,21 +16,36 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link href="css/maincss.css" rel="stylesheet"/>
 
+
+        <!--Check Username-->
         <script>
             $(document).ready(function () {
                 $("#username").focusout(function () {
                     var username = $("#username").val();
-                    alert(username);
                     $.ajax({
                         url: "checkusername/" + username,
                         success: function (result) {
-                            $("#checkresult").html(result);
+                            $("#checkusername").html(result);
                         }});
                 });
             });
         </script>
+
+        <!--Check Email-->
+        <script>
+            $(document).ready(function () {
+                $("#email").focusout(function () {
+                    var email = $("#email").val();
+                    $.ajax({
+                        url: "checkemail/" + email,
+                        success: function (result) {
+                            $("#checkemail").html(result);
+                        }});
+                });
+            });
+        </script>
+
         <style>
             .error {
                 color: #ff0000;
@@ -52,7 +67,7 @@
                                 <!-- Username -->
                                 <label class="control-label"  for="username">Username</label>
                                 <div class="controls">
-                                    <form:input path="username" cssClass="input-xlarge" id="username"/><spann id="checkresult"></spann>
+                                    <form:input path="username" cssClass="input-xlarge" id="username"/><spann id="checkusername"></spann>
                                     <span style="color: red"><strong>${wrongusername}</strong></span>
                                     <td><springForm:errors path="username" cssClass="error"/></td> 
                                 </div>
@@ -61,9 +76,9 @@
                                 <!-- Email-->
                                 <label class="control-label" for="email">Email</label>
                                 <div class="controls">
-                                    <form:input path="email" cssClass="input-xlarge" type="email"/>
-                                     <span style="color: red"><strong>${wrongemail}</strong></span>
-                                      <td><springForm:errors path="email" cssClass="error" /></td>
+                                    <form:input path="email" cssClass="input-xlarge" type="email" id="email"/><spann id="checkemail"></spann>
+                                    <span style="color: red"><strong>${wrongemail}</strong></span>
+                                    <td><springForm:errors path="email" cssClass="error" /></td>
                                 </div>
                             </div> 
                             <div class="control-group">
@@ -71,12 +86,12 @@
                                 <label class="control-label" for="password">Password</label>
                                 <div class="controls">
                                     <form:input path="password" cssClass="input-xlarge" type="password"/>
-                                     <span style="color: red"><strong>${wrongpass}</strong></span>
-                                      <td><springForm:errors path="password" cssClass="error" /></td>
+                                    <span style="color: red"><strong>${wrongpass}</strong></span>
+                                    <td><springForm:errors path="password" cssClass="error" /></td>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <!-- Password-->
+                                <!-- Password 2-->
                                 <label class="control-label" for="password">Retype Password</label>
                                 <div class="controls">
                                     <form:input path="password2" cssClass="input-xlarge" type="password"/>

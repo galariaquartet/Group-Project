@@ -12,6 +12,8 @@ public interface CustomerService {
 
     public Customer getCustomerByUsername(String username);
     
+    public Customer getCustomerByEmail (String email);
+    
     public boolean existsCustomerUsername(String username);
     
     public boolean existsCustomerEmail(String email);
