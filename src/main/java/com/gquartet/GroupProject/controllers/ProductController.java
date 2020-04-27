@@ -27,7 +27,7 @@ public class ProductController {
 //    @RequestMapping("/products1")
 //    public  List<ProductCategoryImageDto> viewProductPage() {
 //        List<ProductCategoryImageDto> list = productService.listProductCategoryImage();
-//
+//          
 //        return list;
 //    }
      

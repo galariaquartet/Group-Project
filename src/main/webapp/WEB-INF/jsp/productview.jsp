@@ -32,7 +32,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <script>
+                        var x =[];
+                    </script>
+                    
                     <c:forEach var="pr" items="${listproducts}">
+                    
+                    <script>
+                        x.push("${pr}");
+                        x.push("${pr.productDescription}");
+                        console.log(x);
+                    </script>
                         <tr>
                             <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
                             <td>${pr.productId}</td>

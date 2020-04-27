@@ -28,7 +28,7 @@ public class ProductCategoryImageDto {
     private int productStock;
     private BigDecimal productPrice;
     private Integer categoryId;
-    private String categoryName;
+    private String categoryName; // mprelok
 //    private byte[] categoryImage;
 //    private String filename;
 
