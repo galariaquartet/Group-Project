@@ -16,7 +16,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     // dhmiourgoume ena query opou 8a kalesei mono tis sthles tou customer pou tou upodiknuoume 
     //epistrefei mia lista apo CustomerDto --> opou thn ftia3ame gia na mporei na emfanizei mono autes tiw sthles k na mhn epistrefei oles tis allles tou customer opou 8a exoun thn timh null
-    @Query("SELECT new com.gquartet.GroupProject.dtos.CustomerDto(c.username as username, c.email) FROM Customer c") //native query opou epistrefei mia lista me ta onomata
+    @Query("SELECT new com.gquartet.GroupProject.dtos.CustomerDto(c.username , c.email) FROM Customer c") //native query opou epistrefei mia lista me ta onomata
     List<CustomerDto> getCustomerUsernameEmail();
 
     //enallaktikh lush me to apo panw opou 8a epistrefei mia lista me customer opou oi alles sthles 8a epistrfoun null

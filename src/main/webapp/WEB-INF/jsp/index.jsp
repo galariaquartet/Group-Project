@@ -21,5 +21,9 @@
         <a href="preregister">Not a member? Click to Register</a>
         <hr>
         <h3>${welcomecustomer}</h3>
+        
+          <hr/>
+        <a href="products">Products</a>
+        <hr>
     </body>
 </html>
