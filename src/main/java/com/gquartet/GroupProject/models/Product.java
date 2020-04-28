@@ -1,8 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Coily1805
+ * @author eliza
  */
 @Entity
 @Table(name = "product")
@@ -60,16 +66,12 @@ public class Product implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "product_price")
     private BigDecimal productPrice;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
-    private Collection<ShoppingCart> shoppingCartCollection;
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+
+        @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     @ManyToOne(optional = false)
     private Category categoryId;
-    @JoinColumn(name = "product_image_id", referencedColumnName = "product_image_id")
-    @ManyToOne(optional = false)
-    private ProductImage productImageId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
-    private Collection<OrderDetails> orderDetailsCollection;
+    private List<ProductImage> productImageList;
 
     public Product() {
     }
@@ -125,15 +127,6 @@ public class Product implements Serializable {
         this.productPrice = productPrice;
     }
 
-    @XmlTransient
-    public Collection<ShoppingCart> getShoppingCartCollection() {
-        return shoppingCartCollection;
-    }
-
-    public void setShoppingCartCollection(Collection<ShoppingCart> shoppingCartCollection) {
-        this.shoppingCartCollection = shoppingCartCollection;
-    }
-
     public Category getCategoryId() {
         return categoryId;
     }
@@ -142,21 +135,15 @@ public class Product implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public ProductImage getProductImageId() {
-        return productImageId;
-    }
 
-    public void setProductImageId(ProductImage productImageId) {
-        this.productImageId = productImageId;
-    }
 
     @XmlTransient
-    public Collection<OrderDetails> getOrderDetailsCollection() {
-        return orderDetailsCollection;
+    public List<ProductImage> getProductImageList() {
+        return productImageList;
     }
 
-    public void setOrderDetailsCollection(Collection<OrderDetails> orderDetailsCollection) {
-        this.orderDetailsCollection = orderDetailsCollection;
+    public void setProductImageList(List<ProductImage> productImageList) {
+        this.productImageList = productImageList;
     }
 
     @Override

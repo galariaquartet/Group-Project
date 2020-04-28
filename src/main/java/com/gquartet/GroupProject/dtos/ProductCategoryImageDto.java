@@ -32,6 +32,8 @@ public class ProductCategoryImageDto {
 //    private byte[] categoryImage;
 //    private String filename;
 
+    public ProductCategoryImageDto() {
+    }
     public ProductCategoryImageDto(Integer productId, String productName, String productDescription, int productStock, BigDecimal productPrice, Integer categoryId, String categoryName) {
         this.productId = productId;
         this.productName = productName;

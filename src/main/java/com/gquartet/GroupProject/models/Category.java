@@ -6,7 +6,7 @@
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Coily1805
+ * @author eliza
  */
 @Entity
 @Table(name = "category")
@@ -56,7 +56,7 @@ public class Category implements Serializable {
     @Column(name = "FILENAME")
     private String filename;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
-    private Collection<Product> productCollection;
+    private List<Product> productList;
 
     public Category() {
     }
@@ -82,6 +82,8 @@ public class Category implements Serializable {
         return categoryName;
     }
 
+    
+
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
@@ -103,12 +105,12 @@ public class Category implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override

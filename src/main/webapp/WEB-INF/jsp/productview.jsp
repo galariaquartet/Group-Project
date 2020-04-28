@@ -14,7 +14,7 @@
     <body style="background-color: #f9dcfa">
         <div align="center">
             <h1>Product Manager</h1>
-            <a href="new">Create New Trainer</a>
+            <a href="newProduct">Create New Product</a>
             <br/>
             <br/>
             <table border='1' cellpadding="10">
@@ -27,37 +27,37 @@
                         <th>Product Price</th>
                         <th>Product categoryId</th>
                         <th>Product category Name</th>
-<!--                        <th>Product ImageId</th>-->
+                        <!--                        <th>Product ImageId</th>-->
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <script>
-                        var x =[];
-                    </script>
-                    
-                    <c:forEach var="pr" items="${listproducts}">
-                    
+                <script>
+                    var x = [];
+                </script>
+
+                <c:forEach var="pr" items="${listproducts}">
+
                     <script>
                         x.push("${pr}");
                         x.push("${pr.productDescription}");
                         console.log(x);
                     </script>
-                        <tr>
-                            <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                            <td>${pr.productId}</td>
-                            <td>${pr.productName}</td>
-                            <td>${pr.productDescription}</td>
-                            <td>${pr.productStock}</td>   
-                            <td>${pr.productPrice}</td>   
-                            <td>${pr.categoryId}</td>   
-                            <td>${pr.categoryName}</td>   
-                            
-               
-                            <td>
-                                
-                            </td>   
-                        </tr>
+                    <tr>
+                        <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
+                        <td>${pr.productId}</td>
+                        <td>${pr.productName}</td>
+                        <td>${pr.productDescription}</td>
+                        <td>${pr.productStock}</td>   
+                        <td>${pr.productPrice}</td>   
+                        <td>${pr.categoryId}</td>   
+                        <td>${pr.categoryName}</td>   
+
+
+                        <td>
+
+                        </td>   
+                    </tr>
                     </tbody>
                 </c:forEach>
             </table>

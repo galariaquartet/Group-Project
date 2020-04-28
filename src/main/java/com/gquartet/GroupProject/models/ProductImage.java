@@ -6,26 +6,24 @@
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Coily1805
+ * @author eliza
  */
 @Entity
 @Table(name = "product_image")
@@ -48,8 +46,9 @@ public class ProductImage implements Serializable {
     @Size(max = 30)
     @Column(name = "product_filename")
     private String productFilename;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productImageId")
-    private Collection<Product> productCollection;
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @ManyToOne(optional = false)
+    private Product productId;
 
     public ProductImage() {
     }
@@ -82,13 +81,12 @@ public class ProductImage implements Serializable {
         this.productFilename = productFilename;
     }
 
-    @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
+    public Product getProductId() {
+        return productId;
     }
 
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
     @Override

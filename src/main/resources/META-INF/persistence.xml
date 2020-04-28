@@ -7,14 +7,14 @@
     <class>com.gquartet.GroupProject.models.ProductImage</class>
     <class>com.gquartet.GroupProject.models.OrderDetails</class>
     <class>com.gquartet.GroupProject.models.ShoppingCart</class>
-    <class>com.gquartet.GroupProject.models.Product</class>
     <class>com.gquartet.GroupProject.models.OrderStatus</class>
     <class>com.gquartet.GroupProject.models.CustomerCreditCard</class>
-    <class>com.gquartet.GroupProject.models.Category</class>
     <class>com.gquartet.GroupProject.models.Payment</class>
     <class>com.gquartet.GroupProject.models.ShippingInformation</class>
     <class>com.gquartet.GroupProject.models.Customer</class>
     <class>com.gquartet.GroupProject.models.CustomerInformation</class>
+    <class>com.gquartet.GroupProject.models.Category</class>
+    <class>com.gquartet.GroupProject.models.Product</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://5.189.135.166:3011/galariaeshop"/>
