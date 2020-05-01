@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index-jsp
-    Created on : Apr 12, 2020, 10:06:46 PM
-    Author     : User
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,6 +18,13 @@
         
           <hr/>
         <a href="products">Products</a>
+        <hr>
+        <a href="customerInformation">Customer Information</a>
+        <hr>
+        <a href="category">Category</a>
+        <hr>
+        <hr>
+        <a href="orderStatus">OrderStatus</a>
         <hr>
     </body>
 </html>

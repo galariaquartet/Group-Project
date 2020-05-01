@@ -12,16 +12,19 @@
 
         
                 <div allign="center" class="insert-courses">
-            <form:form method="POST" action="saveCategory" modelAttribute="category">
+            <form:form enctype="multipart/form-data" method="POST" action="saveCategory" modelAttribute="category">
                 <h2>Sign Up</h2>
                 <form:label path="categoryName">category Name</form:label>
                 <form:input path="categoryName" type="text"/>
 
                 <form:label path="categoryImage">category Image</form:label>
-                <form:input path="categoryImage" type="text"/>
+                <input type="file" name="mycategoryImage">
+                
 
                 <form:label path="filename">filename</form:label>
                 <form:input path="filename" type="text"/>
+                
+                        
 
                 <input type="submit" value="Submit"/>
 

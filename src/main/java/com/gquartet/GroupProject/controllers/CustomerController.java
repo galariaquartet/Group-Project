@@ -3,7 +3,9 @@ package com.gquartet.GroupProject.controllers;
 import com.gquartet.GroupProject.dtos.CustomerDto;
 import com.gquartet.GroupProject.dtos.RegisterCustomerDto;
 import com.gquartet.GroupProject.models.Customer;
+import com.gquartet.GroupProject.models.CustomerInformation;
 import com.gquartet.GroupProject.models.Role;
+import com.gquartet.GroupProject.services.CustomerInformationSercvice;
 import com.gquartet.GroupProject.services.CustomerService;
 import com.gquartet.GroupProject.services.RoleService;
 import com.gquartet.GroupProject.validators.CustomerValidator;
@@ -19,15 +21,14 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/demo")
-//@Controller
+@Controller
 public class CustomerController {
 
     @Autowired
@@ -39,7 +40,7 @@ public class CustomerController {
 
     @Autowired
     CustomerValidator customerValidator;
-
+ 
     //pairnei to antikeimeno k tou leme oti exei ena validator etsi kolame to controller sto validator
     @InitBinder
     private void initBinder(WebDataBinder binder) {//WebDataBinder is a DataBinder that binds request parameter to JavaBean objects.
@@ -110,10 +111,12 @@ public class CustomerController {
     }
 
     //epistrefei mia lista me to username k to email tou customer se json morfh
-    @ResponseBody
-    @GetMapping("/foo")
-    public List<CustomerDto> allCustomersUsernames() {
-        List<CustomerDto> usernamesEmails = customerService.listUsernameEmail();
-        return usernamesEmails;
-    }
+//    @ResponseBody
+//    @GetMapping("/foo")
+//    public List<CustomerDto> allCustomersUsernames() {
+//        List<CustomerDto> usernamesEmails = customerService.listUsernameEmail();
+//        return usernamesEmails;
+//    }
+   
+    
 }

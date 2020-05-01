@@ -27,6 +27,7 @@
                         <th>Product Price</th>
                         <th>Product categoryId</th>
                         <th>Product category Name</th>
+                        <th>Product filename </th>
                         <!--                        <th>Product ImageId</th>-->
                         <th>Actions</th>
                     </tr>
@@ -52,10 +53,12 @@
                         <td>${pr.productPrice}</td>   
                         <td>${pr.categoryId}</td>   
                         <td>${pr.categoryName}</td>   
+                        <td>${pr.filename}</td>   
 
 
                         <td>
-
+                            <a href="/editProduct/${pr.productId}">Edit</a>
+                            <a href="/deleteProduct/${pr.productId}">Delete</a>
                         </td>   
                     </tr>
                     </tbody>

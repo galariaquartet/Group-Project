@@ -10,11 +10,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Upadate Product form</h1>
 
-        <form:form enctype="multipart/form-data"  method="POST" action="saveProduct" modelAttribute="product">
-            <h2>Sign Up</h2>
+        <form:form enctype="multipart/form-data"  method="POST" action="/updateProduct" modelAttribute="product">
 
+            <form:input path="productId" type="hidden" value="" />
 
             <form:label path="productName">product Name</form:label>
             <form:input path="productName" type="text"/>
@@ -28,20 +28,15 @@
             <form:label path="productPrice">product Price</form:label>
             <form:input path="productPrice" type="number"/>
 
-       
-
             <form:select path="categoryId" items="${categoryList}" itemLabel="categoryName" itemValue="categoryId"/>
             <form:errors path="categoryId" cssClass="error"/>
-            
-                     <form:label path="filename">product file name</form:label>
-            <form:input path="filename" type="text"/>
-            
-             <input type="file" name="myfile">
-            
+
+
+
+            <!--             <input type="file" name="myfile">-->
             <input type="submit" value="Submit"/>
 
+
         </form:form>
-
-
     </body>
 </html>

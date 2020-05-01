@@ -29,12 +29,15 @@ public class ProductCategoryImageDto {
     private BigDecimal productPrice;
     private Integer categoryId;
     private String categoryName; // mprelok
-//    private byte[] categoryImage;
-//    private String filename;
+  //  private byte[] categoryImage;
+    private String filename;
+   //  private byte[] productImage;
+//    private ProductImage productImage;
 
     public ProductCategoryImageDto() {
     }
-    public ProductCategoryImageDto(Integer productId, String productName, String productDescription, int productStock, BigDecimal productPrice, Integer categoryId, String categoryName) {
+
+    public ProductCategoryImageDto(Integer productId, String productName, String productDescription, int productStock, BigDecimal productPrice, Integer categoryId, String categoryName, String filename) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -42,6 +45,45 @@ public class ProductCategoryImageDto {
         this.productPrice = productPrice;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
+        this.filename = filename;
+    }
+
+
+//    
+//
+//    public ProductImage getProductImage() {
+//        return productImage;
+//    }
+//
+//    public void setProductImage(ProductImage productImage) {
+//        this.productImage = productImage;
+//    }
+
+
+//
+//    public byte[] getProductImage() {
+//        return productImage;
+//    }
+//
+//    public void setProductImage(byte[] productImage) {
+//        this.productImage = productImage;
+//    }
+    
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getProductDescription() {
@@ -68,52 +110,6 @@ public class ProductCategoryImageDto {
         this.productPrice = productPrice;
     }
 
-
-
-
-
-
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-//    public String getProductDescription() {
-//        return productDescription;
-//    }
-//
-//    public void setProductDescription(String productDescription) {
-//        this.productDescription = productDescription;
-//    }
-//
-//    public int getProductStock() {
-//        return productStock;
-//    }
-//
-//    public void setProductStock(int productStock) {
-//        this.productStock = productStock;
-//    }
-//
-//    public BigDecimal getProductPrice() {
-//        return productPrice;
-//    }
-//
-//    public void setProductPrice(BigDecimal productPrice) {
-//        this.productPrice = productPrice;
-//    }
-//
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -129,7 +125,7 @@ public class ProductCategoryImageDto {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
-//
+
 //    public byte[] getCategoryImage() {
 //        return categoryImage;
 //    }
@@ -137,13 +133,14 @@ public class ProductCategoryImageDto {
 //    public void setCategoryImage(byte[] categoryImage) {
 //        this.categoryImage = categoryImage;
 //    }
-//
-//    public String getFilename() {
-//        return filename;
-//    }
-//
-//    public void setFilename(String filename) {
-//        this.filename = filename;
-//    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
 
 }

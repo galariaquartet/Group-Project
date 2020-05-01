@@ -19,6 +19,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer getCustomer(Integer id) {
+        return customerRepository.getOne(id);
+    }
+
+    @Override
     public Customer getCustomerByUsername(String username) {
         return customerRepository.findByUsername(username);
     }

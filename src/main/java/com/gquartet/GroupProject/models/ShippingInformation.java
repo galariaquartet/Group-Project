@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
@@ -21,10 +16,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Coily1805
- */
 @Entity
 @Table(name = "shipping_information")
 @XmlRootElement
@@ -214,5 +205,5 @@ public class ShippingInformation implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.ShippingInformation[ shippingInformationId=" + shippingInformationId + " ]";
     }
-    
+
 }
