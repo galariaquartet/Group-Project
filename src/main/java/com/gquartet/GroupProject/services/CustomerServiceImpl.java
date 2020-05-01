@@ -1,9 +1,7 @@
 package com.gquartet.GroupProject.services;
 
-import com.gquartet.GroupProject.dtos.CustomerDto;
 import com.gquartet.GroupProject.models.Customer;
 import com.gquartet.GroupProject.repos.CustomerRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +20,17 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomer(Integer id) {
         return customerRepository.getOne(id);
     }
-
+    
     @Override
     public Customer getCustomerByUsername(String username) {
         return customerRepository.findByUsername(username);
     }
+
+    @Override
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
 
     //elegxei an uparxei to onoma mesa sth bash k epistrefei true/false
     @Override
@@ -36,8 +40,8 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return false;
     }
-
-    //elegxei an uparxei to email mesa sth bash k epistrefei true/false
+//
+//    //elegxei an uparxei to email mesa sth bash k epistrefei true/false
     @Override
     public boolean existsCustomerEmail(String email) {
         if (customerRepository.findByEmail(email) != null) {
@@ -45,12 +49,12 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return false;
     }
-
-    //epistrefei olh th lista me ta omomata twn customer 
-    @Override
-    public List<CustomerDto> listUsernameEmail() {
-        List<CustomerDto> usernamesEmails = customerRepository.getCustomerUsernameEmail();
-        return usernamesEmails;
-    }
+//
+//    //epistrefei olh th lista me ta omomata twn customer 
+//    @Override
+//    public List<CustomerDto> listUsernameEmail() {
+//        List<CustomerDto> usernamesEmails = customerRepository.getCustomerUsernameEmail();
+//        return usernamesEmails;
+//    }
 
 }
