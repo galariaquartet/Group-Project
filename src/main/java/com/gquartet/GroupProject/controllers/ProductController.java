@@ -77,6 +77,7 @@ public class ProductController {
             //save to db
             //ousiastika tou leme na parei ta byte tou arxeiou 
             productImage.setProductImage(multipart.getBytes());
+            productImage.setProductFilename(multipart.getOriginalFilename());
         } catch (IOException ex) {
             Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,11 +93,6 @@ public class ProductController {
         mm.addAttribute("product", productService.getProduct(productId));
                 List<Category> categoryNames = categoryService.listAll();
         mm.addAttribute("categoryList", categoryNames);
-
-     //  List<ProductImage> pis = productImageService.findProductImageByProductId(productId);
-       
-        //System.out.println("************"+pis);
-      //  mm.addAttribute("filename", pis);
         return "updateFormProduct";
     }
 

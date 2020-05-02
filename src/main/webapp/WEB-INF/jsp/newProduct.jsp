@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -32,9 +31,7 @@
 
             <form:select path="categoryId" items="${categoryList}" itemLabel="categoryName" itemValue="categoryId"/>
             <form:errors path="categoryId" cssClass="error"/>
-            
-                     <form:label path="filename">product file name</form:label>
-            <form:input path="filename" type="text"/>
+      
             
              <input type="file" name="myfile">
             
