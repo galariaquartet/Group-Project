@@ -9,51 +9,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
         
-                <div align="center">
-          
+        <h1>asdasdasda</h1>
+        <p>${listCustomerInformations.customerId}</p>
+        <p>${listCustomerInformations.firstName}</p>
+        <p>${listCustomerInformations.lastName}</p>
+        <p>${listCustomerInformations.country}</p>
+        <p>${listCustomerInformations.state}</p>
+        <p>${listCustomerInformations.city}</p>
+        <p>${listCustomerInformations.street}</p>
+        <p>${listCustomerInformations.zip}</p>
+        <p>${listCustomerInformations.phone}</p>
+ 
        
-            <br/>
-            <br/>
-            <table border='1' cellpadding="10">
-                <thead>
-                    <tr>
-                        <th>customer Id</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>country</th>
-                        <th>state</th>
-                        <th>city</th>
-                        <th>street</th>
-                        <th>zip</th>
-                        <th>phone</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="ci" items="${listCustomerInformations}">
-                        <tr>
-                            <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                            <td>${ci.customerId}</td>
-                            <td>${ci.firstName}</td>
-                            <td>${ci.lastName}</td>
-                            <td>${ci.country}</td>
-                            <td>${ci.state}</td>
-                            <td>${ci.city}</td>
-                            <td>${ci.street}</td>
-                            <td>${ci.zip}</td>
-                            <td>${ci.phone}</td>
-                           
-                            <td>
-                                <a href="/editCustomerInformation/${ci.customerId}">Edit</a>
-                                <a href="/deleteCustomerInformation/${ci.customerId}">Delete</a>
-                            </td>   
-                        </tr>
-                    </tbody>
-                </c:forEach>
-            </table>
-
-        </div>
     </body>
 </html>

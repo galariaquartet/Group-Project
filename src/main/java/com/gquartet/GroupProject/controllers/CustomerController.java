@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -90,10 +91,21 @@ public class CustomerController {
         }
         if (tempcustomer.getRoleId().getRoleId() == 2) { // User/Customer
             mm.addAttribute("welcomecustomer", "welcome customer");
-            return "index";
+            return "redirect:/home";
         }
         return "problem";
     }
+    //TODO na mhn mporei o xrhsths na to xtupaei apo to URL
+    @RequestMapping(value="/home") //afou kanei login o xrhsths gia na paei sthn nena selida pairnaei mesa apo ton controller
+    public String home (HttpSession session, ModelMap mm){
+        if (session.getAttribute("customer")==null){ //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
+            mm.addAttribute("login_required", "You have to log in first");
+            return "index";
+        } else {
+            return "home";
+        }
+    }
+    
     
     @ResponseBody
     @PostMapping(value = "checkusername/{name}")

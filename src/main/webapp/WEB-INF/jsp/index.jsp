@@ -9,7 +9,7 @@
         <form action="dologin" method="POST">
             Username: <input type="text" name = "username" placeholder="username"> <span style="color: red"><strong>${wrongusername}</strong></span>
             Password: <input type="password" name = "password" placeholder="password"> <span style="color: red"><strong>${wrongpassword}</strong></span>
-            <input type="submit" value="Login">
+            <input type="submit" value="Login"> <span><strong>${login_required}</strong></span>
         </form>
         <hr/>
         <a href="preregister">Not a member? Click to Register</a>
@@ -25,6 +25,7 @@
         <hr>
         <hr>
         <a href="orderStatus">OrderStatus</a>
+        <hr>
         <hr>
     </body>
 </html>
