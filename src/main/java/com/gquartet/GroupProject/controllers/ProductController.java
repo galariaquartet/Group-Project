@@ -38,29 +38,29 @@ public class ProductController {
 //TODO VALIDATOS
     //TODO add photo to upadate form 
     
-//    @RequestMapping("/products")
-//    public String viewProductPage(ModelMap mm) {
-//        List<ProductCategoryImageDto> list = productService.listProductCategoryImage();
-//        mm.addAttribute("listproducts", list);
-//
-//        return "productview";
-//    }
-   @ResponseBody
     @RequestMapping("/products")
-    public List<Product> viewProductPage() {
-        List<Product> list = productService.listAll();
-      //  mm.addAttribute("listproducts", list);
+    public String viewProductPage(ModelMap mm) {
+        List<ProductCategoryImageDto> list = productService.listProductCategoryImage();
+        mm.addAttribute("listproducts", list);
 
-        return list;
+        return "productview";
     }
-   @ResponseBody
-    @RequestMapping("/products2")
-    public List<ProductCategoryImageDto> viewProduct2Page() {
-          List<ProductCategoryImageDto> list = productService.listProductCategoryImage();
-      //  mm.addAttribute("listproducts", list);
-
-        return list;
-    }
+//   @ResponseBody
+//    @RequestMapping("/products")
+//    public List<Product> viewProductPage() {
+//        List<Product> list = productService.listAll();
+//      //  mm.addAttribute("listproducts", list);
+//
+//        return list;
+//    }
+//   @ResponseBody
+//    @RequestMapping("/products2")
+//    public List<ProductCategoryImageDto> viewProduct2Page() {
+//          List<ProductCategoryImageDto> list = productService.listProductCategoryImage();
+//      //  mm.addAttribute("listproducts", list);
+//
+//        return list;
+//    }
 
     @RequestMapping("/newProduct")
     public String viewNewProductForm(ModelMap mm) {
