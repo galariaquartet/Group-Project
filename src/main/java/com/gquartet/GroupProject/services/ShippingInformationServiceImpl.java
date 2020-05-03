@@ -1,5 +1,6 @@
 package com.gquartet.GroupProject.services;
 
+import com.gquartet.GroupProject.models.OrderDetails;
 import com.gquartet.GroupProject.models.ShippingInformation;
 import com.gquartet.GroupProject.repos.ShippingInformationRepository;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
     @Override
     public void update(ShippingInformation shippingInformation) {
         ShippingInformation si = repo.getOne(shippingInformation.getShippingInformationId());
-        
+
         si.setShippingInformationId(shippingInformation.getShippingInformationId());
         si.setShippingCountry(shippingInformation.getShippingCountry());
         si.setShippingState(shippingInformation.getShippingState());
@@ -45,8 +46,13 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
         si.setRecipientFirstName(shippingInformation.getRecipientFirstName());
         si.setRecipientLastName(shippingInformation.getRecipientLastName());
         si.setRecipientPhone(shippingInformation.getRecipientPhone());
-       
+
         repo.save(si);
+    }
+
+    @Override
+    public List<ShippingInformation> findShippingInformation(int orderNumber) {
+        return repo.findShippingInformationByOrderDetailsId(orderNumber);
     }
 
 }

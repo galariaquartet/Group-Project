@@ -1,5 +1,6 @@
 package com.gquartet.GroupProject.controllers;
 
+import com.gquartet.GroupProject.models.CustomerOrder;
 import com.gquartet.GroupProject.models.ShippingInformation;
 import com.gquartet.GroupProject.services.ShippingInformationService;
 import java.util.List;
@@ -16,11 +17,17 @@ public class ShippingInformationController {
     @Autowired
     private ShippingInformationService shippingInformationService;
 
-    @RequestMapping("/shippingInformation")
-    public String viewHomePage(ModelMap mm) {
-        List<ShippingInformation> list = shippingInformationService.listAll();
+    @RequestMapping("/shippingInformation/{ordernumber}")
+    public String viewHomePage(@PathVariable("ordernumber") CustomerOrder customerOrder,ModelMap mm) {
+        
+        int ordernumber = customerOrder.getOrderNumber();
+
+        List<ShippingInformation> list = shippingInformationService.findShippingInformation(ordernumber);
         mm.addAttribute("listShippingInformation", list);
-        return "shippingInformationView";
+        
+      
+       // return "orderDetailsView";
+        return "forward:/payment/"+ordernumber;
     }
 
     @RequestMapping("/newShippingInformation")

@@ -1,5 +1,6 @@
 package com.gquartet.GroupProject.controllers;
 
+import com.gquartet.GroupProject.models.CustomerOrder;
 import com.gquartet.GroupProject.models.Payment;
 import com.gquartet.GroupProject.services.PaymentService;
 import java.util.List;
@@ -16,11 +17,14 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @RequestMapping("/payment")
-    public String viewPaymentPage(ModelMap mm) {
-        List<Payment> list = paymentService.listAll();
+    @RequestMapping("/payment/{ordernumber}")
+    public String viewPaymentPage(@PathVariable("ordernumber") CustomerOrder customerOrder, ModelMap mm) {
+       int ordernumber = customerOrder.getOrderNumber();
+
+        List<Payment> list = paymentService.findPaymentListByOrderDetailsId(ordernumber);
         mm.addAttribute("listPayment", list);
-        return "paymentView";
+       // return "paymentView";
+            return "orderDetailsView";
     }
 
     @RequestMapping("/newPayment")

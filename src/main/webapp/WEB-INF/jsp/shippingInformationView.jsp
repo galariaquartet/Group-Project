@@ -48,8 +48,9 @@
                             <a href="/deleteShippingInformation/${si.shippingInformationId}">Delete</a>
                         </td>   
                     </tr>
-                    </tbody>
+                    
                 </c:forEach>
+                    </tbody>
             </table>
 
         </div>

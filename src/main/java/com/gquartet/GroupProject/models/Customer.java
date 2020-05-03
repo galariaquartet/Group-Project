@@ -189,7 +189,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gquartet.GroupProject.models.Customer[ customerId=" + customerId + " ]";
+        return "customerId = " + customerId;
     }
     
 }

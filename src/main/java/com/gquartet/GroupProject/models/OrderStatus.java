@@ -115,7 +115,7 @@ public class OrderStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gquartet.GroupProject.models.OrderStatus[ orderStatusId=" + orderStatusId + " ]";
+        return "orderStatusId = " + orderStatusId;
     }
     
 }

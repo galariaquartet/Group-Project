@@ -11,7 +11,6 @@ public interface CustomerInformationSercvice {
 
     public CustomerInformation getCustomerInformation(Integer id);
 
-    public void delete(Integer id);
 
     public void update(CustomerInformation customerInformation);
 

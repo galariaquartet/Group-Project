@@ -15,6 +15,6 @@ public interface CustomerOrderService {
 
     public void update(CustomerOrder customerOrder);
     
-    public CustomerOrder findCustomerOrderByCustomerId(int customerId);
+    public List<CustomerOrder> findCustomerOrderByCustomerId(int customerId);
 
 }

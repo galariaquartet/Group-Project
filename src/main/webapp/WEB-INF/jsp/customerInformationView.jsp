@@ -9,18 +9,21 @@
         <title>JSP Page</title>
     </head>
     <body>
+
         
         <h1>asdasdasda</h1>
-        <p>${listCustomerInformations.customerId}</p>
-        <p>${listCustomerInformations.firstName}</p>
-        <p>${listCustomerInformations.lastName}</p>
-        <p>${listCustomerInformations.country}</p>
-        <p>${listCustomerInformations.state}</p>
-        <p>${listCustomerInformations.city}</p>
-        <p>${listCustomerInformations.street}</p>
-        <p>${listCustomerInformations.zip}</p>
-        <p>${listCustomerInformations.phone}</p>
+        <p>${customerInformations.customerId}</p>
+        <p>${customerInformations.firstName}</p>
+        <p>${customerInformations.lastName}</p>
+        <p>${customerInformations.country}</p>
+        <p>${customerInformations.state}</p>
+        <p>${customerInformations.city}</p>
+        <p>${customerInformations.street}</p>
+        <p>${customerInformations.zip}</p>
+        <p>${customerInformations.phone}</p>
  
+        <a href="editCustomerInformation"> Edit</a>
+        <a href="deleteCustomerInformation"> delete</a>
        
     </body>
 </html>

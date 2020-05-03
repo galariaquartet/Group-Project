@@ -3,14 +3,14 @@ package com.gquartet.GroupProject.controllers;
 import com.gquartet.GroupProject.models.Customer;
 import com.gquartet.GroupProject.models.CustomerInformation;
 import com.gquartet.GroupProject.services.CustomerInformationSercvice;
-import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class CustomerInformationController {
@@ -23,11 +23,12 @@ public class CustomerInformationController {
     @RequestMapping("/customerInformation")
     public String viewCustomerInformationPage(HttpSession session, ModelMap mm) {
         if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
+            mm.addAttribute("login_required", "You have to log in first");
             return "index";
         } else {
-            int id = ((Customer) session.getAttribute("customer")).getCustomerId();
-           
-            mm.addAttribute("listCustomerInformations",  customerInformationSercvice.getCustomerInformation(id)); // me auton to tropo pairnoume too id tou customer
+            int customerid = ((Customer) session.getAttribute("customer")).getCustomerId();
+
+            mm.addAttribute("customerInformations", customerInformationSercvice.getCustomerInformation(customerid)); // me auton to tropo pairnoume too id tou customer
             return "customerInformationView";
         }
     }
@@ -45,23 +46,53 @@ public class CustomerInformationController {
 //        return "redirect:/customerInformation";
 //    }
 
-    @RequestMapping("/editCustomerInformation/{customerId}")
-    public String showEditCustomerInformationForm(@PathVariable("customerId") int customerId, ModelMap mm) {
-        mm.addAttribute("customerInformation", customerInformationSercvice.getCustomerInformation(customerId));
-        return "updateFormCustomerInformation";
+    // @RequestMapping(value = "/editCustomerInformation", method = RequestMethod.GET)
+    @RequestMapping(value = "/editCustomerInformation")
+    public String showEditCustomerInformationForm(HttpSession session, ModelMap mm) {
+        if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
+            mm.addAttribute("login_required", "You have to log in first");
+            return "index";
+        } else {
+
+            int customerid = ((Customer) session.getAttribute("customer")).getCustomerId();
+            mm.addAttribute("customerInformation", customerInformationSercvice.getCustomerInformation(customerid));
+            return "updateFormCustomerInformation";
+        }
     }
 
     @RequestMapping("/updateCustomerInformation")
-    public String saveUpdatedCustomerInformation(ModelMap mm, @ModelAttribute("customerInformation") CustomerInformation customerInformation) {
-        customerInformationSercvice.update(customerInformation);
-        return "redirect:/customerInformation";
+    public String saveUpdatedCustomerInformation(HttpSession session, ModelMap mm, @ModelAttribute("customerInformation") CustomerInformation customerInformation) {
+
+        if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
+            mm.addAttribute("login_required", "You have to log in first");
+            return "index";
+        } else {
+            customerInformationSercvice.update(customerInformation);
+            return "redirect:/customerInformation";
+        }
     }
 
-    //TODO na ftixnoume na sbhnontai ta MONO TA stoixeia 
-    @RequestMapping("/deleteCustomerInformation/{customerId}")
-    public String deleteProduct(@PathVariable int customerId, ModelMap mm) {
-        customerInformationSercvice.delete(customerId);
-        return "redirect:/customerInformation";
+    @RequestMapping("/deleteCustomerInformation")
+    public String deleteProduct(HttpSession session, ModelMap mm) {
+
+        if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
+            mm.addAttribute("login_required", "You have to log in first");
+            return "index";
+        } else {
+            int customerid = ((Customer) session.getAttribute("customer")).getCustomerId();
+
+            CustomerInformation customerInformation = customerInformationSercvice.getCustomerInformation(customerid);
+            customerInformation.setFirstName(null);
+            customerInformation.setLastName(null);
+            customerInformation.setPhone(null);
+            customerInformation.setState(null);
+            customerInformation.setCity(null);
+            customerInformation.setStreet(null);
+            customerInformation.setZip(null);
+            
+            customerInformationSercvice.update(customerInformation);
+            return "redirect:/customerInformation";
+        }
     }
 
 }

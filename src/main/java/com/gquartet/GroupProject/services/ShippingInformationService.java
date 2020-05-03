@@ -14,5 +14,7 @@ public interface ShippingInformationService {
     public void delete(Integer id);
 
     public void update(ShippingInformation shippingInformation);
+    
+    public List<ShippingInformation> findShippingInformation(int orderNumber);
 
 }

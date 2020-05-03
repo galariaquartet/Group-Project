@@ -45,7 +45,7 @@ public class CustomerOrderSeviceImpl implements CustomerOrderService {
     }
     
         @Override
-    public CustomerOrder findCustomerOrderByCustomerId(int customerId) {
+    public List<CustomerOrder> findCustomerOrderByCustomerId(int customerId) {
         return repo.getCustomerOrderByCustomerId(customerId);
     }
 

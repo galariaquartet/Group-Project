@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>Welcome!</h1>
-        <a href="account">Profile   |</a>
+        <a href="customerOrder">Profile   |</a>
         <a href="about_us">About us   |</a>
         <a href="Contact">Contact   |</a>
         <a href="Games">Games   |</a>

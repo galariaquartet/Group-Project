@@ -42,4 +42,9 @@ public class PaymentServiceImpl implements PaymentService {
         repo.save(p);
     }
 
+    @Override
+    public List<Payment> findPaymentListByOrderDetailsId(int orderNumber) {
+        return repo.findPaymentByOrderDetailsId(orderNumber);
+    }
+
 }
