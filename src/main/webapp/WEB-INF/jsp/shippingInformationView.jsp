@@ -12,7 +12,7 @@
             <br/>
                     <a href="newShippingInformation">Create new shippingInformation</a>
         <br/>
-
+<!--auto mallon den 8a to xreiastoume-->
             <br/>
             <table border='1' cellpadding="10">
                 <thead>

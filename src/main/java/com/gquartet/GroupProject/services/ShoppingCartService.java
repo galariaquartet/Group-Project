@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ShoppingCartService {
 
-    public List<ShoppingCart> listAll();
+//    public List<ShoppingCart> listAll();
 
     public void save(ShoppingCart trainer);
 

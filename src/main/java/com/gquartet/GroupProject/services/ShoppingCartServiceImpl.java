@@ -12,10 +12,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     ShoppingCartRepository repo;
     
-    @Override
-    public List<ShoppingCart> listAll() {
-        return repo.findAll();
-    }
+//    @Override
+//    public List<ShoppingCart> listAll() {
+//        return repo.findAll();
+//    }
     
     @Override
     public void save(ShoppingCart trainer) {
