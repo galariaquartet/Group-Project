@@ -48,7 +48,6 @@ public class ProductCategoryImageDto {
         this.filename = filename;
     }
 
-
 //    
 //
 //    public ProductImage getProductImage() {

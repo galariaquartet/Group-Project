@@ -13,8 +13,11 @@
     </head>
     <body style="background-color: #f9dcfa">
         <div align="center">
-            <h1>Product Manager</h1>
-            <a href="newProduct">Create New Product</a>
+
+            <a href="/shoppingCartView">view shopping cart</a>
+
+            <h1>Product Manager</h1> 
+            <a href="/newProduct">Create New Product</a>
             <br/>
             <br/>
             <table border='1' cellpadding="10">
@@ -28,6 +31,7 @@
                         <th>Product categoryId</th>
                         <th>Product category Name</th>
                         <th>Product filename </th>
+                        <th>Quantity </th>
                         <!--                        <th>Product ImageId</th>-->
                         <th>Actions</th>
                     </tr>
@@ -35,10 +39,12 @@
                 <tbody>
                 <script>
                     var x = [];
+                    
                 </script>
-
+                <!--{%! boolean outofstock = false; %}-->
                 <c:forEach var="pr" items="${listproducts}">
 
+                    
                     <script>
                         x.push("${pr}");
                         x.push("${pr.productDescription}");
@@ -53,17 +59,25 @@
                         <td>${pr.productPrice}</td>   
                         <td>${pr.categoryId}</td>   
                         <td>${pr.categoryName}</td>   
-                        <td>${pr.filename}</td>   
-
+                        <td>${pr.filename}</td>  
+                        <td>
+                    <form action="/addToCart/${pr.productId}" method="POST" >
+                    <input type="number" min="1" max="${pr.productStock}" name="quantity" />
+                    
+                        </td>
 
                         <td>
                             <a href="/editProduct/${pr.productId}">Edit</a>
                             <a href="/deleteProduct/${pr.productId}">Delete</a>
-                        </td>   
+                            <button type="submit">Add to cart</button>
+                        </td> 
+                        </form>
                     </tr>
                     </tbody>
                 </c:forEach>
             </table>
+
+
 
         </div>
 

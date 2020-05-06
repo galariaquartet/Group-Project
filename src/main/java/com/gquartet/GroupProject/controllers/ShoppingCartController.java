@@ -1,8 +1,8 @@
 package com.gquartet.GroupProject.controllers;
 
 import com.gquartet.GroupProject.models.Customer;
+import com.gquartet.GroupProject.models.Product;
 import com.gquartet.GroupProject.models.ShoppingCart;
-import com.gquartet.GroupProject.repos.ShoppingCartRepository;
 import com.gquartet.GroupProject.services.CustomerService;
 import com.gquartet.GroupProject.services.ProductService;
 import com.gquartet.GroupProject.services.ShoppingCartService;
@@ -11,9 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ShoppingCartController {
@@ -39,68 +41,52 @@ public class ShoppingCartController {
         }
     }
 
-    @RequestMapping("/newShoppingCart")
-    public String viewNewShoppingCartForm(HttpSession session, ModelMap mm) {
+    @RequestMapping("/addToCart/{productId}" )
+    public String showEditShoppingCartForm(@RequestParam("quantity") int quantity, HttpSession session, @PathVariable("productId") int productId, ModelMap mm) {
         if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
             mm.addAttribute("login_required", "You have to log in first");
             return "index";
         } else {
-            int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
-            ShoppingCart shoppingCart = new ShoppingCart();
-            mm.addAttribute("customerId", customerService.getCustomer(customerId).getCustomerId());
-            mm.addAttribute("shoppingCart", shoppingCart);
-            return "newShoppingCart";
-        }
-    }
+            Customer customer = ((Customer) session.getAttribute("customer"));
+            
+            int customerId = customer.getCustomerId();
+            ShoppingCart shoppingCart = shoppingCartService.getCartByProduct(productId, customerId);
+            //tsekaroume ena uparxei sto kala8i me bash to productID ena proion ean den uparxei dhmiourgoume ena kainourgio kala8i k to pros8etoume
+            if (shoppingCart == null ) {
+                shoppingCart = new ShoppingCart();
+                shoppingCart.setCustomerId(customer);
+                Product product = productService.getProduct(productId);
+                shoppingCart.setProductId(product);
 
-    @RequestMapping("/saveShoppingCart")
-    public String saveShoppingCart(HttpSession session, ModelMap mm, @ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
+                //TODO change quantity and check ean uperbainei to orio tou product
+                shoppingCart.setQuantity(quantity);
 
-        if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
-            mm.addAttribute("login_required", "You have to log in first");
-            return "index";
-        } else {
-            int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
-            shoppingCart.setCustomerId(customerService.getCustomer(customerId));
+            } else {
+                int quan = (shoppingCart.getQuantity()) + quantity;
+                shoppingCart.setQuantity(quan);
+            }
             shoppingCartService.save(shoppingCart);
-            return "redirect:/shoppingCartView";
+            return "redirect:/products";
         }
     }
 
-    @RequestMapping("/editShoppingCart/{shoppingCartId}")
-    public String showEditShoppingCartForm(HttpSession session, @PathVariable("shoppingCartId") int shoppingCartId, ModelMap mm) {
-
-        if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
-            mm.addAttribute("login_required", "You have to log in first");
-            return "index";
-        } else {
-            int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
-            mm.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(shoppingCartId));
-            mm.addAttribute("customerId", customerService.getCustomer(customerId).getCustomerId());
-            return "updateFormShoppingCart";
-        }
-    }
-
-    @RequestMapping("/updateShoppingCart")
-    public String saveUpdatedShoppingCart(HttpSession session, ModelMap mm, @ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
-
-        if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
-            mm.addAttribute("login_required", "You have to log in first");
-            return "index";
-        } else {
-            int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
-            shoppingCart.setCustomerId(customerService.getCustomer(customerId));
-            shoppingCartService.update(shoppingCart);
-            return "redirect:/shoppingCartView";
-        }
-
-    }
 //auto paizei aplws den exw balei na odhgei sth swsth dieu8unsh
-
     @RequestMapping("/deleteShoppingCart/{shoppingCartId}")
     public String deleteShoppingCart(@PathVariable int shoppingCartId, ModelMap mm) {
         shoppingCartService.delete(shoppingCartId);
         return "redirect:/shoppingCartView";
     }
+    
+    @ResponseBody
+    @PostMapping("updatequantity/{quantity}/{cartid}")
+    public void updateQuantity(@PathVariable("quantity") int quantity, @PathVariable("cartid") int cartid){
+        System.out.println("Quantity = " + quantity);
+        System.out.println("Cart id = " + cartid);
 
+//        System.out.println("%%%%%%%%%%%%%%"+ shoppingCart.getQuantity());
+//        System.out.println("%%%%%%%%%%%%%%"+ shoppingCart);
+// 
+        
+        
+    }
 }

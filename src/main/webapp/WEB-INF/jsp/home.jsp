@@ -11,5 +11,6 @@
         <a href="about_us">About us   |</a>
         <a href="Contact">Contact   |</a>
         <a href="Games">Games   |</a>
+        <a href="products">Products   |</a>
     </body>
 </html>

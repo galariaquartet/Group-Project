@@ -7,6 +7,7 @@ import com.gquartet.GroupProject.models.ProductImage;
 import com.gquartet.GroupProject.services.CategoryService;
 import com.gquartet.GroupProject.services.ProductImageService;
 import com.gquartet.GroupProject.services.ProductService;
+import com.gquartet.GroupProject.services.ShoppingCartService;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -37,12 +38,10 @@ public class ProductController {
 
 //TODO VALIDATOS
     //TODO add photo to upadate form 
-    
     @RequestMapping("/products")
     public String viewProductPage(ModelMap mm) {
         List<ProductCategoryImageDto> list = productService.listProductCategoryImage();
-        mm.addAttribute("listproducts", list);
-
+        mm.addAttribute("listproducts", list);         
         return "productview";
     }
 //   @ResponseBody
@@ -68,11 +67,12 @@ public class ProductController {
         mm.addAttribute("product", productCategoryImageDto);
         List<Category> categoryNames = categoryService.listAll();
         mm.addAttribute("categoryList", categoryNames);
+
         return "newProduct";
     }
 
     @RequestMapping("/saveProduct")
-    public String saveCategory(@RequestParam(value = "myfile") MultipartFile multipart, ModelMap mm, @ModelAttribute("product") ProductCategoryImageDto productCategoryImageDto ) {
+    public String saveCategory(@RequestParam(value = "myfile") MultipartFile multipart, ModelMap mm, @ModelAttribute("product") ProductCategoryImageDto productCategoryImageDto) {
         Product product = new Product();
 
         product.setProductId(productCategoryImageDto.getProductId());
@@ -88,8 +88,8 @@ public class ProductController {
         productService.save(product);
         //apo edw k katw afora tis fwtografies
         ProductImage productImage = new ProductImage();
-       productImage.setProductFilename(productCategoryImageDto.getFilename());//pairnei thn onomasia k thn katalh3h apo authn pou tou exei dwsei o xrhsth
-        try {      
+        productImage.setProductFilename(productCategoryImageDto.getFilename());//pairnei thn onomasia k thn katalh3h apo authn pou tou exei dwsei o xrhsth
+        try {
             //save to db
             //ousiastika tou leme na parei ta byte tou arxeiou 
             productImage.setProductImage(multipart.getBytes());
@@ -99,23 +99,23 @@ public class ProductController {
         }
         productImage.setProductId(product);//bazoume to foreign key sth product image
         productImageService.storeFileToDB(productImage); //save product image
-        
+
         return "redirect:/products";
     }
 
     //gia na ftia3oume to update arxika phgainoume sthn forma 
     @RequestMapping("/editProduct/{productId}")
-    public String showEditProductForm(@PathVariable("productId") int productId, ModelMap mm) {         
+    public String showEditProductForm(@PathVariable("productId") int productId, ModelMap mm) {
         mm.addAttribute("product", productService.getProduct(productId));
-                List<Category> categoryNames = categoryService.listAll();
+        List<Category> categoryNames = categoryService.listAll();
         mm.addAttribute("categoryList", categoryNames);
         return "updateFormProduct";
     }
 
     @RequestMapping("/updateProduct")
-    public String saveUpdatedCategory(ModelMap mm, @ModelAttribute("product") Product product) {              
+    public String saveUpdatedCategory(ModelMap mm, @ModelAttribute("product") Product product) {
         productService.update(product);
-     
+
         return "redirect:/products";
     }
 
