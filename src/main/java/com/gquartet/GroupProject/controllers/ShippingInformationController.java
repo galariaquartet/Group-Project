@@ -1,6 +1,5 @@
 package com.gquartet.GroupProject.controllers;
 
-import com.gquartet.GroupProject.dtos.ShippingInformationPaymentDto;
 import com.gquartet.GroupProject.models.CustomerOrder;
 import com.gquartet.GroupProject.models.Payment;
 import com.gquartet.GroupProject.models.ShippingInformation;
@@ -30,7 +29,6 @@ public class ShippingInformationController {
         List<ShippingInformation> list = shippingInformationService.findShippingInformation(ordernumber);
         mm.addAttribute("listShippingInformation", list);
         
-      
        // return "orderDetailsView";
         return "forward:/payment/"+ordernumber;
     }
@@ -41,29 +39,35 @@ public class ShippingInformationController {
 //        mm.addAttribute("shippingInformation", shippingInformation);
 //        return "newShippingInformation";
 //    }
-    @RequestMapping("/newShippingInformationPayment")
-    public String viewNewProductForm(ModelMap mm) {
-        ShippingInformationPaymentDto shippingInformationPaymentDto = new ShippingInformationPaymentDto();
-        mm.addAttribute("shippingInformationPaymentDto", shippingInformationPaymentDto);
-       List<Payment> paymentList = paymentService.listAll();
-        mm.addAttribute("paymentList", paymentList);
- 
-        return "newShippingInformationPaymentForm";
-    }
-
-    @RequestMapping("/saveShippingInformation")
-    public String saveShippingInformation(ModelMap mm, @ModelAttribute("shippingInformationPaymentDto") ShippingInformationPaymentDto shippingInformationPaymentDto) {
-        shippingInformationPaymentDto.setShippingInformationId(null);
-        shippingInformationPaymentDto.setShippingCountry(shippingInformationPaymentDto.getShippingCountry());
-        shippingInformationPaymentDto.setShippingState(shippingInformationPaymentDto.getShippingState());        
-        shippingInformationPaymentDto.setShippingCity(shippingInformationPaymentDto.getShippingCity());    
-        shippingInformationPaymentDto.setShippingStreet(shippingInformationPaymentDto.getShippingStreet());
-        shippingInformationPaymentDto.setShippingZip(shippingInformationPaymentDto.getShippingZip());
-        shippingInformationPaymentDto.setRecipientFirstName(shippingInformationPaymentDto.getRecipientFirstName());
-        
-//        shippingInformationService.save(shippingInformation);
-        return "redirect:/";
-    }
+//    @RequestMapping("/newShippingInformation")
+//    public String viewNewProductForm(ModelMap mm) {
+//        ShippingInformation shippingInformation = new ShippingInformation();
+//        mm.addAttribute("shippingInformation", shippingInformation);
+//        return "orderPage";
+//    }
+//    @RequestMapping("/newShippingInformationPayment")
+//    public String viewNewProductForm(ModelMap mm) {
+//        ShippingInformationPaymentDto shippingInformationPaymentDto = new ShippingInformationPaymentDto();
+//        mm.addAttribute("shippingInformationPaymentDto", shippingInformationPaymentDto);
+//       List<Payment> paymentList = paymentService.listAll();
+//        mm.addAttribute("paymentList", paymentList);
+// 
+//        return "newShippingInformationPaymentForm";
+//    }
+//
+//    @RequestMapping("/saveShippingInformation")
+//    public String saveShippingInformation(ModelMap mm, @ModelAttribute("shippingInformationPaymentDto") ShippingInformationPaymentDto shippingInformationPaymentDto) {
+//        shippingInformationPaymentDto.setShippingInformationId(null);
+//        shippingInformationPaymentDto.setShippingCountry(shippingInformationPaymentDto.getShippingCountry());
+//        shippingInformationPaymentDto.setShippingState(shippingInformationPaymentDto.getShippingState());        
+//        shippingInformationPaymentDto.setShippingCity(shippingInformationPaymentDto.getShippingCity());    
+//        shippingInformationPaymentDto.setShippingStreet(shippingInformationPaymentDto.getShippingStreet());
+//        shippingInformationPaymentDto.setShippingZip(shippingInformationPaymentDto.getShippingZip());
+//        shippingInformationPaymentDto.setRecipientFirstName(shippingInformationPaymentDto.getRecipientFirstName());
+//        
+////        shippingInformationService.save(shippingInformation);
+//        return "redirect:/";
+//    }
 //    @RequestMapping("/saveShippingInformation")
 //    public String saveShippingInformation(ModelMap mm, @ModelAttribute("shippingInformation") ShippingInformation shippingInformation) {
 //        shippingInformationService.save(shippingInformation);

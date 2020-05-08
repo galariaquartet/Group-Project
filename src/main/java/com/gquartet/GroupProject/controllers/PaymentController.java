@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,16 @@ public class PaymentController {
        // return "paymentView";
             return "orderDetailsView";
     }
+    //edw phgainoume otan 8eloume na praggeiloume oti exoume balei mesa sto kala8i
+//    @GetMapping("/payments")
+//    public String viewPayment(ModelMap mm) {
+//        Payment payment = new Payment();
+//        mm.addAttribute("payment",payment);
+//        List<Payment> list = paymentService.listAll();
+//        mm.addAttribute("listPayment", list);
+//       // return "paymentView";
+//            return "orderPage";
+//    }
 
     @RequestMapping("/newPayment")
     public String viewNewPaymentForm(ModelMap mm) {

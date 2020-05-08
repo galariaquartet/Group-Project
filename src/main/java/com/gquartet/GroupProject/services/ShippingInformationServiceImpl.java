@@ -1,5 +1,6 @@
 package com.gquartet.GroupProject.services;
 
+import com.gquartet.GroupProject.models.CustomerInformation;
 import com.gquartet.GroupProject.models.OrderDetails;
 import com.gquartet.GroupProject.models.ShippingInformation;
 import com.gquartet.GroupProject.repos.ShippingInformationRepository;
@@ -46,6 +47,7 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
         si.setRecipientFirstName(shippingInformation.getRecipientFirstName());
         si.setRecipientLastName(shippingInformation.getRecipientLastName());
         si.setRecipientPhone(shippingInformation.getRecipientPhone());
+        si.setOrderDetailsId(shippingInformation.getOrderDetailsId());
 
         repo.save(si);
     }
@@ -53,6 +55,45 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
     @Override
     public List<ShippingInformation> findShippingInformation(int orderNumber) {
         return repo.findShippingInformationByOrderDetailsId(orderNumber);
+    }
+
+    @Override
+    public void newShippingInfoFromShippingInfo(ShippingInformation shippingInformation) {
+         ShippingInformation si = new ShippingInformation();
+         
+                 si.setShippingInformationId(null);
+        si.setShippingCountry(shippingInformation.getShippingCountry());
+        si.setShippingState(shippingInformation.getShippingState());
+        si.setShippingCity(shippingInformation.getShippingCity());
+        si.setShippingStreet(shippingInformation.getShippingStreet());
+        si.setShippingZip(shippingInformation.getShippingZip());
+        si.setRecipientFirstName(shippingInformation.getRecipientFirstName());
+        si.setRecipientLastName(shippingInformation.getRecipientLastName());
+        si.setRecipientPhone(shippingInformation.getRecipientPhone());
+        si.setOrderDetailsId(shippingInformation.getOrderDetailsId());
+
+        System.out.println("############################"+shippingInformation.getRecipientFirstName());
+        repo.save(si);
+         
+    }
+
+    @Override
+    public void newShippingInfoFromCustomerInfo(CustomerInformation customerInformation) {
+         ShippingInformation si = new ShippingInformation();
+         
+                     si.setShippingInformationId(null);
+            si.setShippingCountry(customerInformation.getCountry());
+            si.setShippingState(customerInformation.getState());
+            si.setShippingCity(customerInformation.getCity());
+            si.setShippingStreet(customerInformation.getStreet());
+            si.setShippingZip(customerInformation.getZip());
+            si.setRecipientFirstName(customerInformation.getFirstName());
+            si.setRecipientLastName(customerInformation.getLastName());
+            si.setRecipientPhone(customerInformation.getPhone());
+           
+            System.out.println("(((((((**************&&&&&&&"+si.getRecipientFirstName());
+            
+          //  repo.save(si);
     }
 
 }

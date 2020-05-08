@@ -77,11 +77,15 @@ public class ShoppingCartController {
         return "redirect:/shoppingCartView";
     }
     
+//    @ResponseBody
+//    @RequestMapping("updatequantity/{quantity}/{cartid}")
+//    public void updateQuantity(@PathVariable("quantity") int quantity, @PathVariable("cartid") int cartid){
+//        System.out.println("Quantity = " + quantity);
     @ResponseBody
-    @PostMapping("updatequantity/{quantity}/{cartid}")
-    public void updateQuantity(@PathVariable("quantity") int quantity, @PathVariable("cartid") int cartid){
-        System.out.println("Quantity = " + quantity);
-        System.out.println("Cart id = " + cartid);
+    @RequestMapping("updatequantity/{quantity}")
+    public void updateQuantity(@PathVariable("quantity") int quantity){
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$Quantity = " + quantity);
+       // System.out.println("Cart id = " + cartid);
 
 //        System.out.println("%%%%%%%%%%%%%%"+ shoppingCart.getQuantity());
 //        System.out.println("%%%%%%%%%%%%%%"+ shoppingCart);

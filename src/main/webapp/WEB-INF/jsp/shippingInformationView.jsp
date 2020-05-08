@@ -10,9 +10,9 @@
     <body>
         <div align="center">
             <br/>
-                    <a href="newShippingInformation">Create new shippingInformation</a>
-        <br/>
-<!--auto mallon den 8a to xreiastoume-->
+            <a href="newShippingInformation">Create new shippingInformation</a>
+            <br/>
+            <!--auto mallon den 8a to xreiastoume-->
             <br/>
             <table border='1' cellpadding="10">
                 <thead>
@@ -31,26 +31,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="si" items="${listShippingInformation}">
-                    <tr>
-                        <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                        <td>${si.shippingInformationId}</td>
-                        <td>${si.shippingCountry}</td>
-                        <td>${si.shippingState}</td>
-                        <td>${si.shippingCity}</td>
-                        <td>${si.shippingStreet}</td>
-                        <td>${si.shippingZip}</td>
-                        <td>${si.recipientFirstName}</td>
-                        <td>${si.recipientLastName}</td>
-                        <td>${si.recipientPhone}</td>
-                        <td>
-                            <a href="/editShippingInformation/${si.shippingInformationId}">Edit</a>
-                            <a href="/deleteShippingInformation/${si.shippingInformationId}">Delete</a>
-                        </td>   
-                    </tr>
-                    
-                </c:forEach>
-                    </tbody>
+                    <c:forEach var="si" items="${listShippingInformation}">
+                        <tr>
+                            <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
+                            <td>${si.shippingInformationId}</td>
+                            <td>${si.shippingCountry}</td>
+                            <td>${si.shippingState}</td>
+                            <td>${si.shippingCity}</td>
+                            <td>${si.shippingStreet}</td>
+                            <td>${si.shippingZip}</td>
+                            <td>${si.recipientFirstName}</td>
+                            <td>${si.recipientLastName}</td>
+                            <td>${si.recipientPhone}</td>
+                            <td>
+                                <a href="/editShippingInformation/${si.shippingInformationId}">Edit</a>
+                                <a href="/deleteShippingInformation/${si.shippingInformationId}">Delete</a>
+                            </td>   
+                        </tr>
+
+                    </c:forEach>
+                </tbody>
             </table>
 
         </div>

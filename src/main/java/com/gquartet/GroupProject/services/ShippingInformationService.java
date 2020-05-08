@@ -1,5 +1,6 @@
 package com.gquartet.GroupProject.services;
 
+import com.gquartet.GroupProject.models.CustomerInformation;
 import com.gquartet.GroupProject.models.ShippingInformation;
 import java.util.List;
 
@@ -14,7 +15,11 @@ public interface ShippingInformationService {
     public void delete(Integer id);
 
     public void update(ShippingInformation shippingInformation);
-    
+
     public List<ShippingInformation> findShippingInformation(int orderNumber);
+
+    public void newShippingInfoFromShippingInfo(ShippingInformation shippingInformation);
+
+    public void newShippingInfoFromCustomerInfo(CustomerInformation customerInformation);
 
 }
