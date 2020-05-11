@@ -2,15 +2,19 @@ package com.gquartet.GroupProject.controllers;
 
 import com.gquartet.GroupProject.dtos.ShippingInfoCustomerInfoPaymentDTO;
 import com.gquartet.GroupProject.models.Customer;
+import com.gquartet.GroupProject.models.CustomerCreditCard;
 import com.gquartet.GroupProject.models.CustomerInformation;
 import com.gquartet.GroupProject.models.CustomerOrder;
 import com.gquartet.GroupProject.models.OrderDetails;
 import com.gquartet.GroupProject.models.OrderStatus;
 import com.gquartet.GroupProject.models.Payment;
+import com.gquartet.GroupProject.models.Product;
 import com.gquartet.GroupProject.models.ShippingInformation;
+import com.gquartet.GroupProject.models.ShoppingCart;
 import com.gquartet.GroupProject.services.CustomerInformationSercvice;
 import com.gquartet.GroupProject.services.CustomerOrderService;
 import com.gquartet.GroupProject.services.CustomerService;
+import com.gquartet.GroupProject.services.OrderDetailsService;
 import com.gquartet.GroupProject.services.OrderStatusService;
 import com.gquartet.GroupProject.services.PaymentService;
 import com.gquartet.GroupProject.services.ShippingInformationService;
@@ -26,7 +30,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/order")
@@ -46,6 +52,8 @@ public class OrderController {
     private CustomerService customerService;
     @Autowired
     private OrderStatusService orderStatusService;
+    @Autowired
+    private OrderDetailsService orderDetailsService;
 
     @RequestMapping
     public String showOrderForm(Model mm) {
@@ -57,54 +65,81 @@ public class OrderController {
     @RequestMapping("/process")
     public String saveOrderInformation(HttpSession session, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
 
+        //dhmiourgeitai h order k apo8hkeyetai k to order status
         CustomerOrder customerOrder = new CustomerOrder();
-
         int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
         customerOrder.setCustomerId(customerService.getCustomer(customerId));
-        //  customerOrder.setOrderDate("2020-04-04");
+
         OrderStatus orderStatus = new OrderStatus();
         Date date = new Date();
         customerOrder.setOrderDate(date);
-        customerOrder.setOrderStatusId(orderStatusService.getOrderStatus(2)); //8elei ftia3imo
+        customerOrder.setOrderStatusId(orderStatusService.getOrderStatus(1)); //to order status san default timh pairnei thn proetoimasia paraggelias 
         customerOrderService.save(customerOrder);
-        int ordernumber = customerOrder.getOrderNumber();
-        System.out.println("ddddddddddddddddddddd" + ordernumber);
 
-        return "forward:/order/payment/"+ ordernumber;
+        int ordernumber = customerOrder.getOrderNumber();
+
+        return "forward:/order/shippingInfo/" + ordernumber;
     }
 
-    @RequestMapping("/payment/{ordernumber}")
-    public String savePaymentInformation(@PathVariable("ordernumber") CustomerOrder customerOrder, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
-          System.out.println("%%%%%%%%%%%^%^^^^^^^^^^^^^^^" + customerOrder.getCustomerId() + "GGGGGGGGGGGGGG" + customerOrder.getOrderNumber());
-        System.out.println("#$#$$$$$$$$$$$$$$$$$$$$$$$" + info.getPayment());
-        int ordernumber = customerOrder.getOrderNumber();
-        Payment payment = new Payment();
-        int paymentId = payment.getPaymentId();
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&"+paymentId);
-        return "forward:/order/shippingInfo/"+ ordernumber+"/"+paymentId;
-    }
+    //APOUHKEUETAI TO SHIPPING INFORMATION ANALOGA ME TO POU UELEI NA TH STEILEI O XRHSTHS THS PARAGGELIAS
+    @RequestMapping("/shippingInfo/{ordernumber}")
+    public String saveOrderInformation(@PathVariable("ordernumber") CustomerOrder customerOrder, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
 
-    @RequestMapping("/payment/{ordernumber}/{paymentId}")
-    public void saveOrderInformation(@PathVariable("ordernumber") CustomerOrder customerOrder,@PathVariable("paymentId") Payment payment,@ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&SHIPPING " + customerOrder.getCustomerId()+" "+ payment.getPaymentId());
-      //  ShippingInformation si = new ShippingInformation();
-//prepei na balw to orderdetails id
-        System.out.println("#$#$$$$$$$$$$$$$$$$$$$$$$$" + info.getPayment());
-        if (info.isCheck() == true) {//ean to checkbox einai check tote to shipping info 8a parei tis nees times
-            
-            shippingInformationService.newShippingInfoFromShippingInfo(info.getShippingInformation());
-            // System.out.println( si.getRecipientFirstName());
-        } else {
-            shippingInformationService.newShippingInfoFromCustomerInfo(info.getCustomerInformation());
+        ShippingInformation si = new ShippingInformation();
+        int ordernumber = customerOrder.getOrderNumber();
+
+        //ean to checkbox den einai check tote to shipping info 8a parei tis nees times 
+        if (info.isCheck() != true) {
+            si = shippingInformationService.newShippingInfoFromShippingInfo(info.getShippingInformation());            // System.out.println( si.getRecipientFirstName());
+            int shippinInfoId = si.getShippingInformationId();
+            return "forward:/order/finishOrder/" + ordernumber + "/" + shippinInfoId;
         }
-       // return "forward:/order/payment";
+
+        si = shippingInformationService.newShippingInfoFromCustomerInfo(info.getCustomerInformation());
+        int shippinInfoId = si.getShippingInformationId();
+
+        return "forward:/order/finishOrder/" + ordernumber + "/" + shippinInfoId;
     }
 
-    @ModelAttribute("customerInformation")
-    public CustomerInformation getcustomerInformation(HttpSession session, ModelMap mm) {
+    @RequestMapping("/finishOrder/{ordernumber}/{shippinInfoId}")
+    public String finishOrder(@PathVariable("ordernumber") CustomerOrder customerOrder, HttpSession session, @PathVariable("shippinInfoId") ShippingInformation shippingInformation, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
+
+        Payment payment = info.getPayment();
+        int paymentId = payment.getPaymentId();
+
         int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
-        return customerInformationSercvice.getCustomerInformation(customerId);
+        
+        List<ShoppingCart> listProduct = shoppingCartService.getShoppingCartByCustomerId(customerId);
+        for (int i = 0; i < listProduct.size(); i++) {
+            Product pr = listProduct.get(i).getProductId();
+
+            //dhmiourgeitai to order detail 
+            OrderDetails orderDetails = new OrderDetails(null, customerOrder, pr, payment, shippingInformation);
+            orderDetailsService.saveOrderDetails(orderDetails);
+            //ME TO POU MPOUN TSH BASH META SBHNOUME APO TH BASH TO KALOA8I TOU SUGKEKRIMENOU XRHSTH
+            ShoppingCart sc = shoppingCartService.getCartByProduct(pr.getProductId(), customerId);
+            shoppingCartService.delete(sc.getShoppingCartId());
+        }
+        return "redirect:/customerOrder"; //odhgei ton xrhsth pali sthn selida orderdetails mesw tou customerOrderController
     }
+
+
+    @RequestMapping("/card")
+    public String showPopUpcardInformation(Model mm) {
+
+        CustomerCreditCard customerCreditCard = new CustomerCreditCard();
+        mm.addAttribute("customerCreditCard", customerCreditCard);
+
+        return "forward:/order/cardInfo";
+    }
+
+    @RequestMapping("/cardInfo")
+    public String cardInformation(Model mm) {
+
+        System.out.println("#################################");
+        return "redirect:/order";
+    }
+
 
     @ModelAttribute("payments")
     public List<Payment> getPayments(ModelMap mm) {
@@ -115,5 +150,19 @@ public class OrderController {
     public boolean getValueToCheckbox(ModelMap mm) {
         return false;
     }
+
+    @ModelAttribute("customerCreditCard")
+    public CustomerCreditCard customerCreditCard(ModelMap mm) {
+        CustomerCreditCard customerCreditCard = new CustomerCreditCard();
+        return customerCreditCard;
+    }
+
+    @ModelAttribute("customerInformation")
+    public CustomerInformation customerInformation(HttpSession session, ModelMap mm) {
+        int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
+        CustomerInformation customerInformation = customerInformationSercvice.getCustomerInformation(customerId);
+        return customerInformation;
+    }
+
 
 }

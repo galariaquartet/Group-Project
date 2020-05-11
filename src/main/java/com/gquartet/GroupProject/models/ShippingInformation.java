@@ -1,21 +1,27 @@
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author Coily1805
+ */
 @Entity
 @Table(name = "shipping_information")
 @XmlRootElement
@@ -78,9 +84,8 @@ public class ShippingInformation implements Serializable {
     @Size(min = 1, max = 15)
     @Column(name = "recipient_phone")
     private String recipientPhone;
-    @JoinColumn(name = "order_details_id", referencedColumnName = "order_details_id")
-    @ManyToOne(optional = false)
-    private OrderDetails orderDetailsId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shippingInformationId")
+    private Collection<OrderDetails> orderDetailsCollection;
 
     public ShippingInformation() {
     }
@@ -173,12 +178,13 @@ public class ShippingInformation implements Serializable {
         this.recipientPhone = recipientPhone;
     }
 
-    public OrderDetails getOrderDetailsId() {
-        return orderDetailsId;
+    @XmlTransient
+    public Collection<OrderDetails> getOrderDetailsCollection() {
+        return orderDetailsCollection;
     }
 
-    public void setOrderDetailsId(OrderDetails orderDetailsId) {
-        this.orderDetailsId = orderDetailsId;
+    public void setOrderDetailsCollection(Collection<OrderDetails> orderDetailsCollection) {
+        this.orderDetailsCollection = orderDetailsCollection;
     }
 
     @Override
@@ -205,5 +211,5 @@ public class ShippingInformation implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.ShippingInformation[ shippingInformationId=" + shippingInformationId + " ]";
     }
-
+    
 }

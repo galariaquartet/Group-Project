@@ -6,6 +6,7 @@ import com.gquartet.GroupProject.models.ShoppingCart;
 import com.gquartet.GroupProject.services.CustomerService;
 import com.gquartet.GroupProject.services.ProductService;
 import com.gquartet.GroupProject.services.ShoppingCartService;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,22 +42,27 @@ public class ShoppingCartController {
         }
     }
 
-    @RequestMapping("/addToCart/{productId}" )
+    @RequestMapping("/addToCart/{productId}")
     public String showEditShoppingCartForm(@RequestParam("quantity") int quantity, HttpSession session, @PathVariable("productId") int productId, ModelMap mm) {
+        double totalPrice = 0.0;
         if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
             mm.addAttribute("login_required", "You have to log in first");
             return "index";
         } else {
             Customer customer = ((Customer) session.getAttribute("customer"));
-            
+
             int customerId = customer.getCustomerId();
             ShoppingCart shoppingCart = shoppingCartService.getCartByProduct(productId, customerId);
             //tsekaroume ena uparxei sto kala8i me bash to productID ena proion ean den uparxei dhmiourgoume ena kainourgio kala8i k to pros8etoume
-            if (shoppingCart == null ) {
+            if (shoppingCart == null) {
                 shoppingCart = new ShoppingCart();
                 shoppingCart.setCustomerId(customer);
                 Product product = productService.getProduct(productId);
                 shoppingCart.setProductId(product);
+
+                totalPrice = totalPrice + product.getProductPrice().doubleValue();
+
+                System.out.println("^^^^^^^^^^^^^^$$$$$$$$$$$$$$$$$" + totalPrice);
 
                 //TODO change quantity and check ean uperbainei to orio tou product
                 shoppingCart.setQuantity(quantity);
@@ -64,6 +70,10 @@ public class ShoppingCartController {
             } else {
                 int quan = (shoppingCart.getQuantity()) + quantity;
                 shoppingCart.setQuantity(quan);
+
+//                totalPrice =totalPrice + totalPrice * quan;
+//
+//                System.out.println("^^^^^^^^^^^^^^**************" + totalPrice);
             }
             shoppingCartService.save(shoppingCart);
             return "redirect:/products";
@@ -76,21 +86,5 @@ public class ShoppingCartController {
         shoppingCartService.delete(shoppingCartId);
         return "redirect:/shoppingCartView";
     }
-    
-//    @ResponseBody
-//    @RequestMapping("updatequantity/{quantity}/{cartid}")
-//    public void updateQuantity(@PathVariable("quantity") int quantity, @PathVariable("cartid") int cartid){
-//        System.out.println("Quantity = " + quantity);
-    @ResponseBody
-    @RequestMapping("updatequantity/{quantity}")
-    public void updateQuantity(@PathVariable("quantity") int quantity){
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$Quantity = " + quantity);
-       // System.out.println("Cart id = " + cartid);
 
-//        System.out.println("%%%%%%%%%%%%%%"+ shoppingCart.getQuantity());
-//        System.out.println("%%%%%%%%%%%%%%"+ shoppingCart);
-// 
-        
-        
-    }
 }

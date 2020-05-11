@@ -19,7 +19,6 @@ public class CustomerOrderSeviceImpl implements CustomerOrderService {
 
     @Override
     public void save(CustomerOrder customerOrder) {
-        System.out.println("^^^^^^^^^^^^^^^^^^CUSTOMER ORDERS AVE");
         repo.save(customerOrder);
     }
 

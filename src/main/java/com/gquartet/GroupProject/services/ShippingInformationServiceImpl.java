@@ -47,7 +47,6 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
         si.setRecipientFirstName(shippingInformation.getRecipientFirstName());
         si.setRecipientLastName(shippingInformation.getRecipientLastName());
         si.setRecipientPhone(shippingInformation.getRecipientPhone());
-        si.setOrderDetailsId(shippingInformation.getOrderDetailsId());
 
         repo.save(si);
     }
@@ -57,11 +56,12 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
         return repo.findShippingInformationByOrderDetailsId(orderNumber);
     }
 
+    //edw apo8hkeuontai oi plhrofories sthn periptwsh pou o xrhsths den 8elei na apo8hkeusei tis plhrofories tou customer Information
     @Override
-    public void newShippingInfoFromShippingInfo(ShippingInformation shippingInformation) {
-         ShippingInformation si = new ShippingInformation();
-         
-                 si.setShippingInformationId(null);
+    public ShippingInformation newShippingInfoFromShippingInfo(ShippingInformation shippingInformation) {
+        ShippingInformation si = new ShippingInformation();
+
+        si.setShippingInformationId(null);
         si.setShippingCountry(shippingInformation.getShippingCountry());
         si.setShippingState(shippingInformation.getShippingState());
         si.setShippingCity(shippingInformation.getShippingCity());
@@ -70,30 +70,26 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
         si.setRecipientFirstName(shippingInformation.getRecipientFirstName());
         si.setRecipientLastName(shippingInformation.getRecipientLastName());
         si.setRecipientPhone(shippingInformation.getRecipientPhone());
-        si.setOrderDetailsId(shippingInformation.getOrderDetailsId());
-
-        System.out.println("############################"+shippingInformation.getRecipientFirstName());
         repo.save(si);
-         
+        return si;
     }
-
+    //edw apo8hkeuontai oi plhrofories tou customer Information h an exei alla3ei kati
     @Override
-    public void newShippingInfoFromCustomerInfo(CustomerInformation customerInformation) {
-         ShippingInformation si = new ShippingInformation();
-         
-                     si.setShippingInformationId(null);
-            si.setShippingCountry(customerInformation.getCountry());
-            si.setShippingState(customerInformation.getState());
-            si.setShippingCity(customerInformation.getCity());
-            si.setShippingStreet(customerInformation.getStreet());
-            si.setShippingZip(customerInformation.getZip());
-            si.setRecipientFirstName(customerInformation.getFirstName());
-            si.setRecipientLastName(customerInformation.getLastName());
-            si.setRecipientPhone(customerInformation.getPhone());
-           
-            System.out.println("(((((((**************&&&&&&&"+si.getRecipientFirstName());
-            
-          //  repo.save(si);
+    public ShippingInformation newShippingInfoFromCustomerInfo(CustomerInformation customerInformation) {
+        ShippingInformation si = new ShippingInformation();
+
+        si.setShippingInformationId(null);
+        si.setShippingCountry(customerInformation.getCountry());
+        si.setShippingState(customerInformation.getState());
+        si.setShippingCity(customerInformation.getCity());
+        si.setShippingStreet(customerInformation.getStreet());
+        si.setShippingZip(customerInformation.getZip());
+        si.setRecipientFirstName(customerInformation.getFirstName());
+        si.setRecipientLastName(customerInformation.getLastName());
+        si.setRecipientPhone(customerInformation.getPhone());
+
+        repo.save(si);
+        return si;
     }
 
 }

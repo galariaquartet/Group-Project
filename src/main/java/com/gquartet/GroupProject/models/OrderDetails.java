@@ -1,9 +1,7 @@
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,11 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author Coily1805
+ */
 @Entity
 @Table(name = "order_details")
 @XmlRootElement
@@ -41,12 +41,21 @@ public class OrderDetails implements Serializable {
     @JoinColumn(name = "payment_id", referencedColumnName = "payment_id")
     @ManyToOne(optional = false)
     private Payment paymentId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderDetailsId")
-    private Collection<ShippingInformation> shippingInformationCollection;
+    @JoinColumn(name = "shipping_information_id", referencedColumnName = "shipping_information_id")
+    @ManyToOne(optional = false)
+    private ShippingInformation shippingInformationId;
 
     public OrderDetails() {
     }
 
+    public OrderDetails(Integer orderDetailsId, CustomerOrder orderNumber, Product productId, Payment paymentId, ShippingInformation shippingInformationId) {
+        this.orderDetailsId = orderDetailsId;
+        this.orderNumber = orderNumber;
+        this.productId = productId;
+        this.paymentId = paymentId;
+        this.shippingInformationId = shippingInformationId;
+    }
+    
     public OrderDetails(Integer orderDetailsId) {
         this.orderDetailsId = orderDetailsId;
     }
@@ -83,13 +92,12 @@ public class OrderDetails implements Serializable {
         this.paymentId = paymentId;
     }
 
-    @XmlTransient
-    public Collection<ShippingInformation> getShippingInformationCollection() {
-        return shippingInformationCollection;
+    public ShippingInformation getShippingInformationId() {
+        return shippingInformationId;
     }
 
-    public void setShippingInformationCollection(Collection<ShippingInformation> shippingInformationCollection) {
-        this.shippingInformationCollection = shippingInformationCollection;
+    public void setShippingInformationId(ShippingInformation shippingInformationId) {
+        this.shippingInformationId = shippingInformationId;
     }
 
     @Override

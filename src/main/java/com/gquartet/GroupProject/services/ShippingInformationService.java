@@ -18,8 +18,8 @@ public interface ShippingInformationService {
 
     public List<ShippingInformation> findShippingInformation(int orderNumber);
 
-    public void newShippingInfoFromShippingInfo(ShippingInformation shippingInformation);
+    public ShippingInformation newShippingInfoFromShippingInfo(ShippingInformation shippingInformation);
 
-    public void newShippingInfoFromCustomerInfo(CustomerInformation customerInformation);
+    public ShippingInformation newShippingInfoFromCustomerInfo(CustomerInformation customerInformation);
 
 }
