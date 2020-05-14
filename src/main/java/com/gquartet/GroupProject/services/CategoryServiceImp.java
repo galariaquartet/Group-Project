@@ -35,22 +35,10 @@ public class CategoryServiceImp implements CategoryService {
     @Override
     public void update(Category category) {
         Category c = repo.getOne(category.getCategoryId());
+        
         c.setCategoryId(category.getCategoryId());
         c.setCategoryName(category.getCategoryName());
-        c.setCategoryImage(category.getCategoryImage());
-        c.setFilename(category.getFilename());
         repo.save(c);
     }
-
-//    @Override
-//    public List<String> ListCategoryName() {
-//        List<String> categoryNames = repo.ListCategoryName();      
-//        return categoryNames;
-//    }
-
-//    @Override
-//    public Category cate(Integer id) {
-//       return repo.findCategory(id);
-//    }
 
 }

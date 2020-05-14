@@ -12,5 +12,7 @@
         <a href="Contact">Contact   |</a>
         <a href="Games">Games   |</a>
         <a href="products">Products   |</a>
+        <a href="subCategory"> SubCategory |</a>
+        <a href="category"> Category |</a>
     </body>
 </html>

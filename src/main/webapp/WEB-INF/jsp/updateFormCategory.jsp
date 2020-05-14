@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Update Category</title>
     </head>
     <body>
               <div allign="center" class="insert-courses">
@@ -17,11 +17,9 @@
                 <form:label path="categoryName">category Name</form:label>
                 <form:input path="categoryName" type="text"/>
 
-                <form:label path="categoryImage">category Image</form:label>
-                <form:input path="categoryImage" type="text"/>
 
-                <form:label path="filename">filename</form:label>
-                <form:input path="filename" type="text"/>
+                <form:label path="categoryImageFilepath">Category FilePath</form:label>
+                <form:input path="categoryImageFilepath" type="text"/>
 
                 <input type="submit" value="Submit"/>
 

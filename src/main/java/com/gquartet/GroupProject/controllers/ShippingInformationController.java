@@ -23,13 +23,13 @@ public class ShippingInformationController {
 
     @RequestMapping("/shippingInformation/{ordernumber}")
     public String viewHomePage(@PathVariable("ordernumber") CustomerOrder customerOrder,ModelMap mm) {
-        
+          System.out.println("##################shippingInformation############################");      
         int ordernumber = customerOrder.getOrderNumber();
 
         List<ShippingInformation> list = shippingInformationService.findShippingInformation(ordernumber);
         mm.addAttribute("listShippingInformation", list);
-        
-       // return "orderDetailsView";
+        System.out.println("##################shippingInformation############################"+list.get(0).getRecipientFirstName());
+     //   return "orderDetailsView";
         return "forward:/payment/"+ordernumber;
     }
 

@@ -1,25 +1,21 @@
 package com.gquartet.GroupProject.controllers;
 
+import com.gquartet.GroupProject.dtos.CategoryDto;
 import com.gquartet.GroupProject.models.Category;
 import com.gquartet.GroupProject.services.CategoryService;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class CategoryController {
-        //TODO validators 
+    //TODO validators 
     //TODO update form --> na thn ftia3w ws pros to update k na doume ti allo exoume na kanoume
-        
+
     @Autowired
     private CategoryService categoryService;
 
@@ -32,24 +28,21 @@ public class CategoryController {
 
     @RequestMapping("/newCategory")
     public String viewNewCategoryForm(ModelMap mm) {
-        Category category = new Category();
-        mm.addAttribute("category", category);
+        CategoryDto categoryDto = new CategoryDto();
+        mm.addAttribute("category", categoryDto);
         return "newCategory";
     }
 
     @RequestMapping("/saveCategory")
-    public String saveCategory(@RequestParam(value = "mycategoryImage") MultipartFile multipart, ModelMap mm, @ModelAttribute("category") Category category) {  
-        //edw pros8etoume to arxeio sto category k meta kaloume to service
-        try {
-            category.setCategoryImage(multipart.getBytes());
-        } catch (IOException ex) {
-            Logger.getLogger(CategoryController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public String saveCategory(ModelMap mm, @ModelAttribute("category") CategoryDto categoryDto) {
+        Category category = new Category();
+        category.setCategoryName(categoryDto.getCategoryName());
+        category.setCategoryImageFilepath(categoryDto.getCategoryFilepath());
         categoryService.save(category);
         return "redirect:/category";
     }
 
-    @RequestMapping("/edit/{categoryId}")
+    @RequestMapping("/editCategory/{categoryId}")
     public String showEditCategoryForm(@PathVariable("categoryId") int categoryId, ModelMap mm) {
         mm.addAttribute("category", categoryService.getCategory(categoryId));
         return "updateFormCategory";
@@ -61,7 +54,7 @@ public class CategoryController {
         return "redirect:/category";
     }
 
-    @RequestMapping("/delete/{categoryId}")
+    @RequestMapping("/deleteCategory/{categoryId}")
     public String deleteCategory(@PathVariable int categoryId, ModelMap mm) {
         categoryService.delete(categoryId);
         return "redirect:/category";

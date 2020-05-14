@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ProductImageService {
 
-    public List<ProductImage> getAllFiles();
+    public List<ProductImage> getAllImages();
 
-    public void storeFileToDB(ProductImage files);
+    public void save(ProductImage productImage);
 
     List<ProductImage> findProductImageByProductId(int productId);
 }

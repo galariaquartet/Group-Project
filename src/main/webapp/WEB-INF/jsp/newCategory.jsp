@@ -5,29 +5,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>New Category</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-
-        
-                <div allign="center" class="insert-courses">
-            <form:form enctype="multipart/form-data" method="POST" action="saveCategory" modelAttribute="category">
-                <h2>Sign Up</h2>
-                <form:label path="categoryName">category Name</form:label>
+        <div allign="center" class="insert-courses">
+            <form:form method="POST" action="saveCategory" modelAttribute="category">
+                <h2>Create New Category</h2>
+                <form:label path="categoryName">Category Name</form:label>
                 <form:input path="categoryName" type="text"/>
 
-                <form:label path="categoryImage">category Image</form:label>
-                <input type="file" name="mycategoryImage">
-                
+                <form:label path="categoryFilepath">Category Image Filepath</form:label>
+                <form:input path="categoryFilepath" type="text" />
 
-                <form:label path="filename">filename</form:label>
-                <form:input path="filename" type="text"/>
-                
-                        
-
-                <input type="submit" value="Submit"/>
-
+                <input type="submit" value="Save Product"/>
             </form:form>
         </div>
     </body>

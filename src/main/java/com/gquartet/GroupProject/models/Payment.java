@@ -1,7 +1,10 @@
+/*
+ * Created on 13/05/2020 at 23:53:19 GMT+2
+ */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,13 +21,17 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author User
+ */
 @Entity
 @Table(name = "payment")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p"),
-    @NamedQuery(name = "Payment.findByPaymentId", query = "SELECT p FROM Payment p WHERE p.paymentId = :paymentId"),
-    @NamedQuery(name = "Payment.findByPaymentName", query = "SELECT p FROM Payment p WHERE p.paymentName = :paymentName")})
+    @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")
+    , @NamedQuery(name = "Payment.findByPaymentId", query = "SELECT p FROM Payment p WHERE p.paymentId = :paymentId")
+    , @NamedQuery(name = "Payment.findByPaymentName", query = "SELECT p FROM Payment p WHERE p.paymentName = :paymentName")})
 public class Payment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +46,7 @@ public class Payment implements Serializable {
     @Column(name = "payment_name")
     private String paymentName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentId")
-    private Collection<OrderDetails> orderDetailsCollection;
+    private List<OrderDetails> orderDetailsList;
 
     public Payment() {
     }
@@ -70,12 +77,12 @@ public class Payment implements Serializable {
     }
 
     @XmlTransient
-    public Collection<OrderDetails> getOrderDetailsCollection() {
-        return orderDetailsCollection;
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
     }
 
-    public void setOrderDetailsCollection(Collection<OrderDetails> orderDetailsCollection) {
-        this.orderDetailsCollection = orderDetailsCollection;
+    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
+        this.orderDetailsList = orderDetailsList;
     }
 
     @Override

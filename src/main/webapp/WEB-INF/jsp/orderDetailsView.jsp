@@ -11,6 +11,7 @@
         <h1>Tzitzis bot at your service</h1>
         <p>${order_details}</p>
 
+
         <div align="center">
             <br/>
             <a href="newShippingInformation">Create new shippingInformation</a>

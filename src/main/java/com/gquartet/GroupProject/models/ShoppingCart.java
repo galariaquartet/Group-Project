@@ -1,3 +1,6 @@
+/*
+ * Created on 13/05/2020 at 23:53:18 GMT+2
+ */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
@@ -15,13 +18,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author User
+ */
 @Entity
 @Table(name = "shopping_cart")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ShoppingCart.findAll", query = "SELECT s FROM ShoppingCart s"),
-    @NamedQuery(name = "ShoppingCart.findByShoppingCartId", query = "SELECT s FROM ShoppingCart s WHERE s.shoppingCartId = :shoppingCartId"),
-    @NamedQuery(name = "ShoppingCart.findByQuantity", query = "SELECT s FROM ShoppingCart s WHERE s.quantity = :quantity")})
+    @NamedQuery(name = "ShoppingCart.findAll", query = "SELECT s FROM ShoppingCart s")
+    , @NamedQuery(name = "ShoppingCart.findByShoppingCartId", query = "SELECT s FROM ShoppingCart s WHERE s.shoppingCartId = :shoppingCartId")
+    , @NamedQuery(name = "ShoppingCart.findByQuantity", query = "SELECT s FROM ShoppingCart s WHERE s.quantity = :quantity")})
 public class ShoppingCart implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -6,20 +6,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>New Product</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
 
-        <form:form enctype="multipart/form-data"  method="POST" action="saveProduct" modelAttribute="product">
-            <h2>Sign Up</h2>
+        <form:form method="POST" action="saveProduct" modelAttribute="product">
 
-
-            <form:label path="productName">product Name</form:label>
+            <form:label path="productName">Product Name</form:label>
             <form:input path="productName" type="text"/>
 
-            <form:label path="productDescription">productDescription</form:label>
-            <form:input path="productDescription" type="text"/>
+            <form:label path="productSize">Product Size</form:label>
+            <form:input path="productSize" type="text"/>
+            
+            <form:label path="productColor">Product Color</form:label>
+            <form:input path="productColor" type="text"/>
+            
+            <form:label path="productMaterial">Product Material</form:label>
+            <form:input path="productMaterial" type="text"/>
+            
+             <form:label path="productGender">Product Gender</form:label>
+            <form:input path="productGender" type="text"/>
 
             <form:label path="productStock">product Stock</form:label>
             <form:input path="productStock" type="number"/>
@@ -27,13 +33,11 @@
             <form:label path="productPrice">product Price</form:label>
             <form:input path="productPrice" type="number"/>
 
-       
-
-            <form:select path="categoryId" items="${categoryList}" itemLabel="categoryName" itemValue="categoryId"/>
-            <form:errors path="categoryId" cssClass="error"/>
+            <form:select path="subcategoryId" items="${subcategory}" itemLabel="subcategoryName" itemValue="subcategoryId"/>
+            <form:errors path="subcategoryId" cssClass="error"/>
       
             
-             <input type="file" name="myfile">
+            <input type="text" name="myphotos"/>
             
             <input type="submit" value="Submit"/>
 

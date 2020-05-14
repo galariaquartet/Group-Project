@@ -1,8 +1,11 @@
+/*
+ * Created on 13/05/2020 at 23:53:18 GMT+2
+ */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,13 +24,17 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author User
+ */
 @Entity
 @Table(name = "customer_order")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CustomerOrder.findAll", query = "SELECT c FROM CustomerOrder c"),
-    @NamedQuery(name = "CustomerOrder.findByOrderNumber", query = "SELECT c FROM CustomerOrder c WHERE c.orderNumber = :orderNumber"),
-    @NamedQuery(name = "CustomerOrder.findByOrderDate", query = "SELECT c FROM CustomerOrder c WHERE c.orderDate = :orderDate")})
+    @NamedQuery(name = "CustomerOrder.findAll", query = "SELECT c FROM CustomerOrder c")
+    , @NamedQuery(name = "CustomerOrder.findByOrderNumber", query = "SELECT c FROM CustomerOrder c WHERE c.orderNumber = :orderNumber")
+    , @NamedQuery(name = "CustomerOrder.findByOrderDate", query = "SELECT c FROM CustomerOrder c WHERE c.orderDate = :orderDate")})
 public class CustomerOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,7 +47,7 @@ public class CustomerOrder implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderNumber")
-    private Collection<OrderDetails> orderDetailsCollection;
+    private List<OrderDetails> orderDetailsList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     @ManyToOne(optional = false)
     private Customer customerId;
@@ -72,12 +79,12 @@ public class CustomerOrder implements Serializable {
     }
 
     @XmlTransient
-    public Collection<OrderDetails> getOrderDetailsCollection() {
-        return orderDetailsCollection;
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
     }
 
-    public void setOrderDetailsCollection(Collection<OrderDetails> orderDetailsCollection) {
-        this.orderDetailsCollection = orderDetailsCollection;
+    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
+        this.orderDetailsList = orderDetailsList;
     }
 
     public Customer getCustomerId() {
@@ -118,7 +125,7 @@ public class CustomerOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "orderNumber=" + orderNumber;
+        return "com.gquartet.GroupProject.models.CustomerOrder[ orderNumber=" + orderNumber + " ]";
     }
     
 }

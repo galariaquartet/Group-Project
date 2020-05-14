@@ -1,3 +1,6 @@
+/*
+ * Created on 13/05/2020 at 23:53:18 GMT+2
+ */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
@@ -11,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,16 +24,23 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author User
+ */
 @Entity
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
-    @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName"),
-    @NamedQuery(name = "Product.findByProductDescription", query = "SELECT p FROM Product p WHERE p.productDescription = :productDescription"),
-    @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock"),
-    @NamedQuery(name = "Product.findByProductPrice", query = "SELECT p FROM Product p WHERE p.productPrice = :productPrice")})
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+    , @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId")
+    , @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName")
+    , @NamedQuery(name = "Product.findByProductSize", query = "SELECT p FROM Product p WHERE p.productSize = :productSize")
+    , @NamedQuery(name = "Product.findByProductColor", query = "SELECT p FROM Product p WHERE p.productColor = :productColor")
+    , @NamedQuery(name = "Product.findByProductMaterial", query = "SELECT p FROM Product p WHERE p.productMaterial = :productMaterial")
+    , @NamedQuery(name = "Product.findByProductGender", query = "SELECT p FROM Product p WHERE p.productGender = :productGender")
+    , @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock")
+    , @NamedQuery(name = "Product.findByProductPrice", query = "SELECT p FROM Product p WHERE p.productPrice = :productPrice")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,9 +56,23 @@ public class Product implements Serializable {
     private String productName;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
-    @Column(name = "product_description")
-    private String productDescription;
+    @Size(min = 1, max = 5)
+    @Column(name = "product_size")
+    private String productSize;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "product_color")
+    private String productColor;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "product_material")
+    private String productMaterial;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "product_gender")
+    private Character productGender;
     @Basic(optional = false)
     @NotNull
     @Column(name = "product_stock")
@@ -57,12 +80,15 @@ public class Product implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "product_price")
     private BigDecimal productPrice;
-
-        @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private List<ShoppingCart> shoppingCartList;
+    @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
     @ManyToOne(optional = false)
-    private Category categoryId;
+    private Subcategory subcategoryId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private List<ProductImage> productImageList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private List<OrderDetails> orderDetailsList;
 
     public Product() {
     }
@@ -71,10 +97,13 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String productName, String productDescription, int productStock) {
+    public Product(Integer productId, String productName, String productSize, String productColor, String productMaterial, Character productGender, int productStock) {
         this.productId = productId;
         this.productName = productName;
-        this.productDescription = productDescription;
+        this.productSize = productSize;
+        this.productColor = productColor;
+        this.productMaterial = productMaterial;
+        this.productGender = productGender;
         this.productStock = productStock;
     }
 
@@ -94,12 +123,36 @@ public class Product implements Serializable {
         this.productName = productName;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getProductSize() {
+        return productSize;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setProductSize(String productSize) {
+        this.productSize = productSize;
+    }
+
+    public String getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(String productColor) {
+        this.productColor = productColor;
+    }
+
+    public String getProductMaterial() {
+        return productMaterial;
+    }
+
+    public void setProductMaterial(String productMaterial) {
+        this.productMaterial = productMaterial;
+    }
+
+    public Character getProductGender() {
+        return productGender;
+    }
+
+    public void setProductGender(Character productGender) {
+        this.productGender = productGender;
     }
 
     public int getProductStock() {
@@ -118,15 +171,22 @@ public class Product implements Serializable {
         this.productPrice = productPrice;
     }
 
-    public Category getCategoryId() {
-        return categoryId;
+    @XmlTransient
+    public List<ShoppingCart> getShoppingCartList() {
+        return shoppingCartList;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setShoppingCartList(List<ShoppingCart> shoppingCartList) {
+        this.shoppingCartList = shoppingCartList;
     }
 
+    public Subcategory getSubcategoryId() {
+        return subcategoryId;
+    }
 
+    public void setSubcategoryId(Subcategory subcategoryId) {
+        this.subcategoryId = subcategoryId;
+    }
 
     @XmlTransient
     public List<ProductImage> getProductImageList() {
@@ -135,6 +195,15 @@ public class Product implements Serializable {
 
     public void setProductImageList(List<ProductImage> productImageList) {
         this.productImageList = productImageList;
+    }
+
+    @XmlTransient
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
+    }
+
+    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
+        this.orderDetailsList = orderDetailsList;
     }
 
     @Override

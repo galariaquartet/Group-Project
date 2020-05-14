@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShippingInformationRepository extends JpaRepository<ShippingInformation, Integer>{
-    @Query(value = "SELECT * FROM order_details od, shipping_information si WHERE od.order_details_id = si.order_details_id AND od.order_number =?1 ", nativeQuery = true)
+    @Query(value = "SELECT * FROM order_details od, shipping_information si WHERE od.shipping_information_id = si.shipping_information_id AND od.order_number =?1 ", nativeQuery = true)
     public List<ShippingInformation> findShippingInformationByOrderDetailsId(int orderNumber);
 }

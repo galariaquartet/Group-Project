@@ -20,6 +20,7 @@ import com.gquartet.GroupProject.services.PaymentService;
 import com.gquartet.GroupProject.services.ShippingInformationService;
 import com.gquartet.GroupProject.services.ShoppingCartService;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.Order;
@@ -35,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/order")
+//@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
@@ -55,16 +56,25 @@ public class OrderController {
     @Autowired
     private OrderDetailsService orderDetailsService;
 
-    @RequestMapping
-    public String showOrderForm(Model mm) {
+    @RequestMapping("/order/{checkedproducts}")
+    public String showOrderForm(Model mm, @PathVariable("checkedproducts") String checkedproducts) {
+        System.out.println("################################## checkedproducts" + checkedproducts);
+        // Start: Getting and Passing the ShoppingCart ids from the checked products
+        String[] temp = checkedproducts.split(",");
+        List<Integer> customerProducts = new ArrayList();
+        for (int i = 0; i < temp.length; i++) {
+            customerProducts.add(Integer.parseInt(temp[i].trim()));
+        }
+        mm.addAttribute("customerProducts", customerProducts);
+        // End
         ShippingInfoCustomerInfoPaymentDTO sicipDTO = new ShippingInfoCustomerInfoPaymentDTO();
         mm.addAttribute("sicipDTO", sicipDTO);
         return "orderForm";
     }
 
-    @RequestMapping("/process")
-    public String saveOrderInformation(HttpSession session, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
-
+    @RequestMapping("/process/{checkedproducts}")
+    public String saveOrderInformation(HttpSession session, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info, @PathVariable("checkedproducts") String checkedproducts) {
+        System.out.println("**************ORDER NUMBER******************************");
         //dhmiourgeitai h order k apo8hkeyetai k to order status
         CustomerOrder customerOrder = new CustomerOrder();
         int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
@@ -78,68 +88,103 @@ public class OrderController {
 
         int ordernumber = customerOrder.getOrderNumber();
 
-        return "forward:/order/shippingInfo/" + ordernumber;
+        //  return "forward:/order/shippingInfo/" + ordernumber;
+        return "forward:/shippingInfo/" + checkedproducts + "/" + ordernumber;
     }
 
     //APOUHKEUETAI TO SHIPPING INFORMATION ANALOGA ME TO POU UELEI NA TH STEILEI O XRHSTHS THS PARAGGELIAS
-    @RequestMapping("/shippingInfo/{ordernumber}")
-    public String saveOrderInformation(@PathVariable("ordernumber") CustomerOrder customerOrder, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
-
+    @RequestMapping("/shippingInfo/{checkedproducts}/{ordernumber}")
+    public String saveOrderInformation(HttpSession session, @PathVariable("ordernumber") CustomerOrder customerOrder, @PathVariable("checkedproducts") String checkedproducts, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
         ShippingInformation si = new ShippingInformation();
         int ordernumber = customerOrder.getOrderNumber();
-
+        System.out.println("**************shipping Info******************************");
         //ean to checkbox den einai check tote to shipping info 8a parei tis nees times 
         if (info.isCheck() != true) {
             si = shippingInformationService.newShippingInfoFromShippingInfo(info.getShippingInformation());            // System.out.println( si.getRecipientFirstName());
             int shippinInfoId = si.getShippingInformationId();
-            return "forward:/order/finishOrder/" + ordernumber + "/" + shippinInfoId;
+            return "forward:/finishOrder/" + checkedproducts + "/" + ordernumber + "/" + shippinInfoId;
         }
-
-        si = shippingInformationService.newShippingInfoFromCustomerInfo(info.getCustomerInformation());
+        int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
+        CustomerInformation customerInformation = customerInformationSercvice.getCustomerInformation(customerId);
+        si = shippingInformationService.newShippingInfoFromCustomerInfo(customerInformation);
         int shippinInfoId = si.getShippingInformationId();
 
-        return "forward:/order/finishOrder/" + ordernumber + "/" + shippinInfoId;
+        // return "forward:/order/finishOrder/" + ordernumber + "/" + shippinInfoId;
+        return "forward:/finishOrder/" + checkedproducts + "/" + ordernumber + "/" + shippinInfoId;
     }
 
-    @RequestMapping("/finishOrder/{ordernumber}/{shippinInfoId}")
-    public String finishOrder(@PathVariable("ordernumber") CustomerOrder customerOrder, HttpSession session, @PathVariable("shippinInfoId") ShippingInformation shippingInformation, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
+    @RequestMapping("/finishOrder/{checkedproducts}/{ordernumber}/{shippinInfoId}")
+    public void finishOrder(@PathVariable("ordernumber") CustomerOrder customerOrder, HttpSession session, @PathVariable("checkedproducts") String checkedproducts, @PathVariable("shippinInfoId") ShippingInformation shippingInformation, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
 
         Payment payment = info.getPayment();
         int paymentId = payment.getPaymentId();
+        System.out.println("**************FINISHED ORDER******************************");
 
-        int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
-        
-        List<ShoppingCart> listProduct = shoppingCartService.getShoppingCartByCustomerId(customerId);
-        for (int i = 0; i < listProduct.size(); i++) {
-            Product pr = listProduct.get(i).getProductId();
 
-            //dhmiourgeitai to order detail 
-            OrderDetails orderDetails = new OrderDetails(null, customerOrder, pr, payment, shippingInformation);
-            orderDetailsService.saveOrderDetails(orderDetails);
-            //ME TO POU MPOUN TSH BASH META SBHNOUME APO TH BASH TO KALOA8I TOU SUGKEKRIMENOU XRHSTH
-            ShoppingCart sc = shoppingCartService.getCartByProduct(pr.getProductId(), customerId);
-            shoppingCartService.delete(sc.getShoppingCartId());
+        // Start: Getting and Passing the ShoppingCart ids from the checked products
+        String[] temp = checkedproducts.split(",");
+        List<Integer> customerProducts = new ArrayList();
+        for (int i = 0; i < temp.length; i++) {
+            customerProducts.add(Integer.parseInt(temp[i])); //metatrepoume tis string times se int k me auton ton tropo dhmiourgoume mia lista me ta shopping cart ids
         }
-        return "redirect:/customerOrder"; //odhgei ton xrhsth pali sthn selida orderdetails mesw tou customerOrderController
+        
+        for(int i=0; i< customerProducts.size(); i++){
+            System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&***************"+ customerProducts.get(i));
+            int shoppingCartId = customerProducts.get(i);
+              System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&***************"+ shoppingCartId);
+              
+            ShoppingCart shoppingCart = shoppingCartService.getCart(shoppingCartId); //briskoume to shopping cart mesa apo to service me bash to shoppingCartId
+
+            Product productId = shoppingCart.getProductId(); //pairnoume apo shoppingCart to productId 
+//
+//            //dhmiourgeitai to order detail 
+//            OrderDetails orderDetails = new OrderDetails(null, customerOrder, productId, payment, shippingInformation);
+//            orderDetailsService.saveOrderDetails(orderDetails);
+//            //ME TO POU MPOUN TSH BASH META SBHNOUME APO TH BASH TO KALOA8I TOU SUGKEKRIMENOU XRHSTH
+//          //  ShoppingCart sc = shoppingCartService.getCartByProduct(pr.getProductId(), customerId);
+//            shoppingCartService.delete(shoppingCart.getShoppingCartId());
+        }
+
+//        int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
+//        List<ShoppingCart> listProduct = shoppingCartService.getShoppingCartByCustomerId(customerId);
+//
+//        for (int i = 0; i < listProduct.size(); i++) {
+//            Product pr = listProduct.get(i).getProductId();
+//
+//            //dhmiourgeitai to order detail 
+//            OrderDetails orderDetails = new OrderDetails(null, customerOrder, pr, payment, shippingInformation);
+//            orderDetailsService.saveOrderDetails(orderDetails);
+//            //ME TO POU MPOUN TSH BASH META SBHNOUME APO TH BASH TO KALOA8I TOU SUGKEKRIMENOU XRHSTH
+//            ShoppingCart sc = shoppingCartService.getCartByProduct(pr.getProductId(), customerId);
+//            shoppingCartService.delete(sc.getShoppingCartId());
+//        }
+        //   return "redirect:/customerOrder"; //odhgei ton xrhsth pali sthn selida orderdetails mesw tou customerOrderController
     }
 
-
-    @RequestMapping("/card")
-    public String showPopUpcardInformation(Model mm) {
+    //einai otan eisagei o kainourgia stoixeia ths kartas edw apo8hkeuontai 
+    @RequestMapping("/card/{checkedproducts}")
+    public String showPopUpcardInformation(Model mm, @PathVariable String checkedproducts) {
 
         CustomerCreditCard customerCreditCard = new CustomerCreditCard();
         mm.addAttribute("customerCreditCard", customerCreditCard);
 
-        return "forward:/order/cardInfo";
+        return "forward:/cardInfo/" + checkedproducts;
     }
 
-    @RequestMapping("/cardInfo")
-    public String cardInformation(Model mm) {
+    //apo8hkeuontai ta stoixeia ths kartas k epistrefei pali pisw sthn selida 
+    @RequestMapping("/cardInfo/{checkedproducts}")
+    public String cardInformation(Model mm, @PathVariable String checkedproducts) {
 
-        System.out.println("#################################");
-        return "redirect:/order";
+        return "forward:/order/" + checkedproducts;
     }
 
+    //otan kanei allages sta stoixeia tou customer Information apo8hkeuontai k sth bash
+    @RequestMapping("/saveChangesToCustomerInfo/{checkedproducts}")
+    public String saveChangesToCustomerInfo(HttpSession session, @ModelAttribute("customerInformation") CustomerInformation info, @PathVariable String checkedproducts) {
+        int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
+        customerInformationSercvice.update(info);
+        return "forward:/order/" + checkedproducts;
+    }
 
     @ModelAttribute("payments")
     public List<Payment> getPayments(ModelMap mm) {
@@ -164,5 +209,10 @@ public class OrderController {
         return customerInformation;
     }
 
+    @ResponseBody
+    @RequestMapping("/checkemail/{firstName}")
+    public void checkEmail(@PathVariable("firstName") String firstName, String lastName) {
+        System.out.println(firstName);
 
+    }
 }

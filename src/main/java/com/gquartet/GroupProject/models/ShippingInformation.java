@@ -1,7 +1,10 @@
+/*
+ * Created on 13/05/2020 at 23:53:18 GMT+2
+ */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,22 +23,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Coily1805
+ * @author User
  */
 @Entity
 @Table(name = "shipping_information")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ShippingInformation.findAll", query = "SELECT s FROM ShippingInformation s"),
-    @NamedQuery(name = "ShippingInformation.findByShippingInformationId", query = "SELECT s FROM ShippingInformation s WHERE s.shippingInformationId = :shippingInformationId"),
-    @NamedQuery(name = "ShippingInformation.findByShippingCountry", query = "SELECT s FROM ShippingInformation s WHERE s.shippingCountry = :shippingCountry"),
-    @NamedQuery(name = "ShippingInformation.findByShippingState", query = "SELECT s FROM ShippingInformation s WHERE s.shippingState = :shippingState"),
-    @NamedQuery(name = "ShippingInformation.findByShippingCity", query = "SELECT s FROM ShippingInformation s WHERE s.shippingCity = :shippingCity"),
-    @NamedQuery(name = "ShippingInformation.findByShippingStreet", query = "SELECT s FROM ShippingInformation s WHERE s.shippingStreet = :shippingStreet"),
-    @NamedQuery(name = "ShippingInformation.findByShippingZip", query = "SELECT s FROM ShippingInformation s WHERE s.shippingZip = :shippingZip"),
-    @NamedQuery(name = "ShippingInformation.findByRecipientFirstName", query = "SELECT s FROM ShippingInformation s WHERE s.recipientFirstName = :recipientFirstName"),
-    @NamedQuery(name = "ShippingInformation.findByRecipientLastName", query = "SELECT s FROM ShippingInformation s WHERE s.recipientLastName = :recipientLastName"),
-    @NamedQuery(name = "ShippingInformation.findByRecipientPhone", query = "SELECT s FROM ShippingInformation s WHERE s.recipientPhone = :recipientPhone")})
+    @NamedQuery(name = "ShippingInformation.findAll", query = "SELECT s FROM ShippingInformation s")
+    , @NamedQuery(name = "ShippingInformation.findByShippingInformationId", query = "SELECT s FROM ShippingInformation s WHERE s.shippingInformationId = :shippingInformationId")
+    , @NamedQuery(name = "ShippingInformation.findByShippingCountry", query = "SELECT s FROM ShippingInformation s WHERE s.shippingCountry = :shippingCountry")
+    , @NamedQuery(name = "ShippingInformation.findByShippingState", query = "SELECT s FROM ShippingInformation s WHERE s.shippingState = :shippingState")
+    , @NamedQuery(name = "ShippingInformation.findByShippingCity", query = "SELECT s FROM ShippingInformation s WHERE s.shippingCity = :shippingCity")
+    , @NamedQuery(name = "ShippingInformation.findByShippingStreet", query = "SELECT s FROM ShippingInformation s WHERE s.shippingStreet = :shippingStreet")
+    , @NamedQuery(name = "ShippingInformation.findByShippingZip", query = "SELECT s FROM ShippingInformation s WHERE s.shippingZip = :shippingZip")
+    , @NamedQuery(name = "ShippingInformation.findByRecipientFirstName", query = "SELECT s FROM ShippingInformation s WHERE s.recipientFirstName = :recipientFirstName")
+    , @NamedQuery(name = "ShippingInformation.findByRecipientLastName", query = "SELECT s FROM ShippingInformation s WHERE s.recipientLastName = :recipientLastName")
+    , @NamedQuery(name = "ShippingInformation.findByRecipientPhone", query = "SELECT s FROM ShippingInformation s WHERE s.recipientPhone = :recipientPhone")})
 public class ShippingInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -85,7 +88,7 @@ public class ShippingInformation implements Serializable {
     @Column(name = "recipient_phone")
     private String recipientPhone;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shippingInformationId")
-    private Collection<OrderDetails> orderDetailsCollection;
+    private List<OrderDetails> orderDetailsList;
 
     public ShippingInformation() {
     }
@@ -179,12 +182,12 @@ public class ShippingInformation implements Serializable {
     }
 
     @XmlTransient
-    public Collection<OrderDetails> getOrderDetailsCollection() {
-        return orderDetailsCollection;
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
     }
 
-    public void setOrderDetailsCollection(Collection<OrderDetails> orderDetailsCollection) {
-        this.orderDetailsCollection = orderDetailsCollection;
+    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
+        this.orderDetailsList = orderDetailsList;
     }
 
     @Override

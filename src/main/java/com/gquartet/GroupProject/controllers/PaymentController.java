@@ -27,6 +27,8 @@ public class PaymentController {
        // return "paymentView";
             return "orderDetailsView";
     }
+    
+    
     //edw phgainoume otan 8eloume na praggeiloume oti exoume balei mesa sto kala8i
 //    @GetMapping("/payments")
 //    public String viewPayment(ModelMap mm) {

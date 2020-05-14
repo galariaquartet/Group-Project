@@ -27,41 +27,93 @@
                 padding: 20px;
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             }
+
+
+
+            body{font:14px Arial, Helvetica, sans-serif;}
+            .formSection{padding:10px;margin-bottom:10px;border:2px solid #ccc;transition: background 0.4s ease;}
+            .formSection *{transition: opacity 0.4s ease;}
+            label, input, button{display:block;margin:5px;}
+            input{background:transparent;border:1px solid #ccc;padding:2px 1px;}
+            label{padding-left:2px;font-weight:bold;font-size:12px;text-transform:uppercase;}
+
+            .actionButtons{margin:5px 5px 0;}
+            .cancelButton{margin-right:10px; color:#666;font-weight:bold;text-decoration:none;}
+            .saveButton{display:inline-block;padding:8px 16px;background:#9db0a3;color:#fff;border:2px solid #fff;cursor:pointer;transition: background 0.4s ease;}
+            .saveButton:hover,.editButton:hover{background:#849589;}
+            .editButton{display:none;margin-top:10px;padding:8px 16px;background:#9db0a3;color:#fff;border:2px solid #fff;transition: background 0.4s ease;}
+
+
+            .formSection.readOnly {background:#e5f6ea;}
+            input[disabled]{color:#000;border-color:transparent;}
+            .readOnly .actionButtons{display:none;}
+            .readOnly .editButton{display:block;cursor:pointer;}
+
+            .formSection.disabled *{opacity:.5;}
+            .disabled .editButton{display:block;cursor:default;}
+            .disabled .editButton:hover{background:#9db0a3;}
+
+
         </style>
+
+        <script>
+            $(document).ready(function () {
+                $("#firstName").focusout(function () {
+                    var firstName = $("#firstName").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/order/checkemail/" + firstName,
+                        data: {input: $('#firstName').val(),
+                            input: $('#lastName').val()}
+                    });
+                });
+            });
+        </script>
 
     </head>
     <body>
 
+        <div class="formSection readOnly">
 
-        <form:form method="POST" action="order/process" modelAttribute="sicipDTO"  >
+            <form:form method="POST" action="/saveChangesToCustomerInfo/${checkedproducts}" modelAttribute="customerInformation"  >
+                <form:input path="customerId" type="hidden" value=""/>
 
 
-            <form:input path="customerInformation.customerId" type="hidden" value=""/>
+                <form:label path="firstName">first Name</form:label>
+                <form:input path="firstName" id="firstName"  type="text" value="${customerInformation.firstName}" disabled="true"/>
+
+                <form:label path="lastName">last Name</form:label>
+                <form:input path="lastName" id="lastName" type="text" value="${customerInformation.lastName}" disabled="true" />
+
+                <form:label path="country">country</form:label>
+                <form:input path="country" type="text" value="${customerInformation.country}" disabled="true"/>
+
+                <form:label path="state">state</form:label>
+                <form:input path="state" type="text" value="${customerInformation.state}" disabled="true"/>
+
+                <form:label path="city">city</form:label>
+                <form:input path="city" type="text" value="${customerInformation.city}" disabled="true"/>
+
+                <form:label path="street">street</form:label>
+                <form:input path="street" type="text" value="${customerInformation.street}" disabled="true"/>
+
+                <form:label path="zip">zip</form:label>
+                <form:input path="zip" type="text" value="${customerInformation.zip}" disabled="true"/>
+
+                <form:label path="phone">phone</form:label>
+                <form:input path="phone" type="number" value="${customerInformation.phone}" disabled="true"/>
+
+                <button type="button" class="editButton">Edit</button>
+                <div class="actionButtons">
+                    <a href="#" class="cancelButton">Cancel</a>
+                    <button class="saveButton" type="submit">Save</button>
+                </div>
+            </form:form>
+        </div>
 
 
-            <form:label path="customerInformation.firstName">first Name</form:label>
-            <form:input path="customerInformation.firstName" id="firstName"  type="text" value="${customerInformation.firstName}" />
+        <form:form method="POST" action="/process/${checkedproducts}" modelAttribute="sicipDTO"  >
 
-            <form:label path="customerInformation.lastName">last Name</form:label>
-            <form:input path="customerInformation.lastName" id="lastName" type="text" value="${customerInformation.lastName}" />
-
-            <form:label path="customerInformation.country">country</form:label>
-            <form:input path="customerInformation.country" type="text" value="${customerInformation.country}" />
-
-            <form:label path="customerInformation.state">state</form:label>
-            <form:input path="customerInformation.state" type="text" value="${customerInformation.state}" />
-
-            <form:label path="customerInformation.city">city</form:label>
-            <form:input path="customerInformation.city" type="text" value="${customerInformation.city}" />
-
-            <form:label path="customerInformation.street">street</form:label>
-            <form:input path="customerInformation.street" type="text" value="${customerInformation.street}" />
-
-            <form:label path="customerInformation.zip">zip</form:label>
-            <form:input path="customerInformation.zip" type="text" value="${customerInformation.zip}" />
-
-            <form:label path="customerInformation.phone">phone</form:label>
-            <form:input path="customerInformation.phone" type="number" value="${customerInformation.phone}" />
 
             <hr>    
             <form:checkbox  path="check" value="" id="myCheck"  onclick="myFunction()" checked="checked"/> h dieu8unsh apostolhs 8es na einai idia me thn dieu8unsh tou customer information????
@@ -109,7 +161,7 @@
         <div id="showPopupForm" class="hide">
             <div class="center hideform">
                 <button id="close" style="float: right;">X</button>
-                <form:form action="order/card" method="POST" modelAttribute="customerCreditCard">
+                <form:form action="/card/${checkedproducts}" method="POST" modelAttribute="customerCreditCard">
                     <a href="#" onclick="showPaymentCardInformation();"> Add new Card</a>
                 </form:form>
             </div>
@@ -118,18 +170,34 @@
         <div id="cardPaymentForm" class="hide">
             <div class="center hideform">
                 <button id="closePaymentForm" style="float: right;">X</button>               
-                <form:form action="order/cardInfo" method="POST" modelAttribute="customerCreditCard">
-                    First name:<br>
-                    <form:input path="ownerFirstName" type="text" name="firstname" value="Mickey"/>
-                    <br>
-                    Last name:<br>
-                    <form:input path="ownerLastName"  type="text" name="lastname" value="Mouse"/>
+                <form:form action="/cardInfo/${checkedproducts}" method="POST" modelAttribute="customerCreditCard">
+
+                    <form:label path="ownerFirstName">ownerFirstName</form:label>            
+                    <form:input path="ownerFirstName" type="text" />
+
+                    <form:label path="ownerLastName">ownerLastName</form:label>               
+                    <form:input path="ownerLastName"  type="text" />
+
+                    <form:label path="cardNumber">cardNumber</form:label>
+                    <form:input path="cardNumber"  type="text" />
+
+                    <form:label path="cardNumberLastDigits">cardNumberLastDigits</form:label>
+                    <form:input path="cardNumberLastDigits"  type="text" />
+
+                    <form:label path="cvv">cvv</form:label>
+                    <form:input path="cvv"  type="text" />
+
+                    <form:label path="expirationDate">expirationDate</form:label>
+                    <form:input path="expirationDate"  type="text" />
+
                     <br><br>
                     <input type="submit" value="Submit"/>
                 </form:form>
 
             </div>
         </div>
+
+        ${checkedproducts};
 
 
         <script>
@@ -172,6 +240,57 @@
                 }
             }
 
+
+        </script>
+
+        <script>
+            var oldValues = null;
+
+            $(document)
+                    .on("click", ".editButton", function () {
+
+                        var section = $(this).closest(".formSection");
+                        var otherSections = $(".formSection").not(section);
+                        var inputs = section.find("input");
+
+                        section
+                                .removeClass("readOnly");
+
+                        otherSections
+                                .addClass("disabled")
+                                .find('button').prop("disabled", true);
+
+                        oldValues = {};
+                        inputs
+                                .each(function () {
+                                    oldValues[this.id] = $(this).val();
+                                })
+                                .prop("disabled", false);
+                    })
+
+                    .on("click", ".cancelButton", function (e) {
+
+                        var section = $(this).closest(".formSection");
+                        var otherSections = $(".formSection").not(section);
+                        var inputs = section.find("input");
+
+                        section
+                                .addClass("readOnly");
+
+                        otherSections
+                                .removeClass("disabled");
+
+                        $('button').prop("disabled", false);
+
+                        inputs
+                                .each(function () {
+                                    $(this).val(oldValues[this.id]);
+                                })
+                                .prop("disabled", true)
+
+                        e.stopPropagation();
+                        e.preventDefault();
+                    });
 
         </script>
     </body>

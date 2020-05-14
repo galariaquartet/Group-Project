@@ -1,7 +1,10 @@
+/*
+ * Created on 13/05/2020 at 23:53:18 GMT+2
+ */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,14 +21,18 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author User
+ */
 @Entity
 @Table(name = "order_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "OrderStatus.findAll", query = "SELECT o FROM OrderStatus o"),
-    @NamedQuery(name = "OrderStatus.findByOrderStatusId", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusId = :orderStatusId"),
-    @NamedQuery(name = "OrderStatus.findByOrderStatusName", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusName = :orderStatusName"),
-    @NamedQuery(name = "OrderStatus.findByTrackingNo", query = "SELECT o FROM OrderStatus o WHERE o.trackingNo = :trackingNo")})
+    @NamedQuery(name = "OrderStatus.findAll", query = "SELECT o FROM OrderStatus o")
+    , @NamedQuery(name = "OrderStatus.findByOrderStatusId", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusId = :orderStatusId")
+    , @NamedQuery(name = "OrderStatus.findByOrderStatusName", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusName = :orderStatusName")
+    , @NamedQuery(name = "OrderStatus.findByTrackingNo", query = "SELECT o FROM OrderStatus o WHERE o.trackingNo = :trackingNo")})
 public class OrderStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,7 +52,7 @@ public class OrderStatus implements Serializable {
     @Column(name = "tracking_no")
     private String trackingNo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderStatusId")
-    private Collection<CustomerOrder> customerOrderCollection;
+    private List<CustomerOrder> customerOrderList;
 
     public OrderStatus() {
     }
@@ -85,12 +92,12 @@ public class OrderStatus implements Serializable {
     }
 
     @XmlTransient
-    public Collection<CustomerOrder> getCustomerOrderCollection() {
-        return customerOrderCollection;
+    public List<CustomerOrder> getCustomerOrderList() {
+        return customerOrderList;
     }
 
-    public void setCustomerOrderCollection(Collection<CustomerOrder> customerOrderCollection) {
-        this.customerOrderCollection = customerOrderCollection;
+    public void setCustomerOrderList(List<CustomerOrder> customerOrderList) {
+        this.customerOrderList = customerOrderList;
     }
 
     @Override
@@ -115,7 +122,7 @@ public class OrderStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "orderStatusId = " + orderStatusId;
+        return "com.gquartet.GroupProject.models.OrderStatus[ orderStatusId=" + orderStatusId + " ]";
     }
     
 }

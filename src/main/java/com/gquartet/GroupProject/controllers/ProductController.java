@@ -4,10 +4,12 @@ import com.gquartet.GroupProject.dtos.ProductCategoryImageDto;
 import com.gquartet.GroupProject.models.Category;
 import com.gquartet.GroupProject.models.Product;
 import com.gquartet.GroupProject.models.ProductImage;
+import com.gquartet.GroupProject.models.Subcategory;
 import com.gquartet.GroupProject.services.CategoryService;
 import com.gquartet.GroupProject.services.ProductImageService;
 import com.gquartet.GroupProject.services.ProductService;
 import com.gquartet.GroupProject.services.ShoppingCartService;
+import com.gquartet.GroupProject.services.SubCategoryService;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -31,96 +33,76 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     @Autowired
-    private CategoryService categoryService;
-
+    private SubCategoryService subCategoryService;
     @Autowired
-    ProductImageService productImageService;
+    private ProductImageService productImageService;
 
 //TODO VALIDATOS
     //TODO add photo to upadate form 
     @RequestMapping("/products")
     public String viewProductPage(ModelMap mm) {
-        List<ProductCategoryImageDto> list = productService.listProductCategoryImage();
-        mm.addAttribute("listproducts", list);         
+        List<Product> list = productService.listAll();
+        mm.addAttribute("listproducts", list);
         return "productview";
     }
-//   @ResponseBody
-//    @RequestMapping("/products")
-//    public List<Product> viewProductPage() {
-//        List<Product> list = productService.listAll();
-//      //  mm.addAttribute("listproducts", list);
-//
-//        return list;
-//    }
-//   @ResponseBody
-//    @RequestMapping("/products2")
-//    public List<ProductCategoryImageDto> viewProduct2Page() {
-//          List<ProductCategoryImageDto> list = productService.listProductCategoryImage();
-//      //  mm.addAttribute("listproducts", list);
-//
-//        return list;
-//    }
+
 
     @RequestMapping("/newProduct")
     public String viewNewProductForm(ModelMap mm) {
-        ProductCategoryImageDto productCategoryImageDto = new ProductCategoryImageDto();
-        mm.addAttribute("product", productCategoryImageDto);
-        List<Category> categoryNames = categoryService.listAll();
-        mm.addAttribute("categoryList", categoryNames);
-
+        Product product = new Product();
+        mm.addAttribute("product", product);
+        List<Subcategory> subcategory = subCategoryService.listAll();
+        mm.addAttribute("subcategory", subcategory);
         return "newProduct";
     }
 
     @RequestMapping("/saveProduct")
-    public String saveCategory(@RequestParam(value = "myfile") MultipartFile multipart, ModelMap mm, @ModelAttribute("product") ProductCategoryImageDto productCategoryImageDto) {
-        Product product = new Product();
+    public String saveProduct(ModelMap mm, @ModelAttribute("product") Product product, @RequestParam("myphotos") String myphotos) {
+        Product pr = new Product();
 
-        product.setProductId(productCategoryImageDto.getProductId());
+        pr.setProductId(product.getProductId());
+        pr.setProductName(product.getProductName());
+        pr.setProductSize(product.getProductSize());
+        pr.setProductColor(product.getProductColor());
+        pr.setProductMaterial(product.getProductMaterial());        
+        pr.setProductGender(product.getProductGender());
+        pr.setProductStock(product.getProductStock());
+        pr.setProductPrice(product.getProductPrice());
 
-        int key = productCategoryImageDto.getCategoryId();
-        product.setCategoryId(categoryService.getCategory(key));
+        pr.setSubcategoryId(product.getSubcategoryId());
+                productService.save(pr);
+       
+            
+             ProductImage productImage = new ProductImage();             
+             productImage.setProductImageId(null);            
+                      
+             productImage.setProductFilepath(myphotos);
+              productImage.setProductId(pr);  
+              
+             productImageService.save(productImage);
 
-        product.setProductDescription(productCategoryImageDto.getProductDescription());
-        product.setProductName(productCategoryImageDto.getProductName());
-        product.setProductPrice(productCategoryImageDto.getProductPrice());
-        product.setProductStock(productCategoryImageDto.getProductStock());
-
-        productService.save(product);
-        //apo edw k katw afora tis fwtografies
-        ProductImage productImage = new ProductImage();
-        productImage.setProductFilename(productCategoryImageDto.getFilename());//pairnei thn onomasia k thn katalh3h apo authn pou tou exei dwsei o xrhsth
-        try {
-            //save to db
-            //ousiastika tou leme na parei ta byte tou arxeiou 
-            productImage.setProductImage(multipart.getBytes());
-            productImage.setProductFilename(multipart.getOriginalFilename());
-        } catch (IOException ex) {
-            Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        productImage.setProductId(product);//bazoume to foreign key sth product image
-        productImageService.storeFileToDB(productImage); //save product image
 
         return "redirect:/products";
     }
 
-    //gia na ftia3oume to update arxika phgainoume sthn forma 
-    @RequestMapping("/editProduct/{productId}")
-    public String showEditProductForm(@PathVariable("productId") int productId, ModelMap mm) {
-        mm.addAttribute("product", productService.getProduct(productId));
-        List<Category> categoryNames = categoryService.listAll();
-        mm.addAttribute("categoryList", categoryNames);
-        return "updateFormProduct";
-    }
-
-    @RequestMapping("/updateProduct")
-    public String saveUpdatedCategory(ModelMap mm, @ModelAttribute("product") Product product) {
-        productService.update(product);
-
-        return "redirect:/products";
-    }
+//    //gia na ftia3oume to update arxika phgainoume sthn forma 
+//    @RequestMapping("/editProduct/{productId}")
+//    public String showEditProductForm(@PathVariable("productId") int productId, ModelMap mm) {
+//        mm.addAttribute("product", productService.getProduct(productId));
+//        List<Category> categoryNames = categoryService.listAll();
+//        mm.addAttribute("categoryList", categoryNames);
+//        return "updateFormProduct";
+//    }
+//
+//    @RequestMapping("/updateProduct")
+//    public String saveUpdatedCategory(ModelMap mm, @ModelAttribute("product") Product product) {
+//        productService.update(product);
+//
+//        return "redirect:/products";
+//    }
 
     @RequestMapping("/deleteProduct/{productId}")
-    public String deleteCategory(@PathVariable int productId, ModelMap mm) {
+    public String deleteProduct(@PathVariable int productId, ModelMap mm) {
         productService.delete(productId);
         return "redirect:/products";
     }

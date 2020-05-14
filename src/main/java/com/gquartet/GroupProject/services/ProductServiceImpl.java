@@ -39,19 +39,18 @@ public class ProductServiceImpl implements ProductService {
         
         pr.setProductId(product.getProductId());
         pr.setProductName(product.getProductName());
-        pr.setProductDescription(product.getProductDescription());
+        pr.setProductSize(product.getProductSize());
+        pr.setProductColor(product.getProductColor());
+        pr.setProductMaterial(product.getProductMaterial());
+        pr.setProductGender(product.getProductGender());
         pr.setProductStock(product.getProductStock());
         pr.setProductPrice(product.getProductPrice());
-        pr.setCategoryId(product.getCategoryId());
-//        pr.setProductImageId(product.getProductImageId());
+        pr.setSubcategoryId(product.getSubcategoryId());
         
         repo.save(pr);
     }
 
-    @Override
-    public List<ProductCategoryImageDto> listProductCategoryImage() {
-        return repo.getProductCategoryImage();
-    }
+
 
 
 

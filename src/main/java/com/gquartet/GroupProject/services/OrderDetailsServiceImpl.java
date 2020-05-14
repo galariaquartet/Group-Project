@@ -1,5 +1,6 @@
 package com.gquartet.GroupProject.services;
 
+import com.gquartet.GroupProject.dtos.OrderDetailsDTO;
 import com.gquartet.GroupProject.models.CustomerOrder;
 import com.gquartet.GroupProject.models.OrderDetails;
 import com.gquartet.GroupProject.models.Payment;
@@ -32,6 +33,10 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     public List<OrderDetails> getOrderDetails(CustomerOrder id) {
         return repo.findByOrderNumber(id);
     }
+//    @Override
+//    public List<OrderDetailsDTO> getOrderDetails(CustomerOrder id) {
+//        return repo.findByOrderNumber(id);
+//    }
 
     @Override
     public OrderDetails getOrderDetailsTakeId(Integer id) {

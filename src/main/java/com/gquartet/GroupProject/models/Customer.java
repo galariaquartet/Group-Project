@@ -1,7 +1,10 @@
+/*
+ * Created on 13/05/2020 at 23:53:19 GMT+2
+ */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,17 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Coily1805
+ * @author User
  */
 @Entity
 @Table(name = "customer")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
-    @NamedQuery(name = "Customer.findByCustomerId", query = "SELECT c FROM Customer c WHERE c.customerId = :customerId"),
-    @NamedQuery(name = "Customer.findByUsername", query = "SELECT c FROM Customer c WHERE c.username = :username"),
-    @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email"),
-    @NamedQuery(name = "Customer.findByPassword", query = "SELECT c FROM Customer c WHERE c.password = :password")})
+    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
+    , @NamedQuery(name = "Customer.findByCustomerId", query = "SELECT c FROM Customer c WHERE c.customerId = :customerId")
+    , @NamedQuery(name = "Customer.findByUsername", query = "SELECT c FROM Customer c WHERE c.username = :username")
+    , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
+    , @NamedQuery(name = "Customer.findByPassword", query = "SELECT c FROM Customer c WHERE c.password = :password")})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,13 +62,13 @@ public class Customer implements Serializable {
     @Column(name = "password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
-    private Collection<ShoppingCart> shoppingCartCollection;
+    private List<ShoppingCart> shoppingCartList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
     private CustomerInformation customerInformation;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
-    private Collection<CustomerOrder> customerOrderCollection;
+    private List<CustomerOrder> customerOrderList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
-    private Collection<CustomerCreditCard> customerCreditCardCollection;
+    private List<CustomerCreditCard> customerCreditCardList;
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     @ManyToOne
     private Role roleId;
@@ -84,13 +86,6 @@ public class Customer implements Serializable {
         this.email = email;
         this.password = password;
     }
-
-    public Customer(String username, String email) {
-        this.username = username;
-        this.email = email;
-    }
-    
-    
 
     public Integer getCustomerId() {
         return customerId;
@@ -125,12 +120,12 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ShoppingCart> getShoppingCartCollection() {
-        return shoppingCartCollection;
+    public List<ShoppingCart> getShoppingCartList() {
+        return shoppingCartList;
     }
 
-    public void setShoppingCartCollection(Collection<ShoppingCart> shoppingCartCollection) {
-        this.shoppingCartCollection = shoppingCartCollection;
+    public void setShoppingCartList(List<ShoppingCart> shoppingCartList) {
+        this.shoppingCartList = shoppingCartList;
     }
 
     public CustomerInformation getCustomerInformation() {
@@ -142,21 +137,21 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<CustomerOrder> getCustomerOrderCollection() {
-        return customerOrderCollection;
+    public List<CustomerOrder> getCustomerOrderList() {
+        return customerOrderList;
     }
 
-    public void setCustomerOrderCollection(Collection<CustomerOrder> customerOrderCollection) {
-        this.customerOrderCollection = customerOrderCollection;
+    public void setCustomerOrderList(List<CustomerOrder> customerOrderList) {
+        this.customerOrderList = customerOrderList;
     }
 
     @XmlTransient
-    public Collection<CustomerCreditCard> getCustomerCreditCardCollection() {
-        return customerCreditCardCollection;
+    public List<CustomerCreditCard> getCustomerCreditCardList() {
+        return customerCreditCardList;
     }
 
-    public void setCustomerCreditCardCollection(Collection<CustomerCreditCard> customerCreditCardCollection) {
-        this.customerCreditCardCollection = customerCreditCardCollection;
+    public void setCustomerCreditCardList(List<CustomerCreditCard> customerCreditCardList) {
+        this.customerCreditCardList = customerCreditCardList;
     }
 
     public Role getRoleId() {
@@ -189,7 +184,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "customerId = " + customerId;
+        return "com.gquartet.GroupProject.models.Customer[ customerId=" + customerId + " ]";
     }
     
 }

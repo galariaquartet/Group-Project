@@ -16,9 +16,6 @@ public interface ProductService {
 
     public void update(Product product);
     
-    public List<ProductCategoryImageDto> listProductCategoryImage();
     
-
-        
 
 }

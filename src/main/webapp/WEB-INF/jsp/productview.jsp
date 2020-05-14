@@ -14,9 +14,9 @@
     <body style="background-color: #f9dcfa">
         <div align="center">
 
-            <a href="/shoppingCartView">view shopping cart</a>
+            <a href="/shoppingCart">view shopping cart</a>
 
-            <h1>Product Manager</h1> 
+           <h1>Product Manager</h1> 
             <a href="/newProduct">Create New Product</a>
             <br/>
             <br/>
@@ -25,61 +25,49 @@
                     <tr>
                         <th>Product id</th>
                         <th>Product Name</th>
-                        <th>Product Description</th>
+                        <th>Product Size</th>
+                        <th>Product Color</th>
+                        <th>Product Material</th>
+                        <th>Product Gender</th>
                         <th>Product Stock</th>
                         <th>Product Price</th>
-                        <th>Product categoryId</th>
-                        <th>Product category Name</th>
-                        <th>Product filename </th>
+                        <th>Product subcategory Name</th>
+                        <th>Product Images </th>
                         <th>Quantity </th>
-                        <!--                        <th>Product ImageId</th>-->
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                <script>
-                    var x = [];
-                    
-                </script>
-                <!--{%! boolean outofstock = false; %}-->
-                <c:forEach var="pr" items="${listproducts}">
-
-                    
-                    <script>
-                        x.push("${pr}");
-                        x.push("${pr.productDescription}");
-                        console.log(x);
-                    </script>
-                    <tr>
-                        <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                        <td>${pr.productId}</td>
-                        <td>${pr.productName}</td>
-                        <td>${pr.productDescription}</td>
-                        <td>${pr.productStock}</td>   
-                        <td>${pr.productPrice}</td>   
-                        <td>${pr.categoryId}</td>   
-                        <td>${pr.categoryName}</td>   
-                        <td>${pr.filename}</td>  
-                        <td>
-                    <form action="/addToCart/${pr.productId}" method="POST" >
-                    <input type="number" min="1" max="${pr.productStock}" name="quantity" />
-                    
-                        </td>
-
-                        <td>
-                            <a href="/editProduct/${pr.productId}">Edit</a>
-                            <a href="/deleteProduct/${pr.productId}">Delete</a>
-                            <button type="submit">Add to cart</button>
-                        </td> 
-                        </form>
-                    </tr>
+                    <c:forEach var="pr" items="${listproducts}">
+                        <tr>
+                            <td>${pr.productId}</td>
+                            <td>${pr.productName}</td>
+                            <td>${pr.productSize}</td>
+                            <td>${pr.productColor}</td>
+                            <td>${pr.productMaterial}</td>
+                            <td>${pr.productGender}</td>
+                            <td>${pr.productStock}</td>   
+                            <td>${pr.productPrice}</td>   
+                            <td>${pr.subcategoryId.subcategoryName}</td>   
+                            <td>
+                                <c:forEach var="pw" items="${pr.productImageList}">
+                                    <img src="${pw.productFilepath}" height="100px" width="150px"/>
+                                </c:forEach> 
+                            </td>  
+                            <td>
+                                <form action="/addToCart/${pr.productId}" method="POST" >
+                                    <input type="number" value="1" min="1" max="${pr.productStock}" name="quantity" />
+                            </td>
+                            <td>
+                                <a href="/editProduct/${pr.productId}">Edit</a>
+                                <a href="/deleteProduct/${pr.productId}">Delete</a>
+                                <button type="submit">Add to cart</button>
+                            </td> 
+                            </form>
+                        </tr>
                     </tbody>
                 </c:forEach>
             </table>
-
-
-
         </div>
-
     </body>
 </html>
