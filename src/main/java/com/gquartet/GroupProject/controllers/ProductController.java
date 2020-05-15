@@ -1,6 +1,5 @@
 package com.gquartet.GroupProject.controllers;
 
-import com.google.gson.Gson;
 import com.gquartet.GroupProject.models.Color;
 import com.gquartet.GroupProject.models.Gender;
 import com.gquartet.GroupProject.models.Material;
@@ -46,20 +45,10 @@ public class ProductController {
 
     //TODO VALIDATOS
     //TODO add photo to upadate form 
-    @RequestMapping("/products")
-    public String viewProductPage(ModelMap mm) {
-        List<String> distinctProductNames = productService.getDistinctNames();
-        List<List<Product>> products = new ArrayList<>();
-        for (String s : distinctProductNames) {
-            products.add(productService.getProductsByName(s)); //apo8hkeuei se mia lista mia allh lista me products
-        }
-        mm.addAttribute("allproducts", products);
-        return "productview";
-    }
 
     @ResponseBody
-    @RequestMapping("/allp")
-    public List<List<Product>> allprod(ModelMap mm) {
+    @RequestMapping("/products")
+    public List<List<Product>> allProducts(ModelMap mm) {
         List<String> distinctProductNames = productService.getDistinctNames();
         List<List<Product>> products = new ArrayList<>();
         for (String s : distinctProductNames) {
@@ -67,8 +56,6 @@ public class ProductController {
         }
         return products;
         
-//        String json = new Gson().toJson(products);
-//        return json;
     }
 
     @RequestMapping("/newProduct")
