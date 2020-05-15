@@ -1,4 +1,3 @@
-
 package com.gquartet.GroupProject.controllers;
 
 import com.gquartet.GroupProject.dtos.OrderDetailsDTO;
@@ -14,19 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class OrderDetailsController {
-    
+
     @Autowired
     OrderDetailsService orderDetailsService;
-    
+
     @RequestMapping("orderdetails/{ordernumber}")
-    public String orderDetails(@PathVariable("ordernumber") CustomerOrder customerOrder, ModelMap mm){
+    public String orderDetails(@PathVariable("ordernumber") CustomerOrder customerOrder, ModelMap mm) {
         List<OrderDetails> orderDetails = orderDetailsService.getOrderDetails(customerOrder);
-      //  List<OrderDetailsDTO> orderDetails = orderDetailsService.getOrderDetails(customerOrder);
+        //  List<OrderDetailsDTO> orderDetails = orderDetailsService.getOrderDetails(customerOrder);
         mm.addAttribute("order_details", orderDetails);
         int ordernumber = customerOrder.getOrderNumber();
         System.out.println("############**orderdetails*********************************");
-        return "forward:/shippingInformation/"+ordernumber;
-      //  return "orderDetailsView";
+        return "forward:/shippingInformation/" + ordernumber;
+        //  return "orderDetailsView";
     }
-    
+
 }

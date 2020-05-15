@@ -1,5 +1,5 @@
 /*
- * Created on 13/05/2020 at 23:53:19 GMT+2
+ * Created on 14/05/2020 at 20:46:50 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "payment")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")
-    , @NamedQuery(name = "Payment.findByPaymentId", query = "SELECT p FROM Payment p WHERE p.paymentId = :paymentId")
-    , @NamedQuery(name = "Payment.findByPaymentName", query = "SELECT p FROM Payment p WHERE p.paymentName = :paymentName")})
+    @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p"),
+    @NamedQuery(name = "Payment.findByPaymentId", query = "SELECT p FROM Payment p WHERE p.paymentId = :paymentId"),
+    @NamedQuery(name = "Payment.findByPaymentName", query = "SELECT p FROM Payment p WHERE p.paymentName = :paymentName")})
 public class Payment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -109,5 +109,5 @@ public class Payment implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.Payment[ paymentId=" + paymentId + " ]";
     }
-    
+
 }

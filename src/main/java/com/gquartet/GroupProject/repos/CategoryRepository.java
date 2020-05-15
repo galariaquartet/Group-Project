@@ -9,7 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 //    public Category findCategory(int categoryid);
-    
-    
 //    public List<String> ListCategoryName();
 }

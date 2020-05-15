@@ -1,5 +1,5 @@
 /*
- * Created on 13/05/2020 at 23:53:18 GMT+2
+ * Created on 14/05/2020 at 20:46:50 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -26,16 +26,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "customer_information")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CustomerInformation.findAll", query = "SELECT c FROM CustomerInformation c")
-    , @NamedQuery(name = "CustomerInformation.findByCustomerId", query = "SELECT c FROM CustomerInformation c WHERE c.customerId = :customerId")
-    , @NamedQuery(name = "CustomerInformation.findByFirstName", query = "SELECT c FROM CustomerInformation c WHERE c.firstName = :firstName")
-    , @NamedQuery(name = "CustomerInformation.findByLastName", query = "SELECT c FROM CustomerInformation c WHERE c.lastName = :lastName")
-    , @NamedQuery(name = "CustomerInformation.findByCountry", query = "SELECT c FROM CustomerInformation c WHERE c.country = :country")
-    , @NamedQuery(name = "CustomerInformation.findByState", query = "SELECT c FROM CustomerInformation c WHERE c.state = :state")
-    , @NamedQuery(name = "CustomerInformation.findByCity", query = "SELECT c FROM CustomerInformation c WHERE c.city = :city")
-    , @NamedQuery(name = "CustomerInformation.findByStreet", query = "SELECT c FROM CustomerInformation c WHERE c.street = :street")
-    , @NamedQuery(name = "CustomerInformation.findByZip", query = "SELECT c FROM CustomerInformation c WHERE c.zip = :zip")
-    , @NamedQuery(name = "CustomerInformation.findByPhone", query = "SELECT c FROM CustomerInformation c WHERE c.phone = :phone")})
+    @NamedQuery(name = "CustomerInformation.findAll", query = "SELECT c FROM CustomerInformation c"),
+    @NamedQuery(name = "CustomerInformation.findByCustomerId", query = "SELECT c FROM CustomerInformation c WHERE c.customerId = :customerId"),
+    @NamedQuery(name = "CustomerInformation.findByFirstName", query = "SELECT c FROM CustomerInformation c WHERE c.firstName = :firstName"),
+    @NamedQuery(name = "CustomerInformation.findByLastName", query = "SELECT c FROM CustomerInformation c WHERE c.lastName = :lastName"),
+    @NamedQuery(name = "CustomerInformation.findByCountry", query = "SELECT c FROM CustomerInformation c WHERE c.country = :country"),
+    @NamedQuery(name = "CustomerInformation.findByState", query = "SELECT c FROM CustomerInformation c WHERE c.state = :state"),
+    @NamedQuery(name = "CustomerInformation.findByCity", query = "SELECT c FROM CustomerInformation c WHERE c.city = :city"),
+    @NamedQuery(name = "CustomerInformation.findByStreet", query = "SELECT c FROM CustomerInformation c WHERE c.street = :street"),
+    @NamedQuery(name = "CustomerInformation.findByZip", query = "SELECT c FROM CustomerInformation c WHERE c.zip = :zip"),
+    @NamedQuery(name = "CustomerInformation.findByPhone", query = "SELECT c FROM CustomerInformation c WHERE c.phone = :phone")})
 public class CustomerInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -184,5 +184,5 @@ public class CustomerInformation implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.CustomerInformation[ customerId=" + customerId + " ]";
     }
-    
+
 }

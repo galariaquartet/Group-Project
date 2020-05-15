@@ -14,7 +14,7 @@ public interface CustomerOrderService {
     public void delete(Integer id);
 
     public void update(CustomerOrder customerOrder);
-    
+
     public List<CustomerOrder> findCustomerOrderByCustomerId(int customerId);
 
 }

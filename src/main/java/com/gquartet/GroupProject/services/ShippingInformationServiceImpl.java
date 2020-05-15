@@ -73,6 +73,7 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
         repo.save(si);
         return si;
     }
+
     //edw apo8hkeuontai oi plhrofories tou customer Information h an exei alla3ei kati
     @Override
     public ShippingInformation newShippingInfoFromCustomerInfo(CustomerInformation customerInformation) {

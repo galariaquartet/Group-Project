@@ -1,8 +1,8 @@
-/*
- * Created on 13/05/2020 at 23:53:18 GMT+2
- */
 package com.gquartet.GroupProject.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,23 +24,15 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author User
- */
 @Entity
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
-    , @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId")
-    , @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName")
-    , @NamedQuery(name = "Product.findByProductSize", query = "SELECT p FROM Product p WHERE p.productSize = :productSize")
-    , @NamedQuery(name = "Product.findByProductColor", query = "SELECT p FROM Product p WHERE p.productColor = :productColor")
-    , @NamedQuery(name = "Product.findByProductMaterial", query = "SELECT p FROM Product p WHERE p.productMaterial = :productMaterial")
-    , @NamedQuery(name = "Product.findByProductGender", query = "SELECT p FROM Product p WHERE p.productGender = :productGender")
-    , @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock")
-    , @NamedQuery(name = "Product.findByProductPrice", query = "SELECT p FROM Product p WHERE p.productPrice = :productPrice")})
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
+    @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName"),
+    @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock"),
+    @NamedQuery(name = "Product.findByProductPrice", query = "SELECT p FROM Product p WHERE p.productPrice = :productPrice")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,26 +46,7 @@ public class Product implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "product_name")
     private String productName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
-    @Column(name = "product_size")
-    private String productSize;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "product_color")
-    private String productColor;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "product_material")
-    private String productMaterial;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "product_gender")
-    private Character productGender;
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @NotNull
     @Column(name = "product_stock")
     private int productStock;
@@ -81,13 +54,33 @@ public class Product implements Serializable {
     @Column(name = "product_price")
     private BigDecimal productPrice;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @JsonIgnore
     private List<ShoppingCart> shoppingCartList;
+    @JoinColumn(name = "color_id", referencedColumnName = "color_id")
+    @ManyToOne(optional = false)
+    @JsonManagedReference
+    private Color colorId;
+    @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
+    @ManyToOne(optional = false)
+    @JsonManagedReference
+    private Gender genderId;
+    @JoinColumn(name = "material_id", referencedColumnName = "material_id")
+    @ManyToOne(optional = false)
+    @JsonManagedReference
+    private Material materialId;
+    @JoinColumn(name = "size_id", referencedColumnName = "size_id")
+    @ManyToOne(optional = false)
+    @JsonManagedReference
+    private ProductSize sizeId;
     @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
     @ManyToOne(optional = false)
+    @JsonManagedReference
     private Subcategory subcategoryId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @JsonManagedReference
     private List<ProductImage> productImageList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @JsonIgnore
     private List<OrderDetails> orderDetailsList;
 
     public Product() {
@@ -97,93 +90,91 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String productName, String productSize, String productColor, String productMaterial, Character productGender, int productStock) {
+    public Product(Integer productId, String productName, int productStock) {
         this.productId = productId;
         this.productName = productName;
-        this.productSize = productSize;
-        this.productColor = productColor;
-        this.productMaterial = productMaterial;
-        this.productGender = productGender;
         this.productStock = productStock;
     }
-
+    
     public Integer getProductId() {
         return productId;
     }
-
+    
     public void setProductId(Integer productId) {
         this.productId = productId;
     }
-
+    
     public String getProductName() {
         return productName;
     }
-
+    
     public void setProductName(String productName) {
         this.productName = productName;
     }
-
-    public String getProductSize() {
-        return productSize;
-    }
-
-    public void setProductSize(String productSize) {
-        this.productSize = productSize;
-    }
-
-    public String getProductColor() {
-        return productColor;
-    }
-
-    public void setProductColor(String productColor) {
-        this.productColor = productColor;
-    }
-
-    public String getProductMaterial() {
-        return productMaterial;
-    }
-
-    public void setProductMaterial(String productMaterial) {
-        this.productMaterial = productMaterial;
-    }
-
-    public Character getProductGender() {
-        return productGender;
-    }
-
-    public void setProductGender(Character productGender) {
-        this.productGender = productGender;
-    }
-
+    
     public int getProductStock() {
         return productStock;
     }
-
+    
     public void setProductStock(int productStock) {
         this.productStock = productStock;
     }
-
+    
     public BigDecimal getProductPrice() {
         return productPrice;
     }
-
+    
     public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<ShoppingCart> getShoppingCartList() {
         return shoppingCartList;
     }
-
+    
+    @JsonProperty
     public void setShoppingCartList(List<ShoppingCart> shoppingCartList) {
         this.shoppingCartList = shoppingCartList;
     }
-
+    
+    public Color getColorId() {
+        return colorId;
+    }
+    
+    public void setColorId(Color colorId) {
+        this.colorId = colorId;
+    }
+    
+    public Gender getGenderId() {
+        return genderId;
+    }
+    
+    public void setGenderId(Gender genderId) {
+        this.genderId = genderId;
+    }
+    
+    public Material getMaterialId() {
+        return materialId;
+    }
+    
+    public void setMaterialId(Material materialId) {
+        this.materialId = materialId;
+    }
+    
+    public ProductSize getSizeId() {
+        return sizeId;
+    }
+    
+    public void setSizeId(ProductSize sizeId) {
+        this.sizeId = sizeId;
+    }
+    
     public Subcategory getSubcategoryId() {
         return subcategoryId;
     }
-
+    
     public void setSubcategoryId(Subcategory subcategoryId) {
         this.subcategoryId = subcategoryId;
     }
@@ -192,16 +183,18 @@ public class Product implements Serializable {
     public List<ProductImage> getProductImageList() {
         return productImageList;
     }
-
+    
     public void setProductImageList(List<ProductImage> productImageList) {
         this.productImageList = productImageList;
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
     }
-
+    
+    @JsonProperty
     public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
         this.orderDetailsList = orderDetailsList;
     }
@@ -230,5 +223,5 @@ public class Product implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.Product[ productId=" + productId + " ]";
     }
-    
+
 }

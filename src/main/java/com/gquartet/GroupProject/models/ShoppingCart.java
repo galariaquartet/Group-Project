@@ -1,5 +1,5 @@
 /*
- * Created on 13/05/2020 at 23:53:18 GMT+2
+ * Created on 14/05/2020 at 20:46:48 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "shopping_cart")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ShoppingCart.findAll", query = "SELECT s FROM ShoppingCart s")
-    , @NamedQuery(name = "ShoppingCart.findByShoppingCartId", query = "SELECT s FROM ShoppingCart s WHERE s.shoppingCartId = :shoppingCartId")
-    , @NamedQuery(name = "ShoppingCart.findByQuantity", query = "SELECT s FROM ShoppingCart s WHERE s.quantity = :quantity")})
+    @NamedQuery(name = "ShoppingCart.findAll", query = "SELECT s FROM ShoppingCart s"),
+    @NamedQuery(name = "ShoppingCart.findByShoppingCartId", query = "SELECT s FROM ShoppingCart s WHERE s.shoppingCartId = :shoppingCartId"),
+    @NamedQuery(name = "ShoppingCart.findByQuantity", query = "SELECT s FROM ShoppingCart s WHERE s.quantity = :quantity")})
 public class ShoppingCart implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -116,5 +116,5 @@ public class ShoppingCart implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.ShoppingCart[ shoppingCartId=" + shoppingCartId + " ]";
     }
-    
+
 }

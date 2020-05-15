@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Integer>{
-     @Query(value = "SELECT * FROM order_details od, payment p WHERE od.payment_id = p.payment_id AND od.order_number =?1 ", nativeQuery = true)
+public interface PaymentRepository extends JpaRepository<Payment, Integer> {
+
+    @Query(value = "SELECT * FROM order_details od, payment p WHERE od.payment_id = p.payment_id AND od.order_number =?1 ", nativeQuery = true)
     public List<Payment> findPaymentByOrderDetailsId(int orderNumber);
 
 }

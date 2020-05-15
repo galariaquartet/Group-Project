@@ -22,15 +22,15 @@ public class ShippingInformationController {
     private PaymentService paymentService;
 
     @RequestMapping("/shippingInformation/{ordernumber}")
-    public String viewHomePage(@PathVariable("ordernumber") CustomerOrder customerOrder,ModelMap mm) {
-          System.out.println("##################shippingInformation############################");      
+    public String viewHomePage(@PathVariable("ordernumber") CustomerOrder customerOrder, ModelMap mm) {
+        System.out.println("##################shippingInformation############################");
         int ordernumber = customerOrder.getOrderNumber();
 
         List<ShippingInformation> list = shippingInformationService.findShippingInformation(ordernumber);
         mm.addAttribute("listShippingInformation", list);
-        System.out.println("##################shippingInformation############################"+list.get(0).getRecipientFirstName());
-     //   return "orderDetailsView";
-        return "forward:/payment/"+ordernumber;
+        System.out.println("##################shippingInformation############################" + list.get(0).getRecipientFirstName());
+        //   return "orderDetailsView";
+        return "forward:/payment/" + ordernumber;
     }
 
 //    @RequestMapping("/newShippingInformation")
@@ -73,7 +73,6 @@ public class ShippingInformationController {
 //        shippingInformationService.save(shippingInformation);
 //        return "redirect:/";
 //    }
-
     @RequestMapping("/editShippingInformation/{shippingInformationId}")
     public String showEditShippingInformationForm(@PathVariable("shippingInformationId") int shippingInformationId, ModelMap mm) {
         mm.addAttribute("shippingInformation", shippingInformationService.getShippingInformation(shippingInformationId));

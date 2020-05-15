@@ -1,6 +1,5 @@
 package com.gquartet.GroupProject.services;
 
-import com.gquartet.GroupProject.dtos.ProductCategoryImageDto;
 import com.gquartet.GroupProject.models.Product;
 import com.gquartet.GroupProject.repos.ProductRepository;
 import java.util.List;
@@ -36,23 +35,28 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void update(Product product) {
         Product pr = repo.getOne(product.getProductId());
-        
+
         pr.setProductId(product.getProductId());
         pr.setProductName(product.getProductName());
-        pr.setProductSize(product.getProductSize());
-        pr.setProductColor(product.getProductColor());
-        pr.setProductMaterial(product.getProductMaterial());
-        pr.setProductGender(product.getProductGender());
+//        pr.setProductSize(product.getProductSize());
+//        pr.setProductColor(product.getProductColor());
+//        pr.setProductMaterial(product.getProductMaterial());
+//        pr.setProductGender(product.getProductGender());
         pr.setProductStock(product.getProductStock());
         pr.setProductPrice(product.getProductPrice());
         pr.setSubcategoryId(product.getSubcategoryId());
-        
+
         repo.save(pr);
     }
 
+    @Override
+    public List<String> getDistinctNames() {
+        return repo.getDistinctNames();
+    }
 
-
-
-
+    @Override
+    public List<Product> getProductsByName(String productName) {
+        return repo.getProductsByName(productName);
+    }
 
 }

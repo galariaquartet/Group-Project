@@ -21,19 +21,19 @@
             </thead>
             <tbody>
 
-            <c:forEach var="o" items="${orderStatusList}">           
-                <tr>
-                    <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                    <td>${o.orderStatusId}</td>
-                    <td>${o.orderStatusName}</td>
-                    <td>${o.trackingNo}</td>
+                <c:forEach var="o" items="${orderStatusList}">           
+                    <tr>
+                        <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
+                        <td>${o.orderStatusId}</td>
+                        <td>${o.orderStatusName}</td>
+                        <td>${o.trackingNo}</td>
 
-                    <td>
-                        <a href="/editOrderStatus/${o.orderStatusId}">Edit</a>
-                        <a href="/deleteOrderStatus/${o.orderStatusId}">Delete</a>
+                        <td>
+                            <a href="/editOrderStatus/${o.orderStatusId}">Edit</a>
+                            <a href="/deleteOrderStatus/${o.orderStatusId}">Delete</a>
 
-                    </td>   
-                </tr>
+                        </td>   
+                    </tr>
                 </tbody>
             </c:forEach>
         </table>

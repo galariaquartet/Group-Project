@@ -9,10 +9,10 @@ public interface CustomerService {
     public void saveCustomer(Customer customer);
 
     public Customer getCustomer(Integer id);
-    
+
     public Customer getCustomerByUsername(String username);
-    
-    public Customer getCustomerByEmail (String email);
+
+    public Customer getCustomerByEmail(String email);
 
 //    public Customer getCustomerByUsername(String username);
 //
@@ -20,6 +20,7 @@ public interface CustomerService {
 //
 //    public List<CustomerDto> listUsernameEmail();
 //
+
     public boolean existsCustomerEmail(String email);
 
 }

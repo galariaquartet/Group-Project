@@ -13,7 +13,6 @@ public interface OrderDetailsService {
     public List<OrderDetails> getOrderDetails(CustomerOrder id);
 
 //    public List<OrderDetailsDTO> getOrderDetails(CustomerOrder id);
-
     public OrderDetails getOrderDetailsTakeId(Integer id);
 
 }

@@ -94,9 +94,9 @@
             }
             totalPrice = 0;
             if (source.checked) {
-                <c:forEach var="sc" items="${shoppingCart}">
+        <c:forEach var="sc" items="${shoppingCart}">
                 totalPrice += ${sc.quantity*sc.productId.productPrice};
-                </c:forEach>
+        </c:forEach>
             } else {
                 totalPrice = 0;
             }

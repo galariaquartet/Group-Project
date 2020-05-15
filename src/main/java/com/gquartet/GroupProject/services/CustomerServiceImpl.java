@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomer(Integer id) {
         return customerRepository.getOne(id);
     }
-    
+
     @Override
     public Customer getCustomerByUsername(String username) {
         return customerRepository.findByUsername(username);
@@ -30,7 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerByEmail(String email) {
         return customerRepository.findByEmail(email);
     }
-
 
     //elegxei an uparxei to onoma mesa sth bash k epistrefei true/false
     @Override
@@ -42,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 //
 //    //elegxei an uparxei to email mesa sth bash k epistrefei true/false
+
     @Override
     public boolean existsCustomerEmail(String email) {
         if (customerRepository.findByEmail(email) != null) {

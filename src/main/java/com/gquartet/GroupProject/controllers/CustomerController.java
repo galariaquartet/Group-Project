@@ -95,35 +95,35 @@ public class CustomerController {
         }
         return "problem";
     }
+
     //TODO na mhn mporei o xrhsths na to xtupaei apo to URL
-    @RequestMapping(value="/home") //afou kanei login o xrhsths gia na paei sthn nena selida pairnaei mesa apo ton controller
-    public String home (HttpSession session, ModelMap mm){
-        if (session.getAttribute("customer")==null){ //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
+    @RequestMapping(value = "/home") //afou kanei login o xrhsths gia na paei sthn nena selida pairnaei mesa apo ton controller
+    public String home(HttpSession session, ModelMap mm) {
+        if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
             mm.addAttribute("login_required", "You have to log in first");
             return "index";
         } else {
             return "home";
         }
     }
-    
-    
+
     @ResponseBody
     @PostMapping(value = "checkusername/{name}")
-    public String checkUsername(@PathVariable("name") String name){
+    public String checkUsername(@PathVariable("name") String name) {
         Customer customer = new Customer();
         customer = customerService.getCustomerByUsername(name);
-        if (customer == null){
+        if (customer == null) {
             return "ok";
         }
         return "already exists";
     }
-    
+
     @ResponseBody
     @PostMapping(value = "checkemail/{email}")
-    public String checkEmail (@PathVariable("email") String email){
+    public String checkEmail(@PathVariable("email") String email) {
         Customer customer = new Customer();
         customer = customerService.getCustomerByEmail(email);
-        if (customer == null){
+        if (customer == null) {
             return "ok";
         }
         return "already exists";

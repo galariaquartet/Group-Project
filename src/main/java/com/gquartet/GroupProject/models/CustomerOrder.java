@@ -1,5 +1,5 @@
 /*
- * Created on 13/05/2020 at 23:53:18 GMT+2
+ * Created on 14/05/2020 at 20:46:50 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "customer_order")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CustomerOrder.findAll", query = "SELECT c FROM CustomerOrder c")
-    , @NamedQuery(name = "CustomerOrder.findByOrderNumber", query = "SELECT c FROM CustomerOrder c WHERE c.orderNumber = :orderNumber")
-    , @NamedQuery(name = "CustomerOrder.findByOrderDate", query = "SELECT c FROM CustomerOrder c WHERE c.orderDate = :orderDate")})
+    @NamedQuery(name = "CustomerOrder.findAll", query = "SELECT c FROM CustomerOrder c"),
+    @NamedQuery(name = "CustomerOrder.findByOrderNumber", query = "SELECT c FROM CustomerOrder c WHERE c.orderNumber = :orderNumber"),
+    @NamedQuery(name = "CustomerOrder.findByOrderDate", query = "SELECT c FROM CustomerOrder c WHERE c.orderDate = :orderDate")})
 public class CustomerOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -127,5 +127,5 @@ public class CustomerOrder implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.CustomerOrder[ orderNumber=" + orderNumber + " ]";
     }
-    
+
 }

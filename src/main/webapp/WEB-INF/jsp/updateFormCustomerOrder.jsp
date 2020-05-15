@@ -11,8 +11,8 @@
         <form:form method="POST" action="/${customerId}/updateCustomerOrder" modelAttribute="customerOrder">
 
             <form:input path="orderNumber" type="hidden" />
-               
-            
+
+
             <form:label path="orderDate">order Date</form:label>
             <form:input path="orderDate" type="datetime-local"/>
 

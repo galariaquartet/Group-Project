@@ -11,8 +11,8 @@
         <div allign="center" class="insert-courses">
             <form:form method="POST" action="/updateOrderStatus" modelAttribute="orderStatus">
 
-                  <form:input path="orderStatusId" type="hidden" value="" />
-                
+                <form:input path="orderStatusId" type="hidden" value="" />
+
                 <form:label path="orderStatusName">order Status Name</form:label>
                 <form:input path="orderStatusName" type="text"/>
 

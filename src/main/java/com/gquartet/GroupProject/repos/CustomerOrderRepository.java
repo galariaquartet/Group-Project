@@ -14,5 +14,5 @@ public interface CustomerOrderRepository extends JpaRepository<CustomerOrder, In
 
     @Query(value = "SELECT * FROM customer_order co  WHERE co.customer_id = ?1 ORDER BY co.order_number DESC", nativeQuery = true) //native query opou epistrefei mia lista me ta onomata
     List<CustomerOrder> getCustomerOrderByCustomerId(int customerId);
-    
+
 }

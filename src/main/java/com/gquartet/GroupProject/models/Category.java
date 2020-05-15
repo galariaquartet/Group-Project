@@ -1,6 +1,3 @@
-/*
- * Created on 13/05/2020 at 23:53:19 GMT+2
- */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
@@ -29,10 +26,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "category")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
-    , @NamedQuery(name = "Category.findByCategoryId", query = "SELECT c FROM Category c WHERE c.categoryId = :categoryId")
-    , @NamedQuery(name = "Category.findByCategoryName", query = "SELECT c FROM Category c WHERE c.categoryName = :categoryName")
-    , @NamedQuery(name = "Category.findByCategoryImageFilepath", query = "SELECT c FROM Category c WHERE c.categoryImageFilepath = :categoryImageFilepath")})
+    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
+    @NamedQuery(name = "Category.findByCategoryId", query = "SELECT c FROM Category c WHERE c.categoryId = :categoryId"),
+    @NamedQuery(name = "Category.findByCategoryName", query = "SELECT c FROM Category c WHERE c.categoryName = :categoryName"),
+    @NamedQuery(name = "Category.findByCategoryImageFilepath", query = "SELECT c FROM Category c WHERE c.categoryImageFilepath = :categoryImageFilepath")})
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -121,5 +118,5 @@ public class Category implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.Category[ categoryId=" + categoryId + " ]";
     }
-    
+
 }

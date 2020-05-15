@@ -1,5 +1,5 @@
 /*
- * Created on 13/05/2020 at 23:53:18 GMT+2
+ * Created on 14/05/2020 at 20:46:49 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "order_details")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "OrderDetails.findAll", query = "SELECT o FROM OrderDetails o")
-    , @NamedQuery(name = "OrderDetails.findByOrderDetailsId", query = "SELECT o FROM OrderDetails o WHERE o.orderDetailsId = :orderDetailsId")
-    , @NamedQuery(name = "OrderDetails.findByQuantity", query = "SELECT o FROM OrderDetails o WHERE o.quantity = :quantity")
-    , @NamedQuery(name = "OrderDetails.findByTotalPrice", query = "SELECT o FROM OrderDetails o WHERE o.totalPrice = :totalPrice")})
+    @NamedQuery(name = "OrderDetails.findAll", query = "SELECT o FROM OrderDetails o"),
+    @NamedQuery(name = "OrderDetails.findByOrderDetailsId", query = "SELECT o FROM OrderDetails o WHERE o.orderDetailsId = :orderDetailsId"),
+    @NamedQuery(name = "OrderDetails.findByQuantity", query = "SELECT o FROM OrderDetails o WHERE o.quantity = :quantity"),
+    @NamedQuery(name = "OrderDetails.findByTotalPrice", query = "SELECT o FROM OrderDetails o WHERE o.totalPrice = :totalPrice")})
 public class OrderDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -151,5 +151,5 @@ public class OrderDetails implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.OrderDetails[ orderDetailsId=" + orderDetailsId + " ]";
     }
-    
+
 }

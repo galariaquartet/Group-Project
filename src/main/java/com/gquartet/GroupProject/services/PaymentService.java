@@ -14,7 +14,7 @@ public interface PaymentService {
     public void delete(Integer id);
 
     public void update(Payment payment);
-    
+
     public List<Payment> findPaymentListByOrderDetailsId(int orderNumber);
 
 }

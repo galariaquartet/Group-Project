@@ -14,7 +14,7 @@ public interface CustomerCreditCardService {
     public void delete(Integer id);
 
     public void update(CustomerCreditCard customerCreditCard);
-    
+
     public CustomerCreditCard findCustomerCreditCardByCustomerId(int customerId);
 
 }

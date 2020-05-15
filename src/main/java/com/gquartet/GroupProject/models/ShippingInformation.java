@@ -1,5 +1,5 @@
 /*
- * Created on 13/05/2020 at 23:53:18 GMT+2
+ * Created on 14/05/2020 at 20:46:49 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "shipping_information")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ShippingInformation.findAll", query = "SELECT s FROM ShippingInformation s")
-    , @NamedQuery(name = "ShippingInformation.findByShippingInformationId", query = "SELECT s FROM ShippingInformation s WHERE s.shippingInformationId = :shippingInformationId")
-    , @NamedQuery(name = "ShippingInformation.findByShippingCountry", query = "SELECT s FROM ShippingInformation s WHERE s.shippingCountry = :shippingCountry")
-    , @NamedQuery(name = "ShippingInformation.findByShippingState", query = "SELECT s FROM ShippingInformation s WHERE s.shippingState = :shippingState")
-    , @NamedQuery(name = "ShippingInformation.findByShippingCity", query = "SELECT s FROM ShippingInformation s WHERE s.shippingCity = :shippingCity")
-    , @NamedQuery(name = "ShippingInformation.findByShippingStreet", query = "SELECT s FROM ShippingInformation s WHERE s.shippingStreet = :shippingStreet")
-    , @NamedQuery(name = "ShippingInformation.findByShippingZip", query = "SELECT s FROM ShippingInformation s WHERE s.shippingZip = :shippingZip")
-    , @NamedQuery(name = "ShippingInformation.findByRecipientFirstName", query = "SELECT s FROM ShippingInformation s WHERE s.recipientFirstName = :recipientFirstName")
-    , @NamedQuery(name = "ShippingInformation.findByRecipientLastName", query = "SELECT s FROM ShippingInformation s WHERE s.recipientLastName = :recipientLastName")
-    , @NamedQuery(name = "ShippingInformation.findByRecipientPhone", query = "SELECT s FROM ShippingInformation s WHERE s.recipientPhone = :recipientPhone")})
+    @NamedQuery(name = "ShippingInformation.findAll", query = "SELECT s FROM ShippingInformation s"),
+    @NamedQuery(name = "ShippingInformation.findByShippingInformationId", query = "SELECT s FROM ShippingInformation s WHERE s.shippingInformationId = :shippingInformationId"),
+    @NamedQuery(name = "ShippingInformation.findByShippingCountry", query = "SELECT s FROM ShippingInformation s WHERE s.shippingCountry = :shippingCountry"),
+    @NamedQuery(name = "ShippingInformation.findByShippingState", query = "SELECT s FROM ShippingInformation s WHERE s.shippingState = :shippingState"),
+    @NamedQuery(name = "ShippingInformation.findByShippingCity", query = "SELECT s FROM ShippingInformation s WHERE s.shippingCity = :shippingCity"),
+    @NamedQuery(name = "ShippingInformation.findByShippingStreet", query = "SELECT s FROM ShippingInformation s WHERE s.shippingStreet = :shippingStreet"),
+    @NamedQuery(name = "ShippingInformation.findByShippingZip", query = "SELECT s FROM ShippingInformation s WHERE s.shippingZip = :shippingZip"),
+    @NamedQuery(name = "ShippingInformation.findByRecipientFirstName", query = "SELECT s FROM ShippingInformation s WHERE s.recipientFirstName = :recipientFirstName"),
+    @NamedQuery(name = "ShippingInformation.findByRecipientLastName", query = "SELECT s FROM ShippingInformation s WHERE s.recipientLastName = :recipientLastName"),
+    @NamedQuery(name = "ShippingInformation.findByRecipientPhone", query = "SELECT s FROM ShippingInformation s WHERE s.recipientPhone = :recipientPhone")})
 public class ShippingInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -214,5 +214,5 @@ public class ShippingInformation implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.ShippingInformation[ shippingInformationId=" + shippingInformationId + " ]";
     }
-    
+
 }

@@ -37,7 +37,7 @@ public class ShoppingCartController {
         }
     }
 
-    @RequestMapping("/addToCart/{productId}" )
+    @RequestMapping("/addToCart/{productId}")
     public String showEditShoppingCartForm(@RequestParam("quantity") int quantity, HttpSession session, @PathVariable("productId") int productId, ModelMap mm) {
         if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
             mm.addAttribute("login_required", "You have to log in first");
@@ -47,7 +47,7 @@ public class ShoppingCartController {
             int customerId = customer.getCustomerId();
             ShoppingCart shoppingCart = shoppingCartService.getCartByProduct(productId, customerId);
             //tsekaroume ena uparxei sto kala8i me bash to productID ena proion ean den uparxei dhmiourgoume ena kainourgio kala8i k to pros8etoume
-            if (shoppingCart == null ) {
+            if (shoppingCart == null) {
                 shoppingCart = new ShoppingCart();
                 shoppingCart.setCustomerId(customer);
                 Product product = productService.getProduct(productId);
@@ -64,7 +64,7 @@ public class ShoppingCartController {
             return "redirect:/products";
         }
     }
-    
+
     @PostMapping("/deleteShoppingCart/{checkedproducts}")
     public String deleteproducts(@PathVariable String checkedproducts) {
         String[] temp = checkedproducts.split(",");
@@ -73,13 +73,13 @@ public class ShoppingCartController {
         }
         return "redirect:/shoppingCart";
     }
-    
+
     @PostMapping("/updatequantity/{cartid}/{newquantity}")
-    public String updateQuantity(@PathVariable("cartid") int cartid, @PathVariable("newquantity") int newquantity){
+    public String updateQuantity(@PathVariable("cartid") int cartid, @PathVariable("newquantity") int newquantity) {
         ShoppingCart shoppingCart = shoppingCartService.getCart(cartid);
         shoppingCart.setQuantity(newquantity);
         shoppingCartService.save(shoppingCart);
         return "redirect:/shoppingCart";
     }
-    
+
 }

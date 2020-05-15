@@ -1,8 +1,9 @@
 /*
- * Created on 13/05/2020 at 23:53:18 GMT+2
+ * Created on 14/05/2020 at 20:46:49 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -26,9 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "product_image")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p")
-    , @NamedQuery(name = "ProductImage.findByProductImageId", query = "SELECT p FROM ProductImage p WHERE p.productImageId = :productImageId")
-    , @NamedQuery(name = "ProductImage.findByProductFilepath", query = "SELECT p FROM ProductImage p WHERE p.productFilepath = :productFilepath")})
+    @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p"),
+    @NamedQuery(name = "ProductImage.findByProductImageId", query = "SELECT p FROM ProductImage p WHERE p.productImageId = :productImageId"),
+    @NamedQuery(name = "ProductImage.findByProductFilepath", query = "SELECT p FROM ProductImage p WHERE p.productFilepath = :productFilepath")})
 public class ProductImage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,6 +43,7 @@ public class ProductImage implements Serializable {
     private String productFilepath;
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Product productId;
 
     public ProductImage() {
@@ -99,5 +101,5 @@ public class ProductImage implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.ProductImage[ productImageId=" + productImageId + " ]";
     }
-    
+
 }

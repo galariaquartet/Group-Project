@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryServiceImp implements CategoryService {
 
-    @Autowired 
+    @Autowired
     private CategoryRepository repo;
 
     @Override
@@ -35,7 +35,6 @@ public class CategoryServiceImp implements CategoryService {
     @Override
     public void update(Category category) {
         Category c = repo.getOne(category.getCategoryId());
-        
         c.setCategoryId(category.getCategoryId());
         c.setCategoryName(category.getCategoryName());
         repo.save(c);

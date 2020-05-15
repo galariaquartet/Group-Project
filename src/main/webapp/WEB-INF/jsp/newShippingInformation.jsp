@@ -10,7 +10,7 @@
     <body>
         <form:form method="POST" action="saveShippingInformation" modelAttribute="shippingInformation">
             <h2>Sign Up</h2>
-            
+
             <form:label path="shippingCountry">shipping Country</form:label>
             <form:input path="shippingCountry" type="text"/>
 
@@ -22,16 +22,16 @@
 
             <form:label path="shippingStreet">shipping Street</form:label>
             <form:input path="shippingStreet" type="text"/>
-            
+
             <form:label path="shippingZip">shipping Zip</form:label>
             <form:input path="shippingZip" type="text"/>
-            
+
             <form:label path="recipientFirstName">recipient First Name</form:label>
             <form:input path="recipientFirstName" type="text"/>
-            
+
             <form:label path="recipientLastName">recipient Last Name</form:label>
             <form:input path="recipientLastName" type="text"/>
-            
+
             <form:label path="recipientPhone">recipient Phone</form:label>
             <form:input path="recipientPhone" type="text"/>
 

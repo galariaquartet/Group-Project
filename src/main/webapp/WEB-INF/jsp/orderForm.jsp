@@ -161,9 +161,37 @@
         <div id="showPopupForm" class="hide">
             <div class="center hideform">
                 <button id="close" style="float: right;">X</button>
-                <form:form action="/card/${checkedproducts}" method="POST" modelAttribute="customerCreditCard">
-                    <a href="#" onclick="showPaymentCardInformation();"> Add new Card</a>
-                </form:form>
+
+                <div class="formSection readOnly">
+
+                    <form:form action="/updateCustomerCreditCard/${checkedproducts}" method="POST" modelAttribute="customerCreditCardSavedDataFromDB">
+
+                        <form:label path="ownerFirstName">ownerFirstName</form:label>            
+                        <form:input path="ownerFirstName" type="text" />
+
+                        <form:label path="ownerLastName">ownerLastName</form:label>               
+                        <form:input path="ownerLastName"  type="text" />
+
+                        <form:label path="cardNumber">cardNumber</form:label>
+                        <form:input path="cardNumber"  type="text" />
+
+                        <form:label path="cardNumberLastDigits">cardNumberLastDigits</form:label>
+                        <form:input path="cardNumberLastDigits"  type="text" />
+
+                        <form:label path="cvv">cvv</form:label>
+                        <form:input path="cvv"  type="text" />
+
+                        <form:label path="expirationDate">expirationDate</form:label>
+                        <form:input path="expirationDate"  type="text" />
+                        <button type="button" class="editButton">Edit</button>
+                        <div class="actionButtons">
+                            <a href="#" class="cancelButton">Cancel</a>
+                            <button class="saveButton" type="submit">Save</button>
+                        </div>
+                    </form:form>
+                </div>
+                <a href="#" onclick="showPaymentCardInformation();"> Add new Card</a>
+
             </div>
         </div>
 

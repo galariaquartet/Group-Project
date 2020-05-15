@@ -5,10 +5,9 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 public class CustomerDto {
-    
-        private String username;
+
+    private String username;
     private String email;
 
     public CustomerDto(String username, String email) {
@@ -31,7 +30,5 @@ public class CustomerDto {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-    
+
 }

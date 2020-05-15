@@ -6,8 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomerInformationRepository extends JpaRepository<CustomerInformation, Integer>{
- 
+public interface CustomerInformationRepository extends JpaRepository<CustomerInformation, Integer> {
+
 //   public CustomerInformation findById(Integer id);
-    
 }

@@ -14,5 +14,6 @@
         <a href="products">Products   |</a>
         <a href="subCategory"> SubCategory |</a>
         <a href="category"> Category |</a>
+        <a href="allp">Json Products</a>
     </body>
 </html>

@@ -10,7 +10,7 @@
     </head>
     <body>
 
-        
+
         <h1>asdasdasda</h1>
         <p>${customerInformations.customerId}</p>
         <p>${customerInformations.firstName}</p>
@@ -21,9 +21,9 @@
         <p>${customerInformations.street}</p>
         <p>${customerInformations.zip}</p>
         <p>${customerInformations.phone}</p>
- 
+
         <a href="editCustomerInformation"> Edit</a>
         <a href="deleteCustomerInformation"> delete</a>
-       
+
     </body>
 </html>

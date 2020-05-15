@@ -9,10 +9,10 @@
     </head>
     <body>
         <h1>Customer Credit Card</h1>
-                
-                <div align="center">
-    
-       
+
+        <div align="center">
+
+
             <br/>
             <br/>
             <table border='1' cellpadding="10">
@@ -26,7 +26,7 @@
                         <th>cvv</th>
                         <th>expiration Date</th>
                         <th>customerId</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>

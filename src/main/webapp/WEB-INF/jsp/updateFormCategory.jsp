@@ -9,11 +9,11 @@
         <title>Update Category</title>
     </head>
     <body>
-              <div allign="center" class="insert-courses">
+        <div allign="center" class="insert-courses">
             <form:form method="POST" action="/updateCategory" modelAttribute="category">
                 <h2>Update</h2>
-                 <form:input path="categoryId" type="hidden" value="" />
-                 
+                <form:input path="categoryId" type="hidden" value="" />
+
                 <form:label path="categoryName">category Name</form:label>
                 <form:input path="categoryName" type="text"/>
 

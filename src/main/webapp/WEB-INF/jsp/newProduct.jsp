@@ -15,17 +15,21 @@
             <form:label path="productName">Product Name</form:label>
             <form:input path="productName" type="text"/>
 
-            <form:label path="productSize">Product Size</form:label>
-            <form:input path="productSize" type="text"/>
-            
-            <form:label path="productColor">Product Color</form:label>
-            <form:input path="productColor" type="text"/>
-            
-            <form:label path="productMaterial">Product Material</form:label>
-            <form:input path="productMaterial" type="text"/>
-            
-             <form:label path="productGender">Product Gender</form:label>
-            <form:input path="productGender" type="text"/>
+            <form:label path="sizeId">Product Size</form:label>
+            <form:select path="sizeId" items="${sizes}" itemLabel="sizeName" itemValue="sizeId"/>
+            <form:errors path="sizeId" cssClass="error"/>
+
+            <form:label path="colorId">Product Color</form:label>  
+            <form:checkboxes path="colorId" items="${colors}" itemLabel="colorName" itemValue="colorId"/>
+            <form:errors path="colorId" cssClass="error"/>
+
+            <form:label path="materialId">Product Material</form:label>
+            <form:select path="materialId" items="${materials}" itemLabel="materialName" itemValue="materialId"/>
+            <form:errors path="materialId" cssClass="error"/>
+
+            <form:label path="genderId">Product Gender</form:label>
+            <form:select path="genderId" items="${genders}" itemLabel="genderName" itemValue="genderId"/>
+            <form:errors path="genderId" cssClass="error"/>
 
             <form:label path="productStock">product Stock</form:label>
             <form:input path="productStock" type="number"/>
@@ -35,10 +39,10 @@
 
             <form:select path="subcategoryId" items="${subcategory}" itemLabel="subcategoryName" itemValue="subcategoryId"/>
             <form:errors path="subcategoryId" cssClass="error"/>
-      
-            
+
+
             <input type="text" name="myphotos"/>
-            
+
             <input type="submit" value="Submit"/>
 
         </form:form>

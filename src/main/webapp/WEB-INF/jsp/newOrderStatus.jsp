@@ -8,7 +8,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-                <div allign="center" class="insert-courses">
+        <div allign="center" class="insert-courses">
             <form:form method="POST" action="/saveOrderStatus" modelAttribute="orderStatus">
 
                 <form:label path="orderStatusName">order Status Name</form:label>
@@ -16,7 +16,7 @@
 
                 <form:label path="trackingNo">trackingNo</form:label>
                 <form:input path="trackingNo" type="text"/>
-                                
+
                 <input type="submit" value="Submit"/>
 
             </form:form>

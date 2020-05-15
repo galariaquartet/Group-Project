@@ -5,7 +5,7 @@ import com.gquartet.GroupProject.models.Product;
 import com.gquartet.GroupProject.models.ShippingInformation;
 
 public class OrderDetailsDTO {
-    
+
     private ShippingInformation shippingInformation;
     private Product product;
     private Payment payment;
@@ -39,7 +39,5 @@ public class OrderDetailsDTO {
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
-    
-    
-    
+
 }

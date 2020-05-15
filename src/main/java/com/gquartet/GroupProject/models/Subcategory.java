@@ -1,6 +1,11 @@
-
+/*
+ * Created on 14/05/2020 at 20:46:50 GMT+2
+ */
 package com.gquartet.GroupProject.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,14 +26,18 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author User
+ */
 @Entity
 @Table(name = "subcategory")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Subcategory.findAll", query = "SELECT s FROM Subcategory s")
-    , @NamedQuery(name = "Subcategory.findBySubcategoryId", query = "SELECT s FROM Subcategory s WHERE s.subcategoryId = :subcategoryId")
-    , @NamedQuery(name = "Subcategory.findBySubcategoryName", query = "SELECT s FROM Subcategory s WHERE s.subcategoryName = :subcategoryName")
-    , @NamedQuery(name = "Subcategory.findBySubcategoryImageFilepath", query = "SELECT s FROM Subcategory s WHERE s.subcategoryImageFilepath = :subcategoryImageFilepath")})
+    @NamedQuery(name = "Subcategory.findAll", query = "SELECT s FROM Subcategory s"),
+    @NamedQuery(name = "Subcategory.findBySubcategoryId", query = "SELECT s FROM Subcategory s WHERE s.subcategoryId = :subcategoryId"),
+    @NamedQuery(name = "Subcategory.findBySubcategoryName", query = "SELECT s FROM Subcategory s WHERE s.subcategoryName = :subcategoryName"),
+    @NamedQuery(name = "Subcategory.findBySubcategoryImageFilepath", query = "SELECT s FROM Subcategory s WHERE s.subcategoryImageFilepath = :subcategoryImageFilepath")})
 public class Subcategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,9 +55,11 @@ public class Subcategory implements Serializable {
     @Column(name = "subcategory_image_filepath")
     private String subcategoryImageFilepath;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subcategoryId")
+    @JsonBackReference
     private List<Product> productList;
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Category categoryId;
 
     public Subcategory() {
@@ -70,11 +81,13 @@ public class Subcategory implements Serializable {
     public void setSubcategoryId(Integer subcategoryId) {
         this.subcategoryId = subcategoryId;
     }
+    
 
     public String getSubcategoryName() {
         return subcategoryName;
     }
-
+    
+    
     public void setSubcategoryName(String subcategoryName) {
         this.subcategoryName = subcategoryName;
     }
@@ -95,11 +108,13 @@ public class Subcategory implements Serializable {
     public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
-
+    
+    @JsonIgnore
     public Category getCategoryId() {
         return categoryId;
     }
-
+    
+    @JsonProperty
     public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
     }
@@ -128,5 +143,5 @@ public class Subcategory implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.Subcategory[ subcategoryId=" + subcategoryId + " ]";
     }
-    
+
 }

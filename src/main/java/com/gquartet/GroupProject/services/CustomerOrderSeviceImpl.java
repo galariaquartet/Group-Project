@@ -35,7 +35,7 @@ public class CustomerOrderSeviceImpl implements CustomerOrderService {
     @Override
     public void update(CustomerOrder customerOrder) {
         CustomerOrder co = repo.getOne(customerOrder.getOrderNumber());
-        
+
         co.setOrderNumber(customerOrder.getOrderNumber());
         co.setOrderDate(customerOrder.getOrderDate());
         co.setCustomerId(customerOrder.getCustomerId());
@@ -43,8 +43,8 @@ public class CustomerOrderSeviceImpl implements CustomerOrderService {
 
         repo.save(co);
     }
-    
-        @Override
+
+    @Override
     public List<CustomerOrder> findCustomerOrderByCustomerId(int customerId) {
         return repo.getCustomerOrderByCustomerId(customerId);
     }

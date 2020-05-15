@@ -17,7 +17,6 @@ public class CustomerInformationSercviceImpl implements CustomerInformationSercv
         return repo.findAll();
     }
 
-
 //    @Override
 //    public CustomerInformation getCustomerInformation(Integer id) {
 //        return repo.findById(id).get();
@@ -27,13 +26,12 @@ public class CustomerInformationSercviceImpl implements CustomerInformationSercv
         return repo.getOne(id);
     }
 
-
     @Override
     public void update(CustomerInformation customerInformation) {
         CustomerInformation cI = repo.getOne(customerInformation.getCustomerId());
-        
+
         cI.setCustomerId(customerInformation.getCustomerId());
-        cI.setFirstName(customerInformation.getFirstName());        
+        cI.setFirstName(customerInformation.getFirstName());
         cI.setLastName(customerInformation.getLastName());
         cI.setCountry(customerInformation.getCountry());
         cI.setState(customerInformation.getState());
@@ -41,10 +39,9 @@ public class CustomerInformationSercviceImpl implements CustomerInformationSercv
         cI.setStreet(customerInformation.getStreet());
         cI.setZip(customerInformation.getZip());
         cI.setPhone(customerInformation.getPhone());
-        
-         repo.save(cI);
-        
-    }
 
+        repo.save(cI);
+
+    }
 
 }

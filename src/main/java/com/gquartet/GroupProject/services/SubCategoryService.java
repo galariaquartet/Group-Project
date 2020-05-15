@@ -14,7 +14,7 @@ public interface SubCategoryService {
     public void delete(Integer id);
 
     public void update(Subcategory subcategory);
-    
-    public List<Subcategory> findSubcategories (int categoryId);
+
+    public List<Subcategory> findSubcategories(int categoryId);
 
 }

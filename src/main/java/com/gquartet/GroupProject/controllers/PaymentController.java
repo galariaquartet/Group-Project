@@ -14,21 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PaymentController {
-              
+
     @Autowired
     private PaymentService paymentService;
 
     @RequestMapping("/payment/{ordernumber}")
     public String viewPaymentPage(@PathVariable("ordernumber") CustomerOrder customerOrder, ModelMap mm) {
-       int ordernumber = customerOrder.getOrderNumber();
+        int ordernumber = customerOrder.getOrderNumber();
 
         List<Payment> list = paymentService.findPaymentListByOrderDetailsId(ordernumber);
         mm.addAttribute("listPayment", list);
-       // return "paymentView";
-            return "orderDetailsView";
+        // return "paymentView";
+        return "orderDetailsView";
     }
-    
-    
+
     //edw phgainoume otan 8eloume na praggeiloume oti exoume balei mesa sto kala8i
 //    @GetMapping("/payments")
 //    public String viewPayment(ModelMap mm) {
@@ -39,7 +38,6 @@ public class PaymentController {
 //       // return "paymentView";
 //            return "orderPage";
 //    }
-
     @RequestMapping("/newPayment")
     public String viewNewPaymentForm(ModelMap mm) {
         Payment payment = new Payment();
@@ -70,5 +68,5 @@ public class PaymentController {
         paymentService.delete(paymentId);
         return "redirect:/payment";
     }
-    
+
 }

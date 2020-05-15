@@ -17,7 +17,7 @@ public class ProductImageServiceImpl implements ProductImageService {
     }
 
     //apo8hkeuei sthn bash to arxeio
-    public void save (ProductImage productImage) {
+    public void save(ProductImage productImage) {
         repo.save(productImage);
     }
 

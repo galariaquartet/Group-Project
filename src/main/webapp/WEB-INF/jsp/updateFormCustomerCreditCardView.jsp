@@ -8,10 +8,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-                <div allign="center" class="insert-courses">
+        <div allign="center" class="insert-courses">
             <form:form method="POST" action="/updateCustomerCreditCard/${customerId}" modelAttribute="customerCreditCard">
-    <form:input path="cardId" type="hidden"/>
-    
+                <form:input path="cardId" type="hidden"/>
+
                 <form:label path="ownerFirstName">owner First Name</form:label>
                 <form:input path="ownerFirstName" type="text"/>
 
@@ -29,7 +29,7 @@
 
                 <form:label path="expirationDate">expiration Date</form:label>
                 <form:input path="expirationDate" type="text"/>
-                                
+
 
 
                 <input type="submit" value="Submit"/>

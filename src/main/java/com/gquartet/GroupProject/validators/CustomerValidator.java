@@ -25,9 +25,8 @@ public class CustomerValidator implements Validator {
 
         boolean customerUsernameExists = customerService.existsCustomerUsername(c.getUsername());//elegx an to username uparxei hdh sth bash
         boolean customerEmailExists = customerService.existsCustomerEmail(c.getEmail());//elegxw an to email uparxei hdh sth 
-        
-//na balw na epistrefei boolean metablhth anti gia ton customer
 
+//na balw na epistrefei boolean metablhth anti gia ton customer
         if (customerUsernameExists == true) {// wrong username          
             errors.rejectValue("username", "customerUsername.exists");
         }

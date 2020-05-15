@@ -12,15 +12,26 @@
     <body>
         <h1>Upadate Product form</h1>
 
-        <form:form enctype="multipart/form-data"  method="POST" action="/updateProduct" modelAttribute="product">
+        <form:form method="POST" action="saveProduct" modelAttribute="product">
 
-            <form:input path="productId" type="hidden" value="" />
-
-            <form:label path="productName">product Name</form:label>
+            <form:label path="productName">Product Name</form:label>
             <form:input path="productName" type="text"/>
 
-            <form:label path="productDescription">productDescription</form:label>
-            <form:input path="productDescription" type="text"/>
+            <form:label path="sizeId">Product Size</form:label>
+            <form:select path="sizeId" items="${sizes}" itemLabel="sizeName" itemValue="sizeId"/>
+            <form:errors path="sizeId" cssClass="error"/>
+
+            <form:label path="colorId">Product Color</form:label>  
+            <form:select path="colorId" items="${colors}" itemLabel="colorName" itemValue="colorId"/>
+            <form:errors path="colorId" cssClass="error"/>
+
+            <form:label path="materialId">Product Material</form:label>
+            <form:select path="materialId" items="${materials}" itemLabel="materialName" itemValue="materialId"/>
+            <form:errors path="materialId" cssClass="error"/>
+
+            <form:label path="genderId">Product Gender</form:label>
+            <form:select path="genderId" items="${genders}" itemLabel="genderName" itemValue="genderId"/>
+            <form:errors path="genderId" cssClass="error"/>
 
             <form:label path="productStock">product Stock</form:label>
             <form:input path="productStock" type="number"/>
@@ -28,15 +39,15 @@
             <form:label path="productPrice">product Price</form:label>
             <form:input path="productPrice" type="number"/>
 
-            <form:select path="categoryId" items="${categoryList}" itemLabel="categoryName" itemValue="categoryId"/>
-            <form:errors path="categoryId" cssClass="error"/>
+            <form:select path="subcategoryId" items="${subcategory}" itemLabel="subcategoryName" itemValue="subcategoryId"/>
+            <form:errors path="subcategoryId" cssClass="error"/>
 
 
+            <input type="text" name="myphotos"/>
 
-            <!--             <input type="file" name="myfile">-->
             <input type="submit" value="Submit"/>
 
-
         </form:form>
+
     </body>
 </html>

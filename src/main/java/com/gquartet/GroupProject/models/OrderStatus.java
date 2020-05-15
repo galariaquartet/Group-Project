@@ -1,5 +1,5 @@
 /*
- * Created on 13/05/2020 at 23:53:18 GMT+2
+ * Created on 14/05/2020 at 20:46:49 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "order_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "OrderStatus.findAll", query = "SELECT o FROM OrderStatus o")
-    , @NamedQuery(name = "OrderStatus.findByOrderStatusId", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusId = :orderStatusId")
-    , @NamedQuery(name = "OrderStatus.findByOrderStatusName", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusName = :orderStatusName")
-    , @NamedQuery(name = "OrderStatus.findByTrackingNo", query = "SELECT o FROM OrderStatus o WHERE o.trackingNo = :trackingNo")})
+    @NamedQuery(name = "OrderStatus.findAll", query = "SELECT o FROM OrderStatus o"),
+    @NamedQuery(name = "OrderStatus.findByOrderStatusId", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusId = :orderStatusId"),
+    @NamedQuery(name = "OrderStatus.findByOrderStatusName", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusName = :orderStatusName"),
+    @NamedQuery(name = "OrderStatus.findByTrackingNo", query = "SELECT o FROM OrderStatus o WHERE o.trackingNo = :trackingNo")})
 public class OrderStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -124,5 +124,5 @@ public class OrderStatus implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.OrderStatus[ orderStatusId=" + orderStatusId + " ]";
     }
-    
+
 }

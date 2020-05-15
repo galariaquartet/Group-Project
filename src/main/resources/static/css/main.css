@@ -1,54 +1,54 @@
 /**************************************************LOGIN FORM********************************************************************************************************/
 /*insert courses*/
 
-  .loginForm{
+.loginForm{
     width: 350px;
     margin: auto;
     background: #67cef3;
     margin-top: 100px;
     padding: 5px;
-  }
-  .loginForm form{
+}
+.loginForm form{
     padding: 10px;
     font-family: arial;
     border: 1px dotted white;
-  }
-  .loginForm h2{
+}
+.loginForm h2{
     text-align: center;
     background: rgb(187, 238, 121);
     color: white;
     padding: 10px;
     border-radius: 10px;
-  }
-  
-  .loginForm input{
+}
+
+.loginForm input{
     padding: 10px;
     margin: 5px;
     border-radius: 5px;
     border: none;
-  }
-  input[type=text]{
+}
+input[type=text]{
     width: 90%;
-  }
-  input[type=password]{
+}
+input[type=password]{
     width: 90%;
-  }
-  input[type=submit]{
+}
+input[type=submit]{
     width: 95%;
     background: rgb(181, 238, 107);
     cursor:pointer;
     font-size: 18px;
     font-weight: bold;
     color: white;
-  }
-  input[type=submit]:hover{
+}
+input[type=submit]:hover{
     background: yellow;
-  }
-  
-  select{
+}
+
+select{
     padding: 10px;
     width: 32%;
     border-radius: 5px;
-  }
+}
 
-  
+

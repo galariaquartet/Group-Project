@@ -47,8 +47,6 @@ public class CustomerInformationController {
 //           return "forward:/newShippingInformation";
 //        }
 //    }
-
-
     // @RequestMapping(value = "/editCustomerInformation", method = RequestMethod.GET)
     @RequestMapping(value = "/editCustomerInformation")
     public String showEditCustomerInformationForm(HttpSession session, ModelMap mm) {
@@ -92,7 +90,7 @@ public class CustomerInformationController {
             customerInformation.setCity(null);
             customerInformation.setStreet(null);
             customerInformation.setZip(null);
-            
+
             customerInformationSercvice.update(customerInformation);
             return "redirect:/customerInformation";
         }

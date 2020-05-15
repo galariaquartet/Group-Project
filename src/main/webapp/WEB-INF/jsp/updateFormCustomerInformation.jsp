@@ -8,12 +8,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-       
+
         <h1>Hello World!</h1>
         <form:form method="POST" action="/updateCustomerInformation" modelAttribute="customerInformation">
             <h2>Sign Up</h2>
-             <form:input path="customerId" type="hidden" value=""/>
-             
+            <form:input path="customerId" type="hidden" value=""/>
+
             <form:label path="firstName">first Name</form:label>
             <form:input path="firstName" type="text"/>
 

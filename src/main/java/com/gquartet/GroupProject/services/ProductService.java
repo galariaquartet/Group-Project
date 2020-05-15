@@ -1,6 +1,5 @@
 package com.gquartet.GroupProject.services;
 
-import com.gquartet.GroupProject.dtos.ProductCategoryImageDto;
 import com.gquartet.GroupProject.models.Product;
 import java.util.List;
 
@@ -16,6 +15,8 @@ public interface ProductService {
 
     public void update(Product product);
     
+    public List<String> getDistinctNames();
     
+    public List<Product> getProductsByName(String productName);
 
 }

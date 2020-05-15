@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SubCategoryServiceImpl implements SubCategoryService{
-    
-    @Autowired 
+public class SubCategoryServiceImpl implements SubCategoryService {
+
+    @Autowired
     private SubcategoryRepository repo;
 
     @Override
@@ -47,5 +47,5 @@ public class SubCategoryServiceImpl implements SubCategoryService{
     public List<Subcategory> findSubcategories(int categoryId) {
         return repo.findByCategoryId(categoryId);
     }
-    
+
 }

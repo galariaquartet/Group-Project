@@ -1,6 +1,3 @@
-/*
- * Created on 13/05/2020 at 23:53:19 GMT+2
- */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
@@ -18,22 +15,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author User
- */
 @Entity
 @Table(name = "customer_credit_card")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CustomerCreditCard.findAll", query = "SELECT c FROM CustomerCreditCard c")
-    , @NamedQuery(name = "CustomerCreditCard.findByCardId", query = "SELECT c FROM CustomerCreditCard c WHERE c.cardId = :cardId")
-    , @NamedQuery(name = "CustomerCreditCard.findByOwnerFirstName", query = "SELECT c FROM CustomerCreditCard c WHERE c.ownerFirstName = :ownerFirstName")
-    , @NamedQuery(name = "CustomerCreditCard.findByOwnerLastName", query = "SELECT c FROM CustomerCreditCard c WHERE c.ownerLastName = :ownerLastName")
-    , @NamedQuery(name = "CustomerCreditCard.findByCardNumber", query = "SELECT c FROM CustomerCreditCard c WHERE c.cardNumber = :cardNumber")
-    , @NamedQuery(name = "CustomerCreditCard.findByCardNumberLastDigits", query = "SELECT c FROM CustomerCreditCard c WHERE c.cardNumberLastDigits = :cardNumberLastDigits")
-    , @NamedQuery(name = "CustomerCreditCard.findByCvv", query = "SELECT c FROM CustomerCreditCard c WHERE c.cvv = :cvv")
-    , @NamedQuery(name = "CustomerCreditCard.findByExpirationDate", query = "SELECT c FROM CustomerCreditCard c WHERE c.expirationDate = :expirationDate")})
+    @NamedQuery(name = "CustomerCreditCard.findAll", query = "SELECT c FROM CustomerCreditCard c"),
+    @NamedQuery(name = "CustomerCreditCard.findByCardId", query = "SELECT c FROM CustomerCreditCard c WHERE c.cardId = :cardId"),
+    @NamedQuery(name = "CustomerCreditCard.findByOwnerFirstName", query = "SELECT c FROM CustomerCreditCard c WHERE c.ownerFirstName = :ownerFirstName"),
+    @NamedQuery(name = "CustomerCreditCard.findByOwnerLastName", query = "SELECT c FROM CustomerCreditCard c WHERE c.ownerLastName = :ownerLastName"),
+    @NamedQuery(name = "CustomerCreditCard.findByCardNumber", query = "SELECT c FROM CustomerCreditCard c WHERE c.cardNumber = :cardNumber"),
+    @NamedQuery(name = "CustomerCreditCard.findByCardNumberLastDigits", query = "SELECT c FROM CustomerCreditCard c WHERE c.cardNumberLastDigits = :cardNumberLastDigits"),
+    @NamedQuery(name = "CustomerCreditCard.findByCvv", query = "SELECT c FROM CustomerCreditCard c WHERE c.cvv = :cvv"),
+    @NamedQuery(name = "CustomerCreditCard.findByExpirationDate", query = "SELECT c FROM CustomerCreditCard c WHERE c.expirationDate = :expirationDate")})
 public class CustomerCreditCard implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -159,5 +152,5 @@ public class CustomerCreditCard implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.CustomerCreditCard[ cardId=" + cardId + " ]";
     }
-    
+
 }

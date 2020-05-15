@@ -5,12 +5,12 @@ import com.gquartet.GroupProject.models.CustomerInformation;
 import com.gquartet.GroupProject.models.Payment;
 import com.gquartet.GroupProject.models.ShippingInformation;
 
-
 public class ShippingInfoCustomerInfoPaymentDTO {
+
     private Payment payment;
     private CustomerInformation customerInformation;
     private ShippingInformation ShippingInformation;
-    private boolean check; 
+    private boolean check;
     private boolean radioCheck;
     private CustomerCreditCard customerCreditCard;
 
@@ -31,8 +31,6 @@ public class ShippingInfoCustomerInfoPaymentDTO {
         this.customerCreditCard = customerCreditCard;
     }
 
-
-
     public boolean isRadioCheck() {
         return radioCheck;
     }
@@ -40,8 +38,6 @@ public class ShippingInfoCustomerInfoPaymentDTO {
     public void setRadioCheck(boolean radioCheck) {
         this.radioCheck = radioCheck;
     }
-
-
 
     public ShippingInfoCustomerInfoPaymentDTO() {
     }
@@ -53,8 +49,6 @@ public class ShippingInfoCustomerInfoPaymentDTO {
     public void setCheck(boolean check) {
         this.check = check;
     }
-    
-    
 
     public Payment getPayment() {
         return payment;
@@ -79,7 +73,5 @@ public class ShippingInfoCustomerInfoPaymentDTO {
     public void setShippingInformation(ShippingInformation ShippingInformation) {
         this.ShippingInformation = ShippingInformation;
     }
-    
-    
-    
+
 }

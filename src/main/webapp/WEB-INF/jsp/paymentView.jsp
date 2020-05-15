@@ -8,7 +8,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+
         <a href="newPayment">Create new Payment</a>
         <br/>
 
@@ -21,22 +21,22 @@
             </thead>
             <tbody>
 
-            <c:forEach var="p" items="${listPayment}">           
-                <tr>
-                    <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                    <td>${p.paymentId}</td>
-                    <td>${p.paymentName}</td>
+                <c:forEach var="p" items="${listPayment}">           
+                    <tr>
+                        <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
+                        <td>${p.paymentId}</td>
+                        <td>${p.paymentName}</td>
 
-                    <td>
-                        <a href="/editPayment/${p.paymentId}">Edit</a>
-                        <a href="/deletePayment/${p.paymentId}">Delete</a>
+                        <td>
+                            <a href="/editPayment/${p.paymentId}">Edit</a>
+                            <a href="/deletePayment/${p.paymentId}">Delete</a>
 
-                    </td>   
-                </tr>
-               
-            </c:forEach>
-                 </tbody>
+                        </td>   
+                    </tr>
+
+                </c:forEach>
+            </tbody>
         </table>
-   
+
     </body>
 </html>

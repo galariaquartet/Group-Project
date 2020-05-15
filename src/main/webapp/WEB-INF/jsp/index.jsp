@@ -16,12 +16,12 @@
         <div class="loginForm">
             <form action="dologin" method="POST" >
                 <h2>Login</h2>
-              
+
                 <input type="text" name="username" maxlength="30">
                 <br>
                 <p style="color: red; font-size: x-small; margin: 2px 10px; " ><strong>${wrongusername}</strong></p>
 
-                 <br>
+                <br>
                 <input type="password" name="password" placeholder="Password" maxlength="30">
                 <br>
                 <p style="color: red; font-size: x-small; margin: 2px 10px; " ><strong>${wrongpassword}</strong></p>

@@ -2,7 +2,6 @@ package com.gquartet.GroupProject.services;
 
 import com.gquartet.GroupProject.models.Category;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 public interface CategoryService {
 
@@ -15,7 +14,5 @@ public interface CategoryService {
     public void delete(Integer id);
 
     public void update(Category category);
-    
-//    public Category cate(Integer id); 
 
 }

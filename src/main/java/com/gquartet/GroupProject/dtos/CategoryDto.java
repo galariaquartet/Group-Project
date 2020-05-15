@@ -1,7 +1,7 @@
-
 package com.gquartet.GroupProject.dtos;
 
 public class CategoryDto {
+
     private int categoryId;
     private String categoryName;
     private String categoryFilepath;
@@ -32,7 +32,5 @@ public class CategoryDto {
     public void setCategoryFilepath(String categoryFilepath) {
         this.categoryFilepath = categoryFilepath;
     }
-    
-    
-    
+
 }
