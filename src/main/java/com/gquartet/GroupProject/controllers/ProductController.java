@@ -42,20 +42,16 @@ public class ProductController {
     private SizeService sizeService;
     @Autowired
     private GenderService genderService;
-
-    //TODO VALIDATOS
-    //TODO add photo to upadate form 
-
-    @ResponseBody
+    
     @RequestMapping("/products")
-    public List<List<Product>> allProducts(ModelMap mm) {
-        List<String> distinctProductNames = productService.getDistinctNames();
-        List<List<Product>> products = new ArrayList<>();
-        for (String s : distinctProductNames) {
-            products.add(productService.getProductsByName(s)); //apo8hkeuei se mia lista mia allh lista me products
-        }
-        return products;
-        
+    public String products(){
+        return "products";
+    }
+
+    @RequestMapping("/productdetails/{index}")
+    public String productDetails(@PathVariable("index") int index, ModelMap mm){
+        mm.addAttribute("index", index);
+        return "productdetails";
     }
 
     @RequestMapping("/newProduct")
@@ -73,14 +69,14 @@ public class ProductController {
         mm.addAttribute("genders", genders);
         List<Material> materials = materialService.listAll();
         mm.addAttribute("materials", materials);
-
+        mm.addAttribute("formpath", "saveProduct");
         return "newProduct";
     }
 
     @RequestMapping("/saveProduct")
-    public String saveProduct(ModelMap mm, @ModelAttribute("product") Product product, @RequestParam("myphotos") String myphotos, @ModelAttribute("colorId") List<Color> colors) {
-        Product pr = new Product();
+    public String saveProduct(ModelMap mm, @ModelAttribute("product") Product product, @RequestParam("myphotos") String myphotos) {
 
+        Product pr = new Product();
         pr.setProductId(product.getProductId());
         pr.setProductName(product.getProductName());
         pr.setProductStock(product.getProductStock());
@@ -92,13 +88,16 @@ public class ProductController {
         pr.setSubcategoryId(product.getSubcategoryId());
         productService.save(pr);
 
-        ProductImage productImage = new ProductImage();
-        productImage.setProductImageId(null);
+        //ousiasthka xwrizoume ta 2 url me komma meta // url1, url2, url3
+        String[] allPhotoFilepaths = myphotos.split(",");
+        for (int i = 0; i < allPhotoFilepaths.length; i++) {
+            ProductImage productImage = new ProductImage();
+            productImage.setProductImageId(null);
+            productImage.setProductId(pr);
+            productImage.setProductFilepath(allPhotoFilepaths[i].trim());
+            productImageService.save(productImage);
 
-        productImage.setProductFilepath(myphotos);
-        productImage.setProductId(pr);
-
-        productImageService.save(productImage);
+        }
 
         return "redirect:/products";
     }
@@ -117,8 +116,9 @@ public class ProductController {
         mm.addAttribute("genders", genders);
         List<Material> materials = materialService.listAll();
         mm.addAttribute("materials", materials);
-
-        return "updateFormProduct";
+        mm.addAttribute("imageFilePath" , productImageService.findProductImageByProductId(productId));
+        mm.addAttribute("formpath", "editProduct");
+        return "newProduct";
     }
 
     @RequestMapping("/updateProduct")
@@ -133,5 +133,17 @@ public class ProductController {
         productService.delete(productId);
         return "redirect:/products";
     }
+    
+    @ResponseBody
+    @RequestMapping("/JsonProducts")
+    public List<List<Product>> allProducts(ModelMap mm) {
+        List<String> distinctProductNames = productService.getDistinctNames();
+        List<List<Product>> products = new ArrayList<>();
+        for (String s : distinctProductNames) {
+            products.add(productService.getProductsByName(s));
+        }
+        return products;
+    }
 
 }
+

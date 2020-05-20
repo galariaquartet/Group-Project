@@ -55,11 +55,8 @@ public class CustomerController {
             return "register";
         }
         Customer c = new Customer();
-        //TODO Check if username already exists   --> check
         c.setUsername(dto.getUsername());
-        //TODO check if email already exists    --> check
         c.setEmail(dto.getEmail());
-        //TODO Check 2 passwords             --> check
         c.setPassword(passwordEncoder.encode(dto.getPassword()));
         Role role = roleService.getCustomerRole();
         c.setRoleId(role);
@@ -84,7 +81,6 @@ public class CustomerController {
             }
         }
         session.setAttribute("customer", tempcustomer);
-
         if (tempcustomer.getRoleId().getRoleId() == 1) { // Admin
             mm.addAttribute("welcomeadmin", "welcome admin");
             return "adminindex";
@@ -96,10 +92,9 @@ public class CustomerController {
         return "problem";
     }
 
-    //TODO na mhn mporei o xrhsths na to xtupaei apo to URL
-    @RequestMapping(value = "/home") //afou kanei login o xrhsths gia na paei sthn nena selida pairnaei mesa apo ton controller
+    @RequestMapping(value = "/home") 
     public String home(HttpSession session, ModelMap mm) {
-        if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
+        if (session.getAttribute("customer") == null) { 
             mm.addAttribute("login_required", "You have to log in first");
             return "index";
         } else {
@@ -128,4 +123,5 @@ public class CustomerController {
         }
         return "already exists";
     }
+    
 }

@@ -37,8 +37,8 @@ public class ShoppingCartController {
         }
     }
 
-    @RequestMapping("/addToCart/{productId}")
-    public String showEditShoppingCartForm(@RequestParam("quantity") int quantity, HttpSession session, @PathVariable("productId") int productId, ModelMap mm) {
+    @PostMapping("/addToCart/{productId}/{quantity}")
+    public String showEditShoppingCartForm(HttpSession session, @PathVariable("productId") int productId,@PathVariable("quantity") int quantity, ModelMap mm) {
         if (session.getAttribute("customer") == null) { //me auhn edw thn entolh pairneis ton customer apo to session k ton elegxeis opote o xrhsths den mporei na pros8esei sto url
             mm.addAttribute("login_required", "You have to log in first");
             return "index";

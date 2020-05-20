@@ -7,46 +7,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registration Form Page</title>
-        <!-- Latest compiled and minified CSS -->
-        <!-- jQuery library -->
+        <title>Registration Form</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <!-- Popper JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-
-        <!--Check Username-->
-        <script>
-            $(document).ready(function () {
-                $("#username").focusout(function () {
-                    var username = $("#username").val();
-                    $.ajax({
-                        type: "POST",
-                        url: "checkusername/" + username,
-                        success: function (result) {
-                            $("#checkusername").html(result);
-                        }});
-                });
-            });
-        </script>
-
-        <!--Check Email-->
-        <script>
-            $(document).ready(function () {
-                $("#email").focusout(function () {
-                    var email = $("#email").val();
-                    $.ajax({
-                        type: "POST",
-                        url: "checkemail/" + email,
-                        success: function (result) {
-                            $("#checkemail").html(result);
-                        }});
-                });
-            });
-        </script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registration_style.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
         <style>
             .error {
@@ -55,63 +19,52 @@
                 font-weight: bold;
             }
         </style>
+        
     </head>
+
     <body>
         <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <form:form cssClass="form-horizontal" action='doregister' method="POST" modelAttribute="registeruser">
-                        <fieldset>
-                            <div id="legend">
-                                <legend class="">Register</legend>
-                            </div>
-                            <div class="control-group">
-                                <!-- Username -->
-                                <label class="control-label"  for="username">Username</label>
-                                <div class="controls">
-                                    <form:input path="username" cssClass="input-xlarge" id="username"/><spann id="checkusername"></spann>
-                                    <span style="color: red"><strong>${wrongusername}</strong></span>
-<!--                                    <td><springForm:errors path="username" cssClass="error"/></td> -->
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <!-- Email-->
-                                <label class="control-label" for="email">Email</label>
-                                <div class="controls">
-                                    <form:input path="email" cssClass="input-xlarge" type="email" id="email"/><spann id="checkemail"></spann>
-<!--                                    <span style="color: red"><strong>${wrongemail}</strong></span>-->
-                                    <td><springForm:errors path="email" cssClass="error" /></td>
-                                </div>
-                            </div> 
-                            <div class="control-group">
-                                <!-- Password-->
-                                <label class="control-label" for="password">Password</label>
-                                <div class="controls">
-                                    <form:input path="password" cssClass="input-xlarge" type="password"/>
-                                    <span style="color: red"><strong>${wrongpass}</strong></span>
-                                    <td><springForm:errors path="password" cssClass="error" /></td>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <!-- Password 2-->
-                                <label class="control-label" for="password">Retype Password</label>
-                                <div class="controls">
-                                    <form:input path="password2" cssClass="input-xlarge" type="password"/>
-                                    <span style="color: red"><strong>${wrongpass2}</strong></span>
-                                    <td><springForm:errors path="password2" cssClass="error" /></td>
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="control-group">
-                                <!-- Button -->
-                                <div class="controls">
-                                    <button class="btn btn-success">Register</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form:form>
-                </div>
+            <div class="header">
+                <h2>Create Account</h2>
             </div>
+            <form:form  id="form" class="form" modelAttribute="registeruser" action='doregister' method="POST">
+                <div class="form-control">
+                    <label for="username">Username</label>
+                    <form:input path="username" type="text" placeholder="e.g Bootcamp User" id="username" />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                    <span style="color: red"><strong>${wrongusername}</strong></span>
+                </div>
+                <div class="form-control">
+                    <label for="email">Email</label>
+                    <form:input path="email" type="email" placeholder="e.g bestsite@gmail.com" id="email" />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                    <td><springForm:errors path="email" cssClass="error" /></td>
+                </div>
+                <div class="form-control">
+                    <label for="password">Password</label>
+                    <form:input path="password" type="password" placeholder="Password" id="password"/>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <springForm:errors path="password" cssClass="error" />
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password2">Confirm password</label>
+                    <form:input path="password2" type="password" placeholder="Confirm password" id="password2"/>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <springForm:errors path="password2" cssClass="error" />
+                    <small>Error message</small>
+                </div>
+                <form:button id="submitbutton">Submit</form:button>
+            </form:form >
         </div>
     </body>
+    
+    <script src="${pageContext.request.contextPath}/js/register.js"></script> 
+
 </html>
