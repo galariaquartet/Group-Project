@@ -31,7 +31,6 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findByEmail(email);
     }
 
-    //elegxei an uparxei to onoma mesa sth bash k epistrefei true/false
     @Override
     public boolean existsCustomerUsername(String username) {
         if (customerRepository.findByUsername(username) != null) {
@@ -39,8 +38,6 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return false;
     }
-//
-//    //elegxei an uparxei to email mesa sth bash k epistrefei true/false
 
     @Override
     public boolean existsCustomerEmail(String email) {
@@ -49,12 +46,5 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return false;
     }
-//
-//    //epistrefei olh th lista me ta omomata twn customer 
-//    @Override
-//    public List<CustomerDto> listUsernameEmail() {
-//        List<CustomerDto> usernamesEmails = customerRepository.getCustomerUsernameEmail();
-//        return usernamesEmails;
-//    }
 
 }

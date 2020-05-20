@@ -11,15 +11,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registration_style.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
-        <style>
-            .error {
-                color: #ff0000;
-                font-style: italic;
-                font-weight: bold;
-            }
-        </style>
-        
     </head>
 
     <body>
@@ -34,7 +25,7 @@
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i>
                     <small>Error message</small>
-                    <span style="color: red"><strong>${wrongusername}</strong></span>
+                    <springForm:errors path="username" cssClass="error" />
                 </div>
                 <div class="form-control">
                     <label for="email">Email</label>
@@ -57,10 +48,10 @@
                     <form:input path="password2" type="password" placeholder="Confirm password" id="password2"/>
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i>
-                    <springForm:errors path="password2" cssClass="error" />
+                    <springForm:errors path="password2" cssClass="error"/>
                     <small>Error message</small>
                 </div>
-                <form:button id="submitbutton">Submit</form:button>
+                    <form:button id="submitbutton" disabled="true">Submit</form:button>
             </form:form >
         </div>
     </body>

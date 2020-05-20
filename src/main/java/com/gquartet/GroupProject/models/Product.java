@@ -28,10 +28,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
-    @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName"),
-    @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock"),
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+    ,
+    @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId")
+    ,
+    @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName")
+    ,
+    @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock")
+    ,
     @NamedQuery(name = "Product.findByProductPrice", query = "SELECT p FROM Product p WHERE p.productPrice = :productPrice")})
 public class Product implements Serializable {
 
@@ -95,35 +99,35 @@ public class Product implements Serializable {
         this.productName = productName;
         this.productStock = productStock;
     }
-    
+
     public Integer getProductId() {
         return productId;
     }
-    
+
     public void setProductId(Integer productId) {
         this.productId = productId;
     }
-    
+
     public String getProductName() {
         return productName;
     }
-    
+
     public void setProductName(String productName) {
         this.productName = productName;
     }
-    
+
     public int getProductStock() {
         return productStock;
     }
-    
+
     public void setProductStock(int productStock) {
         this.productStock = productStock;
     }
-    
+
     public BigDecimal getProductPrice() {
         return productPrice;
     }
-    
+
     public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
     }
@@ -133,48 +137,48 @@ public class Product implements Serializable {
     public List<ShoppingCart> getShoppingCartList() {
         return shoppingCartList;
     }
-    
+
     @JsonProperty
     public void setShoppingCartList(List<ShoppingCart> shoppingCartList) {
         this.shoppingCartList = shoppingCartList;
     }
-    
+
     public Color getColorId() {
         return colorId;
     }
-    
+
     public void setColorId(Color colorId) {
         this.colorId = colorId;
     }
-    
+
     public Gender getGenderId() {
         return genderId;
     }
-    
+
     public void setGenderId(Gender genderId) {
         this.genderId = genderId;
     }
-    
+
     public Material getMaterialId() {
         return materialId;
     }
-    
+
     public void setMaterialId(Material materialId) {
         this.materialId = materialId;
     }
-    
+
     public ProductSize getSizeId() {
         return sizeId;
     }
-    
+
     public void setSizeId(ProductSize sizeId) {
         this.sizeId = sizeId;
     }
-    
+
     public Subcategory getSubcategoryId() {
         return subcategoryId;
     }
-    
+
     public void setSubcategoryId(Subcategory subcategoryId) {
         this.subcategoryId = subcategoryId;
     }
@@ -183,7 +187,7 @@ public class Product implements Serializable {
     public List<ProductImage> getProductImageList() {
         return productImageList;
     }
-    
+
     public void setProductImageList(List<ProductImage> productImageList) {
         this.productImageList = productImageList;
     }
@@ -193,7 +197,7 @@ public class Product implements Serializable {
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
     }
-    
+
     @JsonProperty
     public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
         this.orderDetailsList = orderDetailsList;
@@ -221,7 +225,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gquartet.GroupProject.models.Product[ productId=" + productId + " ]";
+        return "productId = " + productId;
     }
 
 }

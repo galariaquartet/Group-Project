@@ -13,7 +13,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ShoppingCartController {
@@ -52,13 +51,10 @@ public class ShoppingCartController {
                 shoppingCart.setCustomerId(customer);
                 Product product = productService.getProduct(productId);
                 shoppingCart.setProductId(product);
-
-                //TODO change quantity and check ean uperbainei to orio tou product
                 shoppingCart.setQuantity(quantity);
 
             } else {
-                int quan = quantity;
-                shoppingCart.setQuantity(quan);
+                shoppingCart.setQuantity(quantity);
             }
             shoppingCartService.save(shoppingCart);
             return "redirect:/products";

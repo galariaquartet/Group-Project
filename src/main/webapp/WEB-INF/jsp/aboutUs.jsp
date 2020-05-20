@@ -27,11 +27,11 @@
           <ul class="nav-links">
               <li><a href="/account"><img class="acount_icon" src="./assets/img/acount.png"></a></li>
             
-             <li><a href="Checkout.html"><img class="basket_icon" src="./assets/img/basket4.png"></a></li>
+             <li><a href="/shoppingCart"><img class="basket_icon" src="./assets/img/basket4.png"></a></li>
           </ul>
         </nav>
         <div id="logo" class="mask">
-            <span class="logo-text masked"><a href="index.html"> <img src="./assets/img/LOGO33.png"></span>
+            <span class="logo-text masked"><a href="/home"> <img src="./assets/img/LOGO33.png"></span>
         </div> 
 
 

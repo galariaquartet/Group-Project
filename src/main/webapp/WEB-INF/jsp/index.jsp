@@ -11,8 +11,6 @@
     </head>
     <body>
 
-        <h3>${welcomecustomer}</h3>
-
         <div class="loginForm">
             <form action="dologin" method="POST" >
                 <h2>Login</h2>
@@ -41,8 +39,8 @@
         </div>
 
     </body>
-    
+
     <script>
-        
+
     </script>
 </html>

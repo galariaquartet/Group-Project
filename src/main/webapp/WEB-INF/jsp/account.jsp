@@ -16,7 +16,7 @@
                 <ul class="nav-links">
                     <li><a href="/aboutUs"> About us </a></li>
                     <li><a href="#"> Game </a></li>
-                    <li><a href="shoppage.html"> Shop </a></li>
+                    <li><a href="/products"> Shop </a></li>
                     <li><a href="/contact"> Contact </a></li>
                 </ul>
                 <ul class="nav-links">
@@ -25,7 +25,7 @@
                 </ul>
             </nav>
             <div id="logo" class="mask">
-                <span class="logo-text masked"><a href="index.html"> <img src="./assets/img/LOGO33.png"></a></span>
+                <span class="logo-text masked"><a href="/home"> <img src="./assets/img/LOGO33.png"></a></span>
             </div> 
         </header>
 

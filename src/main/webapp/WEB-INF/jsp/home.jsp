@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,10 +18,6 @@
                     <li><a href="#"> Game </a></li>
                     <li><a href="/products"> Shop </a></li>
                     <li><a href="/contact"> Contact </a></li>
-                    <li><a href="/sss"> Contact </a></li>
-
-                    <!--        <a href="subCategory"> SubCategory |</a>
-                            <a href="category"> Category |</a>-->
                 </ul>
 
                 <ul class="nav-links">
@@ -30,32 +26,14 @@
                     <li><a href="/shoppingCart"><img class="basket_icon" src="./assets/img/basket4.png"></a></li>
                 </ul>
             </nav>
-
         </header>
+
+
         <div id="hero-slider">
 
             <div id="logo" class="mask">
-                <span class="logo-text masked"><a href="index.html"> <img src="./assets/img/LOGO33.png"></span>
+                <span class="logo-text masked"><a href="/home"> <img src="./assets/img/LOGO33.png"></span>
                         </div> 
-
-
-
-
-
-
-
-
-
-                        <!--    <div class="logo_mobile">
-                                            <a href="http://axtida.lighting"><img src="http://axtida.lighting/wp-content/uploads/2020/01/ASPRO-LOGO-AXTIDA.png" ></a>
-                                            <div class="burger" onclick="myFunction(this)">
-                                                    <div class="line1"></div>
-                                                    <div class="line2"></div>
-                                                    <div class="line3"></div>
-                                            </div>
-                            </div>
-                            <script>function myFunction(x) { x.classList.toggle("change"); }</script> -->
-
 
 
                         <div class="linediv">

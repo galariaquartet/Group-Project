@@ -47,10 +47,12 @@
         const productBox = document.querySelector("#product");
         const errorDiv = document.querySelector("#errorDiv");
         const myForm = document.querySelector("#addTocart");
+        
         let selectedProductId;
         let colorsOfProduct = new Set();
         let sizesOfProduct = new Set();
         let sizesOfColor = [];
+        let selectedProductQuantity = 0;
 
         function getProducts(data) {
             for (let i = 0; i < data[${index}].length; i++) {
@@ -104,18 +106,21 @@
             productOutput += `</div>`; // Outer Div
 
             // Total Price = product price * quantity
-
+            productOutput += `<div>Total Price: <span id="totalprice">0</span>&euro;</div>`;
+            
             // Add to Cart Section
-            productOutput += `<div>
-                    <button onclick="cartFunction()">Add To Cart</button>
-                    
-                              </div>`;
+            productOutput += `<div><button onclick="cartFunction()">Add To Cart</button></div>`;
             productBox.innerHTML = productOutput;
         }
+        
+        
 
         function productsByColor(color) {
+            const totalPriceSpan = document.querySelector("#totalprice");
             selectedProductId = undefined;
             errorDiv.innerHTML = "";
+            totalPriceSpan.innerHTML = 0;
+            selectedProductQuantity = 0;
             const imageDiv = document.querySelector("#image");
             const sizeDiv = document.querySelector("#size");
             let sizeOutput = "";
@@ -145,8 +150,13 @@
             `;
             sizeDiv.innerHTML = sizeOutput;
         }
-
+        
+        
+        
         function finalProduct(productId) {
+            selectedProductQuantity = 0;
+            const totalPriceSpan = document.querySelector("#totalprice");
+            totalPriceSpan.innerHTML = 0;
             let tempProduct;
             const quantitySpan = document.querySelector("#quantitySpan");
             errorDiv.innerHTML = "";
@@ -156,29 +166,33 @@
                     tempProduct = product[k2];
                 }
             }
-            quantitySpan.innerHTML = `<input type="number" min="1" max="\${tempProduct.productStock}" />`;
-            console.log("Final Product", productId);
+            quantitySpan.innerHTML = `<input type="number" onchange="finalProductQuantity(this)"  min="1" max="\${tempProduct.productStock}" />`;
+        }
+        
+        function finalProductQuantity (source){
+            errorDiv.innerHTML = "";
+            const totalPriceSpan = document.querySelector("#totalprice");
+            selectedProductQuantity = source.value;
+            const totalPrice = product[0].productPrice*selectedProductQuantity;
+            totalPriceSpan.innerHTML = totalPrice.toFixed(2);
         }
 
         function cartFunction() {
 
             if (typeof selectedProductId === "undefined") {
                 errorDiv.innerHTML = "You have to select a product first";
+            } else if (selectedProductQuantity === 0){
+                errorDiv.innerHTML = "You have to select a quantity first";
             } else {
-                console.log("Lets add now");
-//                myForm.action = "/addToCart/" + selectedProduct + "/" + quantity;
-//                myForm.submit();
+                console.log("Final Product ID ", selectedProductId);
+                console.log("Final Product Quantity ", selectedProductQuantity);
+                myForm.action = "/addToCart/" + selectedProductId + "/" + selectedProductQuantity;
+                myForm.submit();
             }
         }
-
-        // product is the productIndex in the Json file
-
-
-        //TODO: Make size buttons change dynamically according to the selected color
-
 
     </script>
 
 </html>
-<!--An o pinakas filteredProducts exei length == 1, activate add to cart, alliws oxi!-->
+
 

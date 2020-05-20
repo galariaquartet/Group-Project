@@ -82,11 +82,9 @@ public class CustomerController {
         }
         session.setAttribute("customer", tempcustomer);
         if (tempcustomer.getRoleId().getRoleId() == 1) { // Admin
-            mm.addAttribute("welcomeadmin", "welcome admin");
             return "adminindex";
         }
         if (tempcustomer.getRoleId().getRoleId() == 2) { // User/Customer
-            mm.addAttribute("welcomecustomer", "welcome customer");
             return "redirect:/home";
         }
         return "problem";

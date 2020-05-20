@@ -104,6 +104,5 @@
     </script>
 
 </html>
-<!--An o pinakas filteredProducts exei length == 1, activate add to cart, alliws oxi!-->
 
 

@@ -35,9 +35,9 @@
                                        onfocusout="updateQuantity(${sc.shoppingCartId}, value)">
                             </td>
                             <td>${sc.productId}</td>
-                            <td>${sc.productId.productPrice}</td>
+                            <td>${sc.productId.productPrice}&euro;</td>
                             <td>${sc.customerId}</td>
-                            <td>${sc.quantity*sc.productId.productPrice}</td>
+                            <td style="font-weight: bold;">${sc.quantity*sc.productId.productPrice}<span>&euro;</span></td>
                         </tr>
                     </c:forEach>
                 <th>Total Price</th>
@@ -58,6 +58,17 @@
     </body>
 
     <script>
+
+        window.addEventListener("pageshow", function (event) {
+            var historyTraversal = event.persisted ||
+                    (typeof window.performance !== "undefined" &&
+                            window.performance.navigation.type === 2);
+            if (historyTraversal) {
+                // Handle page restore.
+                window.location.reload();
+            }
+        });
+
         const checkoutButton = document.querySelector("#checkout");
         const deleteButton = document.querySelector("#delete");
         const error = document.querySelector("#error");
@@ -71,7 +82,7 @@
             } else {
                 totalPrice -= price;
             }
-            totalPricePrint.innerHTML = totalPrice;
+            totalPricePrint.innerHTML = totalPrice.toFixed(2);
         }
 
         function parentCheckbox() {
@@ -100,7 +111,7 @@
             } else {
                 totalPrice = 0;
             }
-            totalPricePrint.innerHTML = totalPrice;
+            totalPricePrint.innerHTML = totalPrice.toFixed(2);
         }
 
         function updateQuantity(cartid, value) {
