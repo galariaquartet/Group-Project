@@ -24,6 +24,7 @@
                 <li><a href="/chat"> Game </a></li>
                 <li><a href="/products"> Shop </a></li>
                 <li><a href="/contact"> Contact </a></li>
+                <li><a href="/adminMain"> Admin </a></li>
                 <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
                 <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
             </ul>

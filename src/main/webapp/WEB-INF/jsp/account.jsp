@@ -14,7 +14,7 @@
             <nav class="headernav">
                 <ul class="nav-links">
                     <li><a href="/aboutUs"> About us </a></li>
-                    <li><a href="#"> Game </a></li>
+                    <li><a href="/preGame"> Game </a></li>
                     <li><a href="/products"> Shop </a></li>
                     <li><a href="/contact"> Contact </a></li>
                 </ul>
@@ -30,63 +30,60 @@
         <div id="account_countainer">
             <div class="acount_title">
                 <h1>My Account</h1>
-                <p>Username</p>
-            </div>
-            <div class="account_all">
-                <div class="account_left">
-                    <div class="acount_categories">
-                    </div>
-                    <div id="profile">
-                        <p >PROFILE</p>
-                    </div>
-                    <div id="orders" class="right-border">
-                        <p>ORDER</p>
-                    </div>
-                    <div id="credit_card">
-                        <p>CREDITS</p>
-                    </div>
+                <p><c:out value="${customer.username}"></c:out>'s Account</p>
                 </div>
-                <div class="account_right">
-                    <div id="customer_info_cont">
-                        <h3>My Info</h3>
-                        <p>Myname</p>
-                        <p>Mylastname</p>
-                        <p>Myemail</p>
-                    </div>
-                    <div id="orders_info_cont">
-                        <h3 class="my_orders">My orders</h3>
-                        <div class="orders">
-                            <dir id="order" >
-                                <p>Myname</p>
-                                <p>Mylastname</p>
-                                <p>Myemail</p>   
-                            </dir>
-                            <dir id="order">
-                                <p>Myname</p>
-                                <p>Mylastname</p>
-                                <p>Myemail</p>   
-                            </dir>
+                <div class="account_all">
+                    <div class="account_left">
+                        <div class="acount_categories">
+                        </div>
+                        <div id="profile">
+                            <p >PROFILE</p>
+                        </div>
+                        <div id="orders" class="right-border">
+                            <p>ORDER</p>
                         </div>
                     </div>
-                    <div id="credits_info_cont">
-                        <p>MyCard</p>
-                        <p>MyNumberCard</p>
-                        <p>MyCcv</p>
-
+                    <div class="account_right">
+                        <div id="customer_info_cont">
+                            <h3>My Info</h3>
+                            <p>Email: <c:out value="${customer.email}"></c:out></p>
+                        <p>Name: <c:out value="${customer.customerInformation.firstName}"></c:out>, <c:out value="${customer.customerInformation.lastName}"></c:out></p>
+                        <p>Country/State/City: <c:out value="${customer.customerInformation.country}"></c:out>/
+                            <c:out value="${customer.customerInformation.state}"></c:out>/
+                            <c:out value="${customer.customerInformation.city}"></c:out>
+                            </p>
+                            <p>Street: <c:out value="${customer.customerInformation.street}"></c:out>,<c:out value="${customer.customerInformation.zip}"></c:out>
+                            </p>
+                                <p>Phone Number: <c:out value="${customer.customerInformation.phone}"></c:out></p>
+                        </div>
+                        <div id="orders_info_cont">
+                            <h3 class="my_orders">My orders</h3>
+                            <div class="orders">
+                                <dir id="order" >
+                                    <p>Myname</p>
+                                    <p>Mylastname</p>
+                                    <p>Myemail</p>   
+                                </dir>
+                                <dir id="order">
+                                    <p>Myname</p>
+                                    <p>Mylastname</p>
+                                    <p>Myemail</p>   
+                                </dir>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer">
-            <div class="footercontainer">
-                <div class="social_footer">
-                    <div class="follow_us">Follow us </div>
-                    <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
-                    <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
-                    <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+            <div class="footer">
+                <div class="footercontainer">
+                    <div class="social_footer">
+                        <div class="follow_us">Follow us </div>
+                        <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <script src="${pageContext.request.contextPath}/js/acount.js"></script>
+            <script src="${pageContext.request.contextPath}/js/acount.js"></script>
     </body>
 </html>

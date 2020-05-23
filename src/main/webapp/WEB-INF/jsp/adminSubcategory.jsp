@@ -20,20 +20,16 @@
                     <li><a href="#"> Game </a></li>
                     <li><a href="/products"> Shop </a></li>
                     <li><a href="/contact"> Contact </a></li>
+                    <li><a href="/adminMain"> Admin </a></li>
                 </ul>
-
                 <ul class="nav-links">
-                    <li><a href="Acoount.html"><img class="acount_icon" src="./assets/img/acount.png"></a></li>
-
-                    <li><a href="ShopingCart.html"><img class="basket_icon" src="./assets/img/basket4.png"></a></li>
+                    <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
+                    <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
                 </ul>
             </nav>
             <div id="logo" class="mask">
-                <span class="logo-text masked"><a href="index.html"> <img src="./assets/img/LOGO33.png"></a></span>
+                <span class="logo-text masked"><a href="/home"> <img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
             </div> 
-
-
-
         </header>
         <div class="space"></div>
         <div class="admin_cat_container">
@@ -69,18 +65,18 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach var="c" items="${listsubCategory}">           
-                        <tr>
-                            <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                            <td>${c.subcategoryId}</td>
-                            <td>${c.subcategoryName}</td>
-                            <td><img src="${c.subcategoryImageFilepath}" width="100px" height="100px"/></td>
-                            <td>${c.categoryId.categoryName}</td>
-                            <td>
-                                <a href="/editSubcategory/${c.subcategoryId}">Edit</a>
-                                <a href="/deleteSubcategory/${c.subcategoryId}">Delete</a>
-                            </td>   
-                        </tr>
+                        <c:forEach var="c" items="${listsubCategory}">           
+                            <tr>
+                                <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
+                                <td>${c.subcategoryId}</td>
+                                <td>${c.subcategoryName}</td>
+                                <td><img src="${c.subcategoryImageFilepath}" width="100px" height="100px"/></td>
+                                <td>${c.categoryId.categoryName}</td>
+                                <td>
+                                    <a href="/editSubcategory/${c.subcategoryId}">Edit</a>
+                                    <a href="/deleteSubcategory/${c.subcategoryId}">Delete</a>
+                                </td>   
+                            </tr>
                         </tbody>
                     </c:forEach>
                 </table>

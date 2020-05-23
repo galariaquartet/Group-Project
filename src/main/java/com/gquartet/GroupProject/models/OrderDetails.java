@@ -1,6 +1,3 @@
-/*
- * Created on 14/05/2020 at 20:46:49 GMT+2
- */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
@@ -19,10 +16,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author User
- */
 @Entity
 @Table(name = "order_details")
 @XmlRootElement
@@ -61,6 +54,18 @@ public class OrderDetails implements Serializable {
 
     public OrderDetails() {
     }
+
+    public OrderDetails(Integer orderDetailsId, int quantity, BigDecimal totalPrice, CustomerOrder orderNumber, Payment paymentId, Product productId, ShippingInformation shippingInformationId) {
+        this.orderDetailsId = orderDetailsId;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.orderNumber = orderNumber;
+        this.paymentId = paymentId;
+        this.productId = productId;
+        this.shippingInformationId = shippingInformationId;
+    }
+    
+    
 
     public OrderDetails(Integer orderDetailsId) {
         this.orderDetailsId = orderDetailsId;

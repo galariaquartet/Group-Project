@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CategoryController {
-    //TODO validators 
-    //TODO update form --> na thn ftia3w ws pros to update k na doume ti allo exoume na kanoume
 
     @Autowired
     private CategoryService categoryService;
@@ -26,11 +24,14 @@ public class CategoryController {
         return "categoryView";
     }
 
-    @RequestMapping("/newCategory")
-    public String viewNewCategoryForm(ModelMap mm) {
+    @RequestMapping("/adminCategory")
+    public String adminCategory(ModelMap mm) {
+        List<Category> list = categoryService.listAll();
+        mm.addAttribute("listcategory", list);
+
         CategoryDto categoryDto = new CategoryDto();
         mm.addAttribute("category", categoryDto);
-        return "newCategory";
+        return "adminCategory";
     }
 
     @RequestMapping("/saveCategory")
@@ -39,7 +40,7 @@ public class CategoryController {
         category.setCategoryName(categoryDto.getCategoryName());
         category.setCategoryImageFilepath(categoryDto.getCategoryFilepath());
         categoryService.save(category);
-        return "redirect:/category";
+        return "redirect:/adminCategory";
     }
 
     @RequestMapping("/editCategory/{categoryId}")
@@ -48,15 +49,16 @@ public class CategoryController {
         return "updateFormCategory";
     }
 
+
     @RequestMapping("/updateCategory")
     public String saveUpdatedCategory(ModelMap mm, @ModelAttribute("category") Category category) {
         categoryService.update(category);
-        return "redirect:/category";
+        return "redirect:/adminCategory";
     }
 
     @RequestMapping("/deleteCategory/{categoryId}")
     public String deleteCategory(@PathVariable int categoryId, ModelMap mm) {
         categoryService.delete(categoryId);
-        return "redirect:/category";
+        return "redirect:/adminCategory";
     }
 }

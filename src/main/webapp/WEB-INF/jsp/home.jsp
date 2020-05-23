@@ -13,7 +13,7 @@
         <nav class="headernav">
             <ul class="nav-links">
                 <li><a href="/aboutUs"> About us </a></li>
-                <li><a href="#"> Game </a></li>
+                <li><a href="/preGame"> Game </a></li>
                 <li><a href="/products"> Shop </a></li>
                 <li><a href="/contact"> Contact </a></li>
                 <li><a href="/adminMain"> Admin </a></li>
@@ -122,7 +122,6 @@
         <div class="footer">
             <div class="footercontainer">
                 <div class="social_footer">
-
                     <div class="follow_us">Follow us </div>
                     <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
                     <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>

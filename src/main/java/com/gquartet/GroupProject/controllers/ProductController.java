@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,16 +43,42 @@ public class ProductController {
     private SizeService sizeService;
     @Autowired
     private GenderService genderService;
-    
+
+
+
     @RequestMapping("/products")
-    public String products(){
+    public String products() {
         return "products";
     }
 
     @RequestMapping("/productdetails/{index}")
     public String productDetails(@PathVariable("index") int index, ModelMap mm) {
         mm.addAttribute("index", index);
-        return "productdetails";
+        return "productDetails";
+    }
+    
+        @ResponseBody
+    @RequestMapping("/JsonProducts")
+    public List<List<Product>> allProducts(ModelMap mm) {
+        List<String> distinctProductNames = productService.getDistinctNames();
+        List<List<Product>> products = new ArrayList<>();
+        for (String s : distinctProductNames) {
+            products.add(productService.getProductsByName(s));
+        }
+        return products;
+    }
+  
+    //******************************ADMIN******************************************
+    @RequestMapping("/adminProductList")
+    public String adminProductList( ModelMap mm) {
+        List<Product> list = productService.listAll();
+        mm.addAttribute("productList", list);
+        
+        List<ProductImage> imagelist = productImageService.getAllImages();
+        mm.addAttribute("imagelist", imagelist);
+        
+        
+        return "adminProduct";
     }
 
     @RequestMapping("/newProduct")
@@ -88,6 +115,7 @@ public class ProductController {
         pr.setSubcategoryId(product.getSubcategoryId());
         productService.save(pr);
 
+        //ousiasthka xwrizoume ta 2 url me komma meta // url1, url2, url3
         String[] allPhotoFilepaths = myphotos.split(",");
         for (int i = 0; i < allPhotoFilepaths.length; i++) {
             ProductImage productImage = new ProductImage();
@@ -98,9 +126,10 @@ public class ProductController {
 
         }
 
-        return "redirect:/products";
+        return "redirect:/adminProductList";
     }
 
+    //gia na ftia3oume to update arxika phgainoume sthn forma 
     @RequestMapping("/editProduct/{productId}")
     public String showEditProductForm(@PathVariable("productId") int productId, ModelMap mm) {
         mm.addAttribute("product", productService.getProduct(productId));
@@ -114,34 +143,22 @@ public class ProductController {
         mm.addAttribute("genders", genders);
         List<Material> materials = materialService.listAll();
         mm.addAttribute("materials", materials);
-        mm.addAttribute("imageFilePath" , productImageService.findProductImageByProductId(productId));
-        mm.addAttribute("formpath", "editProduct");
-        return "newProduct";
+        mm.addAttribute("imageFilePath", productImageService.findProductImageByProductId(productId));
+       // mm.addAttribute("formpath", "editProduct");
+        return "updateFormProduct";
     }
 
     @RequestMapping("/updateProduct")
     public String saveUpdatedCategory(ModelMap mm, @ModelAttribute("product") Product product) {
         productService.update(product);
 
-        return "redirect:/products";
+        return "redirect:/adminProductList";
     }
 
     @RequestMapping("/deleteProduct/{productId}")
     public String deleteProduct(@PathVariable int productId, ModelMap mm) {
         productService.delete(productId);
-        return "redirect:/products";
-    }
-    
-    @ResponseBody
-    @RequestMapping("/JsonProducts")
-    public List<List<Product>> allProducts(ModelMap mm) {
-        List<String> distinctProductNames = productService.getDistinctNames();
-        List<List<Product>> products = new ArrayList<>();
-        for (String s : distinctProductNames) {
-            products.add(productService.getProductsByName(s));
-        }
-        return products;
+        return "redirect:/adminProductList";
     }
 
 }
-

@@ -22,13 +22,6 @@ public class SubCategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/subCategory")
-    public String viewAllSubcategories(ModelMap mm) {
-        List<Subcategory> list = subCategoryService.listAll();
-        mm.addAttribute("listsubCategory", list);
-        return "subcategoryView";
-    }
-
     @RequestMapping("/subCategory/{categoryId}")
     public String viewFilteredSubcategory(@PathVariable("categoryId") int categoryId, ModelMap mm) {
         List<Subcategory> list = subCategoryService.findSubcategories(categoryId);
@@ -36,13 +29,27 @@ public class SubCategoryController {
         return "subcategoryView";
     }
 
-    @RequestMapping("/newSubcategory")
-    public String viewNewSubcategoryForm(ModelMap mm) {
+    //******************************ADMIN SUBCATEGORY***************************************   
+
+    @RequestMapping("/adminSubategory")
+    public String viewAdminAllSubcategories(ModelMap mm) {
+        List<Subcategory> list = subCategoryService.listAll();
+        mm.addAttribute("listsubCategory", list);
+        
         SubcategoryDto subcategoryDto = new SubcategoryDto();
         mm.addAttribute("subcategory", subcategoryDto);
         mm.addAttribute("categoryList", categoryService.listAll());
-        return "newSubcategory";
+        
+        return "adminSubcategory";
     }
+
+//    @RequestMapping("/newSubcategory")
+//    public String viewNewSubcategoryForm(ModelMap mm) {
+//        SubcategoryDto subcategoryDto = new SubcategoryDto();
+//        mm.addAttribute("subcategory", subcategoryDto);
+//        mm.addAttribute("categoryList", categoryService.listAll());
+//        return "newSubcategory";
+//    }
 
     @RequestMapping("/saveSubcategory")
     public String saveCategory(ModelMap mm, @ModelAttribute("subcategory") SubcategoryDto subcategoryDto) {
@@ -52,7 +59,7 @@ public class SubCategoryController {
         subcategory.setSubcategoryImageFilepath(subcategoryDto.getSubcategoryImageFilepath());
         subcategory.setCategoryId(subcategoryDto.getCategoryId());
         subCategoryService.save(subcategory);
-        return "redirect:/subCategory";
+        return "redirect:/adminSubategory";
     }
 
     @RequestMapping("/editSubcategory/{subcategoryId}")
@@ -70,13 +77,13 @@ public class SubCategoryController {
         sub.setSubcategoryImageFilepath(subcategory.getSubcategoryImageFilepath());
         sub.setCategoryId(subcategory.getCategoryId());
         subCategoryService.update(sub);
-        return "redirect:/subCategory";
+        return "redirect:/adminSubategory";
     }
 
     @RequestMapping("/deleteSubcategory/{subcategoryId}")
     public String deleteSubcategory(@PathVariable int subcategoryId, ModelMap mm) {
         subCategoryService.delete(subcategoryId);
-        return "redirect:/subCategory";
+        return "redirect:/adminSubategory";
     }
 
 }

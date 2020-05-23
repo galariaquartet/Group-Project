@@ -1,36 +1,36 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style_shop.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/shoppingCart.css">
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>My Cart</title>
-        
+
         <style>
             * {
-                background-color: black;
+
                 color: white;
             }
-            
+
             td {
                 text-align: center;
             }
-            
+
             #header {
                 margin-bottom: 5%;
-                
+
             }
         </style>
     </head>
     <body>
-        
+
         <header id="header">
             <nav class="headernav">
                 <ul class="nav-links">
                     <li><a href="/aboutUs"> About us </a></li>
-                    <li><a href="#"> Game </a></li>
+                    <li><a href="/preGame"> Game </a></li>
                     <li><a href="/products"> Shop </a></li>
                     <li><a href="/contact"> Contact </a></li>
                 </ul>
@@ -43,60 +43,87 @@
                 <span class="logo-text masked"><a href="/home"><img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
             </div> 
         </header>
-        
-        <div align="center">
-            <br/>
-            <div id="error"></div>
-            <br/>
-            <table border='1' cellpadding="10">
-                <thead>
-                    <tr>
-                        <th><input id="parent" type="checkbox" onClick="checkAll(this)"></th>
-                        <th>Image</th>
-                        <th>Product Name</th>
-                        <th>Product Color</th>
-                        <th>Product Size</th>
-                        <th>quantity</th>
-                        <th>Product Price</th>
-                        <th>price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="sc" items="${shoppingCart}">
+        <div class="ShopingCart_countainer">
+            <div class="space"></div>
+
+            <div class="shoping-cart-nav">
+
+                <div>Shopping Cart</div>
+                <div>Checkout</div>
+                <div>Order Complete</div>
+
+            </div>
+
+
+            <div align="center">
+                <br/>
+                
+                <br/>
+                <table style="width: 100%" cellpadding="10">
+                    <thead>
                         <tr>
-                            <th><input type="checkbox" name="child" value="${sc.shoppingCartId}" onclick="parentCheckbox(); updatePrice(this, ${sc.quantity*sc.productId.productPrice});"></th>
-                            <td>
-                                <c:forEach var = "s" items="${sc.productId.productImageList}">
-                                    <img src="${s.productFilepath}" height="75px" width="75px" />
-                                </c:forEach>
-                            </td>
-                            <td>${sc.productId.productName}</td>
-                            <td>${sc.productId.colorId.colorName}</td>
-                            <td>${sc.productId.sizeId.sizeName}</td>
-                            <td>
-                                <input type="number" name="newquantity" value="${sc.quantity}" min="1" max="${sc.productId.productStock}" 
-                                       onchange="updateQuantity(${sc.shoppingCartId}, value)">
-                            </td>
-                            <td>${sc.productId.productPrice}&euro;</td>
-                            <td style="font-weight: bold;">${sc.quantity*sc.productId.productPrice}<span>&euro;</span></td>
+                            <th><input id="parent" type="checkbox" onClick="checkAll(this)"></th>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Product Color</th>
+                            <th>Product Size</th>
+                            <th>quantity</th>
+                            <th>Product Price</th>
+                            <th>price</th>
                         </tr>
-                    </c:forEach>
-                <th>Total Price</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th><span id="totalPrice">0</span>&euro;</th>
-                </tbody>
-                <form id="update" action="#" method="POST"></form>
-                <form id="checkoutForm" action="#" method="POST"></form>
-                <form id="deleteForm" action="#" method="POST"></form>
-            </table>
-            <br>
-            <button id="checkout" type="submit" value="Submit">Checkout</button>
-            <button id="delete" value="Delete">Delete</button>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="sc" items="${shoppingCart}">
+                            <tr style="border-bottom:1px solid white;">
+                                <th style="border:none" ><input type="checkbox" name="child" value="${sc.shoppingCartId}" onclick="parentCheckbox(); updatePrice(this, ${sc.quantity*sc.productId.productPrice});"></th>
+                                <td>
+                                    <c:forEach var = "s" items="${sc.productId.productImageList}">
+                                        <img src="${s.productFilepath}" height="75px" width="75px" />
+                                    </c:forEach>
+                                </td>
+                                <td>${sc.productId.productName}</td>
+                                <td>${sc.productId.colorId.colorName}</td>
+                                <td>${sc.productId.sizeId.sizeName}</td>
+                                <td>
+                                    <input type="number" name="newquantity" value="${sc.quantity}" min="1" max="${sc.productId.productStock}" 
+                                           onchange="updateQuantity(${sc.shoppingCartId}, value)">
+                                </td>
+                                <td>${sc.productId.productPrice}&euro;</td>
+                                <td style="font-weight: bold;">${sc.quantity*sc.productId.productPrice}<span>&euro;</span></td>
+                            </tr>
+                        </c:forEach>
+
+                    </tbody>
+                    <form id="update" action="#" method="POST"></form>
+                    <form id="checkoutForm" action="#" method="POST"></form>
+                    <form id="deleteForm" action="#" method="POST"></form>
+                </table>
+                <div class="total_price_SC">
+                    <span>Total Price: </span>
+                    <span id="totalPrice">0</span>&euro;
+                </div>
+                <hr style="margin-top: 3%">
+                <div style="color: red; text-align: center;" id="error"></div>
+
+                <br>
+                <div class="SC_button_L">
+                    <button id="checkout"  type="submit" value="Submit">Proced to Payment</button>
+                    <button id="delete" value="Delete">Delete</button>
+                </div>
+
+            </div>
+            <div class="footer">
+                <div class="footercontainer">
+                    <div class="social_footer">
+                        <div class="follow_us">Follow us </div>
+                        <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 
     <script>

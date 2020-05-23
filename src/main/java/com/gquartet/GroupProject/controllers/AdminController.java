@@ -3,11 +3,8 @@
  */
 package com.gquartet.GroupProject.controllers;
 
-import com.gquartet.GroupProject.dtos.CategoryDto;
-import com.gquartet.GroupProject.models.Category;
 import com.gquartet.GroupProject.services.CategoryService;
 import com.gquartet.GroupProject.services.SubCategoryService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,14 +23,6 @@ public class AdminController {
         return "adminMain";
     }
 
-    @RequestMapping("/adminCategory")
-    public String adminCategory(ModelMap mm) {
-        List<Category> list = categoryService.listAll();
-        mm.addAttribute("listcategory", list);
-
-        CategoryDto categoryDto = new CategoryDto();
-        mm.addAttribute("category", categoryDto);
-        return "adminCategory";
-    }
+    
 
 }
