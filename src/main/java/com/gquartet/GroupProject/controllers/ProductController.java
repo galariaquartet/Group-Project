@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @RequestMapping("/productdetails/{index}")
-    public String productDetails(@PathVariable("index") int index, ModelMap mm){
+    public String productDetails(@PathVariable("index") int index, ModelMap mm) {
         mm.addAttribute("index", index);
         return "productdetails";
     }
@@ -88,7 +88,6 @@ public class ProductController {
         pr.setSubcategoryId(product.getSubcategoryId());
         productService.save(pr);
 
-        //ousiasthka xwrizoume ta 2 url me komma meta // url1, url2, url3
         String[] allPhotoFilepaths = myphotos.split(",");
         for (int i = 0; i < allPhotoFilepaths.length; i++) {
             ProductImage productImage = new ProductImage();
@@ -102,7 +101,6 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    //gia na ftia3oume to update arxika phgainoume sthn forma 
     @RequestMapping("/editProduct/{productId}")
     public String showEditProductForm(@PathVariable("productId") int productId, ModelMap mm) {
         mm.addAttribute("product", productService.getProduct(productId));

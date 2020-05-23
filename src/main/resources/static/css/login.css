@@ -1,0 +1,227 @@
+p , h1 , h2 ,  h3 , h4 , h5 ,a {
+  font-family: 'New Font' !important;
+
+}
+.body{
+  background-image:none !important;
+}
+/* line 10, D:/WEB/Projects/Slider/assets/scss/style.scss */
+* {
+  box-sizing: border-box;
+}
+test2 {display: block; }
+/* line 14, D:/WEB/Projects/Slider/assets/scss/style.scss */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* line 19, D:/WEB/Projects/Slider/assets/scss/style.scss */
+ul {
+  padding: 0;
+}
+
+/* line 23, D:/WEB/Projects/Slider/assets/scss/style.scss */
+li {
+  list-style-type: none;
+}
+
+/* line 27, D:/WEB/Projects/Slider/assets/scss/style.scss */
+a,
+a:visited,
+a:hover {
+  color: white;
+  text-decoration: none !important;
+  outline: none;
+  font-size: 115%;
+
+}
+a{
+  text-transform: none !important;
+}
+
+/* line 35, D:/WEB/Projects/Slider/assets/scss/style.scss */
+html {
+  font-size: 16px;
+}
+
+/* line 39, D:/WEB/Projects/Slider/assets/scss/style.scss */
+html,
+body {
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+  background-color: black;
+  color: white;
+}
+
+/* line 45, D:/WEB/Projects/Slider/assets/scss/style.scss */
+body {
+  font-family: "Muli", sans-serif;
+  color: #030303;
+}
+
+
+
+.footer{
+  position: absolute;
+    height: 15vh;
+    color: white;
+    bottom: 0;
+    width: 100%;
+    z-index: 300;
+}
+.footercontainer{
+  position: absolute;
+  top: 35%;
+  left: 40%;
+}
+.social_footer{
+  display: flex;
+}
+.follow_us{
+  margin: 1.4rem;
+}
+.social_icon{
+ 
+  width: 2rem;
+  margin: 1rem;
+}
+.space{
+  width: 100%;
+  height: 4rem;
+}
+/*LOGIN PAGE*/
+.header {
+	border-bottom: 1px solid #f0f0f0;
+	background-color:#BE1629;
+	padding: 20px 40px;
+	color: white;
+        border-top-left-radius: 5px 5px;
+border-top-right-radius: 5px 5px;
+text-align: center;
+}
+
+.header h2 {
+	margin: 0;
+        
+}
+
+.form {
+	padding: 30px 40px;	
+	background-color: black;
+	color: white;
+}
+
+.form-control {
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	position: relative;
+}
+
+.form-control label {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.form-control input {
+	border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 10px;
+	width: 100%;
+	background-color: white;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    transition: color .3s, border .3s, background .3s, opacity .3s;
+}
+
+.form-control input:focus {
+	outline: 0;
+	border-color: #777;
+}
+
+.form-control.success input {
+	border-color: #2ecc71;
+}
+
+.form-control.error input {
+	border-color: #e74c3c;
+}
+
+.form-control i {
+	visibility: hidden;
+	position: absolute;
+	top: 40px;
+	right: 10px;
+}
+
+.form-control.success i.fa-check-circle {
+	color: #2ecc71;
+	visibility: visible;
+}
+
+.form-control.error i.fa-exclamation-circle {
+	color: #e74c3c;
+	visibility: visible;
+}
+
+.form-control small {
+	color: #e74c3c;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	visibility: hidden;
+}
+
+.form-control.error small {
+	visibility: visible;
+}
+
+.form button {
+	background-color: #BE1629;
+	border: 2px solid #BE1629;
+	border-radius: 4px;
+	color: #fff;
+	display: block;
+	font-family: inherit;
+	font-size: 16px;
+	padding: 10px;
+	margin-top: 20px;
+	width: 100%;
+}
+input[type=submit]{
+    background-color: #BE1629;
+    color: white;
+    border: none;
+}
+
+
+.login_container{
+    width: 100%;
+    height: auto;
+    background-color: black;
+    
+}
+.loginForm{
+    width: 35%;
+    margin: auto;
+    
+    color: white;
+   
+}
+.loginForm form{
+     padding: 30px 40px;
+    
+}
+
+@media only screen and (max-width: 812px)  {
+    .loginForm{
+        width: 80%;
+    }
+    .space{
+        height: 1rem;
+    }
+}

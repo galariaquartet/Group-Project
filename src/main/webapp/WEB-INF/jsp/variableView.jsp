@@ -183,7 +183,7 @@
         sizediv.style.display = "none";
         materialdiv.style.display = "none";
         genderdiv.style.display = "none";
-        
+
         colorbuttton.addEventListener("click", function () {
             if (colordiv.style.display === "none") {
                 colordiv.style.display = "block";
@@ -191,7 +191,7 @@
                 colordiv.style.display = "none";
             }
         });
-        
+
         sizebutton.addEventListener("click", function () {
             if (sizediv.style.display === "none") {
                 sizediv.style.display = "block";
@@ -199,7 +199,7 @@
                 sizediv.style.display = "none";
             }
         });
-        
+
         materialbutton.addEventListener("click", function () {
             if (materialdiv.style.display === "none") {
                 materialdiv.style.display = "block";
@@ -207,7 +207,7 @@
                 materialdiv.style.display = "none";
             }
         });
-        
+
         genderbutton.addEventListener("click", function () {
             if (genderdiv.style.display === "none") {
                 genderdiv.style.display = "block";

@@ -1,0 +1,39 @@
+/*
+ * Created on 23/05/2020 at 14:07:40 GMT+2
+ */
+package com.gquartet.GroupProject.controllers;
+
+import com.gquartet.GroupProject.dtos.CategoryDto;
+import com.gquartet.GroupProject.models.Category;
+import com.gquartet.GroupProject.services.CategoryService;
+import com.gquartet.GroupProject.services.SubCategoryService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class AdminController {
+
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private SubCategoryService subCategoryService;
+
+    @RequestMapping("/adminMain")
+    public String adminMain(ModelMap mm) {
+        return "adminMain";
+    }
+
+    @RequestMapping("/adminCategory")
+    public String adminCategory(ModelMap mm) {
+        List<Category> list = categoryService.listAll();
+        mm.addAttribute("listcategory", list);
+
+        CategoryDto categoryDto = new CategoryDto();
+        mm.addAttribute("category", categoryDto);
+        return "adminCategory";
+    }
+
+}

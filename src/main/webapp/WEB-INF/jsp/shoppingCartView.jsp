@@ -1,14 +1,49 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style_shop.css">
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>My Cart</title>
+        
+        <style>
+            * {
+                background-color: black;
+                color: white;
+            }
+            
+            td {
+                text-align: center;
+            }
+            
+            #header {
+                margin-bottom: 5%;
+                
+            }
+        </style>
     </head>
     <body>
-        <h1 style="text-align: center">shopping cart</h1>
+        
+        <header id="header">
+            <nav class="headernav">
+                <ul class="nav-links">
+                    <li><a href="/aboutUs"> About us </a></li>
+                    <li><a href="#"> Game </a></li>
+                    <li><a href="/products"> Shop </a></li>
+                    <li><a href="/contact"> Contact </a></li>
+                </ul>
+                <ul class="nav-links">
+                    <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
+                    <li><a href="#"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
+                </ul>
+            </nav>
+            <div id="logo" class="mask">
+                <span class="logo-text masked"><a href="/home"><img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
+            </div> 
+        </header>
+        
         <div align="center">
             <br/>
             <div id="error"></div>
@@ -17,11 +52,12 @@
                 <thead>
                     <tr>
                         <th><input id="parent" type="checkbox" onClick="checkAll(this)"></th>
-                        <th>shoppingCartId</th>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Product Color</th>
+                        <th>Product Size</th>
                         <th>quantity</th>
-                        <th>productID</th>
                         <th>Product Price</th>
-                        <th>customerId</th>
                         <th>price</th>
                     </tr>
                 </thead>
@@ -29,18 +65,24 @@
                     <c:forEach var="sc" items="${shoppingCart}">
                         <tr>
                             <th><input type="checkbox" name="child" value="${sc.shoppingCartId}" onclick="parentCheckbox(); updatePrice(this, ${sc.quantity*sc.productId.productPrice});"></th>
-                            <td>${sc.shoppingCartId}</td>
+                            <td>
+                                <c:forEach var = "s" items="${sc.productId.productImageList}">
+                                    <img src="${s.productFilepath}" height="75px" width="75px" />
+                                </c:forEach>
+                            </td>
+                            <td>${sc.productId.productName}</td>
+                            <td>${sc.productId.colorId.colorName}</td>
+                            <td>${sc.productId.sizeId.sizeName}</td>
                             <td>
                                 <input type="number" name="newquantity" value="${sc.quantity}" min="1" max="${sc.productId.productStock}" 
-                                       onfocusout="updateQuantity(${sc.shoppingCartId}, value)">
+                                       onchange="updateQuantity(${sc.shoppingCartId}, value)">
                             </td>
-                            <td>${sc.productId}</td>
                             <td>${sc.productId.productPrice}&euro;</td>
-                            <td>${sc.customerId}</td>
                             <td style="font-weight: bold;">${sc.quantity*sc.productId.productPrice}<span>&euro;</span></td>
                         </tr>
                     </c:forEach>
                 <th>Total Price</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -64,7 +106,6 @@
                     (typeof window.performance !== "undefined" &&
                             window.performance.navigation.type === 2);
             if (historyTraversal) {
-                // Handle page restore.
                 window.location.reload();
             }
         });
@@ -133,7 +174,7 @@
                 }
             });
             const checkoutForm = document.querySelector("#checkoutForm");
-            checkoutForm.action = "/order/" + checkedproducts;
+            checkoutForm.action = "/order/" + checkedproducts + "/" + totalPrice;
             checkoutForm.submit();
         });
 
