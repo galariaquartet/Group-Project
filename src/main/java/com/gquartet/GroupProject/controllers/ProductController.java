@@ -44,8 +44,6 @@ public class ProductController {
     @Autowired
     private GenderService genderService;
 
-
-
     @RequestMapping("/products")
     public String products() {
         return "products";
@@ -54,10 +52,10 @@ public class ProductController {
     @RequestMapping("/productdetails/{index}")
     public String productDetails(@PathVariable("index") int index, ModelMap mm) {
         mm.addAttribute("index", index);
-        return "productDetails";
+        return "productdetails";
     }
-    
-        @ResponseBody
+
+    @ResponseBody
     @RequestMapping("/JsonProducts")
     public List<List<Product>> allProducts(ModelMap mm) {
         List<String> distinctProductNames = productService.getDistinctNames();
@@ -67,17 +65,16 @@ public class ProductController {
         }
         return products;
     }
-  
+
     //******************************ADMIN******************************************
     @RequestMapping("/adminProductList")
-    public String adminProductList( ModelMap mm) {
+    public String adminProductList(ModelMap mm) {
         List<Product> list = productService.listAll();
         mm.addAttribute("productList", list);
-        
+
         List<ProductImage> imagelist = productImageService.getAllImages();
         mm.addAttribute("imagelist", imagelist);
-        
-        
+
         return "adminProduct";
     }
 
@@ -144,7 +141,7 @@ public class ProductController {
         List<Material> materials = materialService.listAll();
         mm.addAttribute("materials", materials);
         mm.addAttribute("imageFilePath", productImageService.findProductImageByProductId(productId));
-       // mm.addAttribute("formpath", "editProduct");
+        // mm.addAttribute("formpath", "editProduct");
         return "updateFormProduct";
     }
 

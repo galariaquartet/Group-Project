@@ -7,6 +7,11 @@
         <script src="${pageContext.request.contextPath}/js/shop.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Products</title>
+        <style>
+            option, select {
+                color: white;
+            }
+        </style>
     </head>
     <body>
 
@@ -32,12 +37,19 @@
             <div class="space"></div>
             <div class="shop_top_bar">
                 <div class="filter_button">
-                    <span>Sort by</span>
                     <div class="burger_shoppage" >
                         <div class="line1"></div>
                         <div class="line2"></div>
                         <div class="line3"></div>
                     </div>
+                    <span>Sort by:&nbsp;&nbsp;&nbsp; </span>
+                    <input id="price" type="range" min=5 max=100 value=100 step=5>
+                    <label for="price">Price: <span id="selected_price">100</span>&euro;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <select id="gender">
+                        <option value="1" selected>Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Unisex</option>
+                    </select>
                 </div>
             </div>
 
@@ -82,11 +94,13 @@
                 });
 
         const allproducts = [];
+        let filteredProducts = [];
         let counter = 0;
 
         function getProducts(data) {
             for (let i = 0; i < data.length; i++) {
                 allproducts.push(data[i]);
+                filteredProducts.push(data[i]);
             }
             displayProducts();
         }
@@ -98,19 +112,22 @@
         function displayProducts() {
             productsBox.innerHTML = "";
             let productsOutput = "";
-            for (let i = 0; i < allproducts.length; i++) { // allproducts.length μας δείχνει τον αριθμό των ΕΝΤΕΛΩΣ διαφορετικών προϊόντων  
+            for (let i = 0; i < filteredProducts.length; i++) { // allproducts.length μας δείχνει τον αριθμό των ΕΝΤΕΛΩΣ διαφορετικών προϊόντων  
+                if (filteredProducts[i].length < 1) {
+                    continue;
+                }
                 productsOutput = "";
                 // Name Section
                 productsOutput += `
                 <div class="product product_container btn">`;
                 // Get's all the available colors
                 colorsPerProduct.clear();
-                for (let j = 0; j < allproducts[i].length; j++) {
-                    colorsPerProduct.add(allproducts[i][j].colorId.colorName);
+                for (let j = 0; j < filteredProducts[i].length; j++) {
+                    colorsPerProduct.add(filteredProducts[i][j].colorId.colorName);
                 }
                 // Image Section
                 productsOutput += `<div id="images\${i}" class="product_image"></div></a>`;
-                productsOutput += `<div class="product_title">\${allproducts[i][0].productName}</div>`;
+                productsOutput += `<div class="product_title">\${filteredProducts[i][0].productName}</div>`;
                 // Color Section
                 productsOutput += `<hr>`;
                 productsOutput += `<div id="colors" style="margin: auto; display: inline-block">`;
@@ -121,7 +138,7 @@
                 }
                 productsOutput += `</div>`;
                 //Price Section
-                productsOutput += `<p style="text-align: center">Price: \${allproducts[i][0].productPrice}&euro;</p></div>`;
+                productsOutput += `<p style="text-align: center">Price: \${filteredProducts[i][0].productPrice}&euro;</p></div>`;
                 productsBox.innerHTML += productsOutput;
                 productsByColor(allproducts[i][0].colorId.colorName, i);
             }
@@ -163,6 +180,53 @@
                 margin-top: 0.4rem;">        
                         <button style="background-color: transparent; border: none;" onclick=carousel(\${product},\${productIndex})><img class="arrow_carousel" src="https://i.ibb.co/RTk18Nw/BELOS-KATO.png " margin="0" "></button>
                     </div>   `;
+        }
+
+        // Price filtering
+        const price = document.querySelector("#price");
+        const selectedPriceVal = document.querySelector("#selected_price");
+        price.addEventListener("input", handlePriceInput);
+        price.addEventListener("change", handlePriceChange);
+        let selectedPrice = 100;
+
+        function handlePriceInput(event) {
+            selectedPriceVal.innerText = event.target.value;
+        }
+        function handlePriceChange(event) {
+            selectedPrice = parseInt(event.target.value);
+            filterProducts();
+        }
+
+        function byPrice(product) {
+            return product.productPrice <= selectedPrice;
+        }
+
+        // Gender Filtering
+        const gender = document.querySelector("#gender");
+        gender.addEventListener("change", handleGenderChange);
+        let selectedGender = 1;
+
+        function handleGenderChange(event) {
+            selectedGender = parseInt(event.target.value);
+            filterProducts();
+        }
+
+        function byGender(product) {
+            return product.genderId.genderId === selectedGender;
+        }
+
+        // Final Filtering
+        function filterProducts() {
+            console.log("selected price:", selectedPrice);
+            console.log("selected gender:", selectedGender);
+            for (let i = 0; i < allproducts.length; i++) {
+                filteredProducts[i] = allproducts[i].filter(function (product) {
+                    return byPrice(product) && byGender(product);
+                });
+            }
+            console.log("All products: ", allproducts);
+            console.log("Filtered products: ", filteredProducts);
+            displayProducts();
         }
 
     </script>
