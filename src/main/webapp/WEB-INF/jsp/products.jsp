@@ -123,7 +123,6 @@
                 </div>
             </div>
         </div>
-
     </body>
     <script src="${pageContext.request.contextPath}/js/burger.js"></script>
     <script src="${pageContext.request.contextPath}/js/burger_shop.js"></script>
