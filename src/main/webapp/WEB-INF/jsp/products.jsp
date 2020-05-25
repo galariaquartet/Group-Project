@@ -7,19 +7,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Products</title>
-        <!--        <style>
-                    select {
-                        all: initial;
-                        * {
-                            all: unset;
-                        }
-                        background-color: white;
-                        color: white;
-                    }
-                    option {
-                        background-color: black;
-                    }
-                </style>-->
+
     </head>
     <body>
 
@@ -128,7 +116,7 @@
     <script src="${pageContext.request.contextPath}/js/burger_shop.js"></script>
 
     <script>
-        fetch("http://localhost:8084/JsonProducts")
+        fetch("http://localhost:8080/JsonProducts")
                 .then(function (response) {
                     return response.json();
                 })
