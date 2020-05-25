@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created on 14/05/2020 at 20:46:49 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Coily1805
+ * @author User
  */
 @Entity
 @Table(name = "role")
@@ -44,7 +42,7 @@ public class Role implements Serializable {
     @Column(name = "role_name")
     private String roleName;
     @OneToMany(mappedBy = "roleId")
-    private Collection<Customer> customerCollection;
+    private List<Customer> customerList;
 
     public Role() {
     }
@@ -70,12 +68,12 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Customer> getCustomerCollection() {
-        return customerCollection;
+    public List<Customer> getCustomerList() {
+        return customerList;
     }
 
-    public void setCustomerCollection(Collection<Customer> customerCollection) {
-        this.customerCollection = customerCollection;
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
     }
 
     @Override
@@ -102,5 +100,5 @@ public class Role implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.Role[ roleId=" + roleId + " ]";
     }
-    
+
 }

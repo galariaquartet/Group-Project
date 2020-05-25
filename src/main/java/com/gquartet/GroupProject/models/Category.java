@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gquartet.GroupProject.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -26,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Coily1805
+ * @author User
  */
 @Entity
 @Table(name = "category")
@@ -35,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
     @NamedQuery(name = "Category.findByCategoryId", query = "SELECT c FROM Category c WHERE c.categoryId = :categoryId"),
     @NamedQuery(name = "Category.findByCategoryName", query = "SELECT c FROM Category c WHERE c.categoryName = :categoryName"),
-    @NamedQuery(name = "Category.findByFilename", query = "SELECT c FROM Category c WHERE c.filename = :filename")})
+    @NamedQuery(name = "Category.findByCategoryImageFilepath", query = "SELECT c FROM Category c WHERE c.categoryImageFilepath = :categoryImageFilepath")})
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,14 +43,11 @@ public class Category implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "category_name")
     private String categoryName;
-    @Lob
-    @Column(name = "category_image")
-    private byte[] categoryImage;
-    @Size(max = 30)
-    @Column(name = "FILENAME")
-    private String filename;
+    @Size(max = 200)
+    @Column(name = "category_image_filepath")
+    private String categoryImageFilepath;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
-    private Collection<Product> productCollection;
+    private List<Subcategory> subcategoryList;
 
     public Category() {
     }
@@ -86,29 +77,21 @@ public class Category implements Serializable {
         this.categoryName = categoryName;
     }
 
-    public byte[] getCategoryImage() {
-        return categoryImage;
+    public String getCategoryImageFilepath() {
+        return categoryImageFilepath;
     }
 
-    public void setCategoryImage(byte[] categoryImage) {
-        this.categoryImage = categoryImage;
-    }
-
-    public String getFilename() {
-        return filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public void setCategoryImageFilepath(String categoryImageFilepath) {
+        this.categoryImageFilepath = categoryImageFilepath;
     }
 
     @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
+    public List<Subcategory> getSubcategoryList() {
+        return subcategoryList;
     }
 
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
+    public void setSubcategoryList(List<Subcategory> subcategoryList) {
+        this.subcategoryList = subcategoryList;
     }
 
     @Override
@@ -135,5 +118,5 @@ public class Category implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.Category[ categoryId=" + categoryId + " ]";
     }
-    
+
 }

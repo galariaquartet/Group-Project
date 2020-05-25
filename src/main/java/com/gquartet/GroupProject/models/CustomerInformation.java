@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created on 14/05/2020 at 20:46:50 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -20,10 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Coily1805
- */
 @Entity
 @Table(name = "customer_information")
 @XmlRootElement
@@ -186,5 +180,5 @@ public class CustomerInformation implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.CustomerInformation[ customerId=" + customerId + " ]";
     }
-    
+
 }
