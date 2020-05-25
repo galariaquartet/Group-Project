@@ -13,12 +13,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleRepository roleRepository;
-    
+
     @Override
     public Role getCustomerRole() {
         return roleRepository.findByRoleId(2);
     }
-    
-    
-    
+
 }

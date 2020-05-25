@@ -1,0 +1,129 @@
+.hidden {
+    display: none;
+}
+li{
+    width: 100%;
+    clear: both;
+}
+
+
+.center {
+    margin: auto;
+    width: 20%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    color: black;
+}
+
+.mystyle {
+    width: 100%;
+    padding: 25px;
+    background-color: coral;
+    color: white;
+    font-size: 25px;
+    box-sizing: border-box;
+}
+#messageArea{
+    height: 10rem;
+    overflow: scroll;
+    width: 100%;
+    list-style-type: none;
+    overflow: -moz-scrollbars-none;
+    list-style: none;
+    padding-left: 0;
+}
+#messageArea::-webkit-scrollbar {
+    display: none;
+}
+.input-group input{
+    border-radius: 15px;
+    background-color: white;
+    border: 1px solid white;
+    background-color: transparent;
+    width: 80%;
+}
+.my_user_name, .my_user_mess{
+    width:70%; color: #BE1629; text-align: right;clear: both; word-wrap: break-word;float: right
+
+}
+.other_user_name, .other_user_mess{
+    width:70%; color: #008B8B; text-align: left;clear: both; word-wrap: break-word;float: left;
+}
+.my_user_name div{
+    width: max-content;
+    padding: 0.3rem;
+    background-color: #BE1629;
+    color: white;
+    float: right;
+    border-radius: 15px;
+}
+.my_user_mess p{
+    width: 100%;
+    padding-right:  0.5rem;
+    float: right;
+    word-wrap: break-word;
+
+}
+.other_user_name div{
+    width: max-content;
+    padding: 0.3rem;
+    background-color:#008B8B;
+    color: white;
+    float: left;
+    border-radius: 15px;
+}
+.other_user_mess p{
+    width:100%;
+    padding-left:  0.5rem;
+    float: left;
+    border-radius: 15px;
+    word-wrap: break-word;
+}
+.username_user_name_new{
+
+}
+.username_name_new{
+    width: max-content;
+    padding: 0.3rem;
+    background-color: #BE1629;
+    color: white;
+    float: right;
+    border-radius: 15px;
+}
+
+.other_user_name_new{
+    width: max-content;
+    padding: 0.3rem;
+    background-color: #008B8B;
+    color: white;
+    float: left;
+    border-radius: 15px;
+}
+.box-chat{
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    z-index: 301;
+    background-color: transparent;
+    color: white;
+}
+#closeChat{
+    background-color: #BE1629;
+    padding: 0.5rem;
+}
+.send_chat_svg {
+    filter: invert() sepia(51%) saturate(0) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+@media only screen and (max-width: 812px){
+    .center{
+        width: 60%;
+    }
+    .box-chat{
+        bottom: 25px;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    #closeChat{
+        padding: 0.2rem;
+    }
+}

@@ -6,7 +6,7 @@ package com.gquartet.GroupProject.services;
 import com.gquartet.GroupProject.models.Role;
 
 public interface RoleService {
-    
+
     public Role getCustomerRole();
-    
+
 }

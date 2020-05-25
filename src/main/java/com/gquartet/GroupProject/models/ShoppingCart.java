@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created on 14/05/2020 at 20:46:48 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
@@ -22,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Coily1805
+ * @author User
  */
 @Entity
 @Table(name = "shopping_cart")
@@ -118,5 +116,5 @@ public class ShoppingCart implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.ShoppingCart[ shoppingCartId=" + shoppingCartId + " ]";
     }
-    
+
 }

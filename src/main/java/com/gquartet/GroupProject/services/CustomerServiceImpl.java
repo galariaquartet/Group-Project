@@ -1,11 +1,7 @@
-/*
- * Created on 12/04/2020 at 22:24:05 GMT+2
- */
 package com.gquartet.GroupProject.services;
 
 import com.gquartet.GroupProject.models.Customer;
 import com.gquartet.GroupProject.repos.CustomerRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +17,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer getCustomer(Integer id) {
+        return customerRepository.getOne(id);
+    }
+
+    @Override
     public Customer getCustomerByUsername(String username) {
         return customerRepository.findByUsername(username);
+    }
+
+    @Override
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
     }
 
     @Override

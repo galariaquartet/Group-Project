@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gquartet.GroupProject.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,19 +24,18 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Coily1805
- */
 @Entity
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
-    @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName"),
-    @NamedQuery(name = "Product.findByProductDescription", query = "SELECT p FROM Product p WHERE p.productDescription = :productDescription"),
-    @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock"),
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+    ,
+    @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId")
+    ,
+    @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName")
+    ,
+    @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock")
+    ,
     @NamedQuery(name = "Product.findByProductPrice", query = "SELECT p FROM Product p WHERE p.productPrice = :productPrice")})
 public class Product implements Serializable {
 
@@ -53,12 +50,7 @@ public class Product implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "product_name")
     private String productName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 60)
-    @Column(name = "product_description")
-    private String productDescription;
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @NotNull
     @Column(name = "product_stock")
     private int productStock;
@@ -66,15 +58,34 @@ public class Product implements Serializable {
     @Column(name = "product_price")
     private BigDecimal productPrice;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
-    private Collection<ShoppingCart> shoppingCartCollection;
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @JsonIgnore
+    private List<ShoppingCart> shoppingCartList;
+    @JoinColumn(name = "color_id", referencedColumnName = "color_id")
     @ManyToOne(optional = false)
-    private Category categoryId;
-    @JoinColumn(name = "product_image_id", referencedColumnName = "product_image_id")
+    @JsonManagedReference
+    private Color colorId;
+    @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
     @ManyToOne(optional = false)
-    private ProductImage productImageId;
+    @JsonManagedReference
+    private Gender genderId;
+    @JoinColumn(name = "material_id", referencedColumnName = "material_id")
+    @ManyToOne(optional = false)
+    @JsonManagedReference
+    private Material materialId;
+    @JoinColumn(name = "size_id", referencedColumnName = "size_id")
+    @ManyToOne(optional = false)
+    @JsonManagedReference
+    private ProductSize sizeId;
+    @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
+    @ManyToOne(optional = false)
+    @JsonManagedReference
+    private Subcategory subcategoryId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
-    private Collection<OrderDetails> orderDetailsCollection;
+    @JsonManagedReference
+    private List<ProductImage> productImageList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @JsonIgnore
+    private List<OrderDetails> orderDetailsList;
 
     public Product() {
     }
@@ -83,10 +94,9 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String productName, String productDescription, int productStock) {
+    public Product(Integer productId, String productName, int productStock) {
         this.productId = productId;
         this.productName = productName;
-        this.productDescription = productDescription;
         this.productStock = productStock;
     }
 
@@ -106,14 +116,6 @@ public class Product implements Serializable {
         this.productName = productName;
     }
 
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
-
     public int getProductStock() {
         return productStock;
     }
@@ -131,37 +133,74 @@ public class Product implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ShoppingCart> getShoppingCartCollection() {
-        return shoppingCartCollection;
+    @JsonIgnore
+    public List<ShoppingCart> getShoppingCartList() {
+        return shoppingCartList;
     }
 
-    public void setShoppingCartCollection(Collection<ShoppingCart> shoppingCartCollection) {
-        this.shoppingCartCollection = shoppingCartCollection;
+    @JsonProperty
+    public void setShoppingCartList(List<ShoppingCart> shoppingCartList) {
+        this.shoppingCartList = shoppingCartList;
     }
 
-    public Category getCategoryId() {
-        return categoryId;
+    public Color getColorId() {
+        return colorId;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setColorId(Color colorId) {
+        this.colorId = colorId;
     }
 
-    public ProductImage getProductImageId() {
-        return productImageId;
+    public Gender getGenderId() {
+        return genderId;
     }
 
-    public void setProductImageId(ProductImage productImageId) {
-        this.productImageId = productImageId;
+    public void setGenderId(Gender genderId) {
+        this.genderId = genderId;
+    }
+
+    public Material getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(Material materialId) {
+        this.materialId = materialId;
+    }
+
+    public ProductSize getSizeId() {
+        return sizeId;
+    }
+
+    public void setSizeId(ProductSize sizeId) {
+        this.sizeId = sizeId;
+    }
+
+    public Subcategory getSubcategoryId() {
+        return subcategoryId;
+    }
+
+    public void setSubcategoryId(Subcategory subcategoryId) {
+        this.subcategoryId = subcategoryId;
     }
 
     @XmlTransient
-    public Collection<OrderDetails> getOrderDetailsCollection() {
-        return orderDetailsCollection;
+    public List<ProductImage> getProductImageList() {
+        return productImageList;
     }
 
-    public void setOrderDetailsCollection(Collection<OrderDetails> orderDetailsCollection) {
-        this.orderDetailsCollection = orderDetailsCollection;
+    public void setProductImageList(List<ProductImage> productImageList) {
+        this.productImageList = productImageList;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
+    }
+
+    @JsonProperty
+    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
+        this.orderDetailsList = orderDetailsList;
     }
 
     @Override
@@ -186,7 +225,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gquartet.GroupProject.models.Product[ productId=" + productId + " ]";
+        return "productId = " + productId;
     }
-    
+
 }

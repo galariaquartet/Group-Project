@@ -1,31 +1,27 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created on 14/05/2020 at 20:46:49 GMT+2
  */
 package com.gquartet.GroupProject.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Coily1805
+ * @author User
  */
 @Entity
 @Table(name = "product_image")
@@ -33,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p"),
     @NamedQuery(name = "ProductImage.findByProductImageId", query = "SELECT p FROM ProductImage p WHERE p.productImageId = :productImageId"),
-    @NamedQuery(name = "ProductImage.findByProductFilename", query = "SELECT p FROM ProductImage p WHERE p.productFilename = :productFilename")})
+    @NamedQuery(name = "ProductImage.findByProductFilepath", query = "SELECT p FROM ProductImage p WHERE p.productFilepath = :productFilepath")})
 public class ProductImage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,14 +38,13 @@ public class ProductImage implements Serializable {
     @Basic(optional = false)
     @Column(name = "product_image_id")
     private Integer productImageId;
-    @Lob
-    @Column(name = "product_image")
-    private byte[] productImage;
-    @Size(max = 30)
-    @Column(name = "product_filename")
-    private String productFilename;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productImageId")
-    private Collection<Product> productCollection;
+    @Size(max = 200)
+    @Column(name = "product_filepath")
+    private String productFilepath;
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @ManyToOne(optional = false)
+    @JsonBackReference
+    private Product productId;
 
     public ProductImage() {
     }
@@ -66,29 +61,20 @@ public class ProductImage implements Serializable {
         this.productImageId = productImageId;
     }
 
-    public byte[] getProductImage() {
-        return productImage;
+    public String getProductFilepath() {
+        return productFilepath;
     }
 
-    public void setProductImage(byte[] productImage) {
-        this.productImage = productImage;
+    public void setProductFilepath(String productFilepath) {
+        this.productFilepath = productFilepath;
     }
 
-    public String getProductFilename() {
-        return productFilename;
+    public Product getProductId() {
+        return productId;
     }
 
-    public void setProductFilename(String productFilename) {
-        this.productFilename = productFilename;
-    }
-
-    @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
-    }
-
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
     @Override
@@ -115,5 +101,5 @@ public class ProductImage implements Serializable {
     public String toString() {
         return "com.gquartet.GroupProject.models.ProductImage[ productImageId=" + productImageId + " ]";
     }
-    
+
 }
