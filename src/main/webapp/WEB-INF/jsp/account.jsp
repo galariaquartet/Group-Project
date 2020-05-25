@@ -11,14 +11,23 @@
         <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300i,400,700&amp;subset=greek" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
               integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
     </head>
     <body>
         <nav class="headernav">
             <ul class="nav-links">
                 <li><a href="/aboutUs"> About us </a></li>
+                <!--                <li><a href="/chat"> chat </a></li>-->
                 <li><a href="/preGame"> Game </a></li>
                 <li><a href="/products"> Shop </a></li>
                 <li><a href="/contact"> Contact </a></li>
+
+                <!--                            <sec:authorize access="hasAuthority('admin')">-->
+                <!--                               <li><a href="/adminMain"> admin </a></li>-->
+                <!--                    </sec:authorize>-->
+
+
+                <!--                <li><a href="/adminMain"> admin </a></li>-->
                 <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
                 <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
             </ul>
@@ -64,37 +73,39 @@
 
 
                         <div id="orders_info_cont">
-                            <h3 class="my_orders">My orders</h3>
+                            <h2 class="my_orders">My orders</h2>
                             <div class="orders">
                                 <dir id="order" >
-                                    <p>Myname</p>
-                                    <p>Mylastname</p>
-                                    <p>Myemail</p>   
-                                </dir>
-                                <dir id="order">
-                                    <p>Myname</p>
-                                    <p>Mylastname</p>
-                                    <p>Myemail</p>   
-                                </dir>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <div class="footercontainer">
-                    <div class="social_footer">
+                                <c:forEach var="co" items="${listCustomerOrder}">
+                                    <p> <strong>Order Number : </strong> ${co.orderNumber}</p>
 
-                        <div class="follow_us">Follow us </div>
-                        <div class="socials_div">
-                            <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
-                            <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
-                            <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+
+                                    <p><strong> Order date :</strong> ${co.orderDate} </p>
+                                    <p> <strong>Order status :</strong> ${co.orderStatusId.orderStatusName} </p>
+                                    <a href="/orderdetails/${co.orderNumber}">  Order Details </a>
+                                    <hr>
+                                </c:forEach>
+                            </dir>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <script src="${pageContext.request.contextPath}/js/acount.js"></script>
+        </div>
+        <div class="footer">
+            <div class="footercontainer">
+                <div class="social_footer">
+
+                    <div class="follow_us">Follow us </div>
+                    <div class="socials_div">
+                        <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="${pageContext.request.contextPath}/js/acount.js"></script>
         <script src="${pageContext.request.contextPath}/js/burger.js"></script>
     </body>
 </html>

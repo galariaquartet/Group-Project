@@ -113,9 +113,32 @@ body {
     cursor: pointer;
 }
 
-
-
-
+.update_info_container{
+    width: 100%;
+    margin: auto;
+    background-color: black;
+    color: white;
+   
+    
+}
+.update_info_form_container{
+    width: 80%;
+    margin: auto;
+    
+    
+}
+.order_details_container{
+    width: 100%;
+    background-color: black;
+    color: white;
+     height: 100vh;
+}
+.order_details_form{
+    width: 80%;
+    margin: auto;
+    height: 80vh;
+overflow: scroll;
+}
 
 
 
@@ -311,7 +334,7 @@ body {
     padding-top: 10%;
     width: 75%;
     margin: auto;
-    padding-bottom: 5rem;
+    padding-bottom: 0.5rem;
 }
 .account_left{
     color: white;
@@ -327,9 +350,10 @@ body {
     max-width: 75%;
     width: 100%;
     margin: auto;
-    height:20vh; 
-    text-align: center;
+    height:22rem; 
+    
     border-left:2px solid white;
+   
 
 
 }
@@ -338,9 +362,15 @@ body {
 }
 
 #orders_info_cont{
+    
     display: block;
+    height: 20rem;
+    overflow: scroll;
 }
 
+#orders_info_cont::-webkit-scrollbar {
+  display: none;
+}
 
 #customer_info_cont, #credits_info_cont{
     display:none;
@@ -357,6 +387,8 @@ body {
 }
 .my_orders{
     margin: 0;
+    text-align: center;
+margin-bottom: 1rem;
 }
 
 
@@ -474,6 +506,10 @@ body {
 .space{
     width: 100%;
     height: 6rem;
+}
+.space_big{
+    width: 100%;
+    height: 7rem;
 }
 .shop_top_bar{
     position: relative;
@@ -2037,6 +2073,9 @@ input[type=submit]:hover {
  }
     .space{
         height: 2rem;
+    }
+    .space_big{
+        height: 5rem;
     }
     /*ABOUT US*/
     .about_text{

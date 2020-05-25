@@ -3,9 +3,8 @@
  */
 package com.gquartet.GroupProject.controllers;
 
-import com.gquartet.GroupProject.services.CategoryService;
-import com.gquartet.GroupProject.services.SubCategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gquartet.GroupProject.models.Customer;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,16 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private SubCategoryService subCategoryService;
-
     @RequestMapping("/adminMain")
-    public String adminMain(ModelMap mm) {
-        return "adminMain";
-    }
+    public String adminMain(HttpSession session, ModelMap mm) {
+        if (((Customer) session.getAttribute("customer")).getRoleId().getRoleId() == 1) {
+            return "adminMain";
+        }
+        return "index";
 
-    
+    }
 
 }

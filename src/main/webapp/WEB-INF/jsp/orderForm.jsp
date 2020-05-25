@@ -79,17 +79,9 @@
          <nav class="headernav">
             <ul class="nav-links">
                 <li><a href="/aboutUs"> About us </a></li>
-<!--                <li><a href="/chat"> chat </a></li>-->
                 <li><a href="/preGame"> Game </a></li>
                 <li><a href="/products"> Shop </a></li>
                 <li><a href="/contact"> Contact </a></li>
-                
-<!--                            <sec:authorize access="hasAuthority('admin')">-->
-<!--                               <li><a href="/adminMain"> admin </a></li>-->
-<!--                    </sec:authorize>-->
-         
-                
-<!--                <li><a href="/adminMain"> admin </a></li>-->
                 <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
                 <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
             </ul>
@@ -100,14 +92,14 @@
             </div>
         </nav>
          <div id="logo" class="mask">
-                <span class="logo-text masked"><a href="index.html"> <img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
+                <span class="logo-text masked"><a href="/home"> <img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
             </div> 
         <div class="ShopingCart_countainer">
             <div class="space"></div>
 
             <div class="shoping-cart-nav">
 
-                <div>Shoping Cart</div>
+                <div>Checkout</div>
                 <div><a href="Checkout.html"> Checkout </a></div>
                 <div>Order Complete</div>
 

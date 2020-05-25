@@ -122,6 +122,9 @@ body {
 
 }
 
+.burger {
+    display: none;
+}
 
 .footer{
   position: relative;

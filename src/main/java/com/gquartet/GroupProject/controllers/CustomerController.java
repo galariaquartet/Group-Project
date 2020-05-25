@@ -74,6 +74,12 @@ public class CustomerController {
             mm.addAttribute("wrongusername", "wrong username");
             return "index";
         } else {
+            if(tempcustomer.getRoleId().getRoleId() == 1){
+                if (password.equals(tempcustomer.getPassword())){
+                    session.setAttribute("customer", tempcustomer);
+                    return "AdminHome";
+                }
+            }
             // checks the plain-text password with .matches, since database's password is hashed.
             if (!passwordEncoder.matches(password, tempcustomer.getPassword())) {//wrong pass
                 mm.addAttribute("wrongpassword", "wrong password");
@@ -81,9 +87,6 @@ public class CustomerController {
             }
         }
         session.setAttribute("customer", tempcustomer);
-        if (tempcustomer.getRoleId().getRoleId() == 1) { // Admin
-            return "adminindex";
-        }
         if (tempcustomer.getRoleId().getRoleId() == 2) { // User/Customer
             return "redirect:/home";
         }

@@ -5,82 +5,65 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Order Details</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
-        <h1>Tzitzis bot at your service</h1>
-        <p>${order_details}</p>
+        <nav class="headernav">
+            <ul class="nav-links">
+                <li><a href="/aboutUs"> About us </a></li>
+                <li><a href="/preGame"> Game </a></li>
+                <li><a href="/products"> Shop </a></li>
+                <li><a href="/contact"> Contact </a></li>
+                <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
+                <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
+            </ul>
+            <div class="burger" >
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+        <div id="logo" class="mask">
+            <span class="logo-text masked"><a href="/home"> <img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
+        </div> 
 
+        <div class="order_details_container">
+            <div class="space_big"></div>
+            <div class="order_details_form">
+                <h2> Order Details </h2>
+                <c:forEach var="o" items="${orderDetails}">
+                    <p> <strong>Order Number : </strong> ${o.orderNumber.orderNumber}</p>
+                    <p><strong>Payment Details : </strong> ${o.paymentId.paymentName}</p>
+                    <p><strong>Product Details : </strong> ${o.productId.productName}, ${o.productId.productPrice}, ${o.productId.colorId.colorName}, ${o.productId.genderId.genderName}, ${o.productId.materialId.materialName}, ${o.productId.sizeId.sizeName} </p>
+                    <p><strong>User Info : </strong> ${o.shippingInformationId.recipientFirstName}, 
+                        ${o.shippingInformationId.recipientLastName},
+                        ${o.shippingInformationId.recipientPhone},
+                        ${o.shippingInformationId.shippingCountry},
+                        ${o.shippingInformationId.shippingState},
+                        ${o.shippingInformationId.shippingCity},
+                        ${o.shippingInformationId.shippingStreet},
+                        ${o.shippingInformationId.shippingZip},
 
-        <div align="center">
-            <br/>
-            <a href="newShippingInformation">Create new shippingInformation</a>
-            <br/>
+                    </p>
 
-            <br/>
-            <table border='1' cellpadding="10">
-                <thead>
-                    <tr>
-                        <th>shippingInformation Id</th>
-                        <th>shipping Country</th>
-                        <th>shipping State</th>
-                        <th>shipping City</th>
-                        <th>shipping Street</th>
-                        <th>shipping Zip</th>
-                        <th>recipient First Name</th>
-                        <th>recipient Last Name</th>
-                        <th>recipient Phone</th>
-
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="si" items="${listShippingInformation}">
-                        <tr>
-                            <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                            <td>${si.shippingInformationId}</td>
-                            <td>${si.shippingCountry}</td>
-                            <td>${si.shippingState}</td>
-                            <td>${si.shippingCity}</td>
-                            <td>${si.shippingStreet}</td>
-                            <td>${si.shippingZip}</td>
-                            <td>${si.recipientFirstName}</td>
-                            <td>${si.recipientLastName}</td>
-                            <td>${si.recipientPhone}</td>
-
-                        </tr>
-
-                    </c:forEach>
-                </tbody>
-            </table>
-
-        </div>
-
-        <a href="newPayment">Create new Payment</a>
-        <br/>
-
-        <table border='1' cellpadding="10">
-            <thead>
-                <tr>
-                    <th>payment Id</th>
-                    <th>payment Name</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <c:forEach var="p" items="${listPayment}">           
-                    <tr>
-                        <!--                            edw bazoume tis metablhtes akribws pou antistoixoun sto entity-->
-                        <td>${p.paymentId}</td>
-                        <td>${p.paymentName}</td>
-
-                        <td>
-                            <a href="/editPayment/${p.paymentId}">Edit</a>
-                            <a href="/deletePayment/${p.paymentId}">Delete</a>
-                        </td>   
-                    </tr>
+                    <hr>
                 </c:forEach>
-            </tbody>
-        </table>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footercontainer">
+                <div class="social_footer">
+
+                    <div class="follow_us">Follow us </div>
+                    <div class="socials_div">
+                        <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="${pageContext.request.contextPath}/js/burger.js"></script>
     </body>
 </html>

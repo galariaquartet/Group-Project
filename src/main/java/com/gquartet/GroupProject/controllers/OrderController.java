@@ -35,8 +35,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-//@RequestMapping("/order")
 public class OrderController {
+
 
     @Autowired
     private ShippingInformationService shippingInformationService;
@@ -57,18 +57,10 @@ public class OrderController {
     @Autowired
     private CustomerCreditCardService customerCreditCardService;
 
+
     @RequestMapping("/order/{checkedproducts}/{totalPrice}")
     public String showOrderForm(HttpSession session, Model mm, @PathVariable("checkedproducts") String checkedproducts, @PathVariable("totalPrice") double totalPrice) {
-        // public String showOrderForm(HttpSession session, Model mm, @PathVariable("checkedproducts") String checkedproducts) {
-//        System.out.println("################################## checkedproducts" + checkedproducts);
-//        // Start: Getting and Passing the ShoppingCart ids from the checked products
-//        String[] temp = checkedproducts.split(",");
-//        List<Integer> customerProducts = new ArrayList();
-//        for (int i = 0; i < temp.length; i++) {
-//            customerProducts.add(Integer.parseInt(temp[i].trim()));
-//        }
-//        mm.addAttribute("customerProducts", customerProducts);
-        // End
+        mm.addAttribute("totalPrice", totalPrice);
         ShippingInfoCustomerInfoPaymentDTO sicipDTO = new ShippingInfoCustomerInfoPaymentDTO();
         mm.addAttribute("totalPrice", totalPrice);
         mm.addAttribute("sicipDTO", sicipDTO);
@@ -118,7 +110,6 @@ public class OrderController {
     @RequestMapping("/finishOrder/{checkedproducts}/{totalPrice}/{ordernumber}/{shippinInfoId}")
     public String finishOrder(@PathVariable("ordernumber") CustomerOrder customerOrder, HttpSession session, @PathVariable("checkedproducts") String checkedproducts, @PathVariable("totalPrice") double totalPrice, @PathVariable("shippinInfoId") ShippingInformation shippingInformation, @ModelAttribute("sicipDTO") ShippingInfoCustomerInfoPaymentDTO info) {
         Payment payment = info.getPayment();
-
         //to kala8i ta pernoume apo to shopping cart. Einai se morfh string opote ta id opote ta metatrepoyme se enan pinaka apo int 
         // Start: Getting and Passing the ShoppingCart ids from the checked products
         String[] temp = checkedproducts.split(",");
@@ -136,9 +127,9 @@ public class OrderController {
             Product productId = shoppingCart.getProductId(); //pairnoume apo shoppingCart to productId 
             System.out.println("shoppingCart.getProductId() " + shoppingCart.getProductId());
             BigDecimal price = shoppingCart.getProductId().getProductPrice();
-             BigDecimal productPrice  = price.multiply(new BigDecimal(quantity));  //h timh tou product * quantity
+            BigDecimal productPrice = price.multiply(new BigDecimal(quantity));  //h timh tou product * quantity
             //dhmiourgeitai to order detail 
-           // OrderDetails orderDetails = new OrderDetails(null, quantity, BigDecimal.valueOf(totalPrice), customerOrder, payment, productId, shippingInformation);
+            // OrderDetails orderDetails = new OrderDetails(null, quantity, BigDecimal.valueOf(totalPrice), customerOrder, payment, productId, shippingInformation);
             OrderDetails orderDetails = new OrderDetails(null, quantity, productPrice, customerOrder, payment, productId, shippingInformation);
             orderDetailsService.saveOrderDetails(orderDetails);
         }
@@ -152,34 +143,12 @@ public class OrderController {
         return "redirect:/customerOrder"; //odhgei ton xrhsth pali sthn selida orderdetails mesw tou customerOrderController
     }
 
-    //einai otan eisagei o kainourgia stoixeia ths kartas edw apo8hkeuontai 
-    @RequestMapping("/card/{checkedproducts}/{totalPrice}")
-    public String showPopUpcardInformation(Model mm, @PathVariable String checkedproducts, @PathVariable("totalPrice") double totalPrice) {
-
-        CustomerCreditCard customerCreditCard = new CustomerCreditCard();
-        mm.addAttribute("customerCreditCard", customerCreditCard);
-
-        return "forward:/cardInfo/" + checkedproducts + "/" + totalPrice;
-    }
-
-    //apo8hkeuontai ta stoixeia ths kartas k epistrefei pali pisw sthn selida 
-    @RequestMapping("/cardInfo/{checkedproducts}/{totalPrice}")
-    public String cardInformation(Model mm, @PathVariable String checkedproducts, @PathVariable("totalPrice") double totalPrice) {
-
-        return "forward:/order/" + checkedproducts + "/" + totalPrice;
-    }
-
     //otan kanei allages sta stoixeia tou customer Information apo8hkeuontai k sth bash
     @RequestMapping("/saveChangesToCustomerInfo/{checkedproducts}/{totalPrice}")
-    public String saveChangesToCustomerInfo(HttpSession session, @ModelAttribute("customerInformation") CustomerInformation info, @PathVariable String checkedproducts, @PathVariable("totalPrice") double totalPrice) {
+    public String saveChangesToCustomerInfo(@ModelAttribute("customerInformation") CustomerInformation info, @PathVariable String checkedproducts, @PathVariable("totalPrice") double totalPrice, HttpSession session ) {
         int customerId = ((Customer) session.getAttribute("customer")).getCustomerId();
         customerInformationSercvice.update(info);
         return "forward:/order/" + checkedproducts + "/" + totalPrice;
-    }
-
-    @ModelAttribute("payments")
-    public List<Payment> getPayments(ModelMap mm) {
-        return paymentService.listAll();
     }
 
     @ModelAttribute("check")
@@ -199,12 +168,6 @@ public class OrderController {
     public String updateCustomerCreditCard(HttpSession session, @ModelAttribute("customerCreditCardSavedDataFromDB") CustomerCreditCard customerCreditCard, @PathVariable String checkedproducts, @PathVariable("totalPrice") double totalPrice) {
         customerCreditCardService.update(customerCreditCard);
         return "forward:/order/" + checkedproducts + "/" + totalPrice;
-    }
-
-    @ModelAttribute("customerCreditCard")
-    public CustomerCreditCard customerCreditCard(ModelMap mm) {
-        CustomerCreditCard customerCreditCard = new CustomerCreditCard();
-        return customerCreditCard;
     }
 
     @ModelAttribute("customerInformation")
