@@ -68,7 +68,6 @@ public class OrderController {
 //            customerProducts.add(Integer.parseInt(temp[i].trim()));
 //        }
 //        mm.addAttribute("customerProducts", customerProducts);
-        mm.addAttribute("totalPrice", totalPrice);
         // End
         ShippingInfoCustomerInfoPaymentDTO sicipDTO = new ShippingInfoCustomerInfoPaymentDTO();
         mm.addAttribute("totalPrice", totalPrice);

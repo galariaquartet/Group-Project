@@ -56,7 +56,6 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
         return repo.findShippingInformationByOrderDetailsId(orderNumber);
     }
 
-    //edw apo8hkeuontai oi plhrofories sthn periptwsh pou o xrhsths den 8elei na apo8hkeusei tis plhrofories tou customer Information
     @Override
     public ShippingInformation newShippingInfoFromShippingInfo(ShippingInformation shippingInformation) {
         ShippingInformation si = new ShippingInformation();
@@ -74,7 +73,6 @@ public class ShippingInformationServiceImpl implements ShippingInformationServic
         return si;
     }
 
-    //edw apo8hkeuontai oi plhrofories tou customer Information h an exei alla3ei kati
     @Override
     public ShippingInformation newShippingInfoFromCustomerInfo(CustomerInformation customerInformation) {
         ShippingInformation si = new ShippingInformation();

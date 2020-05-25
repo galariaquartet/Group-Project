@@ -4,66 +4,106 @@
 <html>
     <head>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style_shop.css">
-        <script src="${pageContext.request.contextPath}/js/shop.js"></script>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Products</title>
-        <style>
-            option, select {
-                color: white;
-            }
-        </style>
+        <!--        <style>
+                    select {
+                        all: initial;
+                        * {
+                            all: unset;
+                        }
+                        background-color: white;
+                        color: white;
+                    }
+                    option {
+                        background-color: black;
+                    }
+                </style>-->
     </head>
     <body>
 
-        <header id="header">
-            <nav class="headernav">
-                <ul class="nav-links">
-                    <li><a href="/aboutUs"> About us </a></li>
-                    <li><a href="#"> Game </a></li>
-                    <li><a href="#"> Shop </a></li>
-                    <li><a href="/contact"> Contact </a></li>
-                </ul>
-                <ul class="nav-links">
-                    <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
-                    <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
-                </ul>
-            </nav>
-            <div id="logo" class="mask">
-                <span class="logo-text masked"><a href="/home"><img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
-            </div> 
-        </header>
+        <nav class="headernav">
+            <ul class="nav-links">
+                <li><a href="/aboutUs"> About us </a></li>
+                <li><a href="/preGame"> Game </a></li>
+                <li><a href="/products"> Shop </a></li>
+                <li><a href="/contact"> Contact </a></li>
+
+                <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
+                <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
+            </ul>
+            <div class="burger" >
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+        <div id="logo" class="mask">
+            <span class="logo-text masked"><a href="/home"> <img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
+        </div> 
 
         <div id="shop_countainer">
-            <div class="space"></div>
+            <div style="height: 6rem;" class="space"></div>
             <div class="shop_top_bar">
                 <div class="filter_button">
+                    <span class="mobile_only">Sort by</span>
+                    <div class="filters"> 
+                        <span>Sort by:&nbsp;&nbsp;&nbsp; </span>
+                        <label for="price">Price: <span id="selected_price">1500</span>&euro;&nbsp;&nbsp;</label>
+                        <input id="price" type="range" min=5 max=1500 value=1500 step=10>
+                        <label for="gender">:&nbsp;&nbsp;&nbsp;Gender:&nbsp;&nbsp;</label>
+                        <select id="gender">
+                            <option value="0" selected>All</option>
+                            <option value="1" >Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Unisex</option>
+                        </select>
+                        <label for="subcategory">&nbsp;&nbsp;Categories: &nbsp;&nbsp;</label>
+                        <select id="subcategory">
+                            <option value="0" selected>All</option>
+                            <optgroup label="Clothes">
+                                <option value="1">TShirt</option>
+                                <option value="2">Sweatshirt</option>
+                                <option value="3">Jacket</option>
+                            </optgroup>
+                            <optgroup label="Accessories">
+                                <option value="4">Keychain</option>
+                            </optgroup>
+                        </select>
+                    </div>
                     <div class="burger_shoppage" >
                         <div class="line1"></div>
                         <div class="line2"></div>
                         <div class="line3"></div>
                     </div>
-                    <span>Sort by:&nbsp;&nbsp;&nbsp; </span>
-                    <input id="price" type="range" min=5 max=100 value=100 step=5>
-                    <label for="price">Price: <span id="selected_price">100</span>&euro;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <select id="gender">
-                        <option value="1" selected>Male</option>
-                        <option value="2">Female</option>
-                        <option value="3">Unisex</option>
-                    </select>
                 </div>
             </div>
 
             <div class="custom-menu">
                 <ul class="custom-menu-list" >
-                    <li class="custom-menu-li " id="cat1">CLOTHES</li>
-                    <li class="custom-menu-li proionta-item" id="cat2">ACCESSORIES<span><button onclick="toggleSubMenu()" class="plusmenubuttom" >+</button></span>
-                        <ul class="custom-sub-menu" style="display: none;">
-                            <li class="custom-menu-li" style="margin-bottom: 0;">BOARD GAMES</li>
-                            <li class="custom-menu-li" style="margin-bottom: 0;">OTHER</li>
-                        </ul>
-                    </li>
-                    <li class="custom-menu-li" id="cat3">BOARD GAMES</li>
-                    <li class="custom-menu-li" id="cat4">OTHER</li>
+                    <li class="custom-menu-li " id="cat"><label for="price">Price: <span id="selected_price">100</span>&euro;</label>
+                        <input id="price" type="range" min=5 max=100 value=100 step=5></li>
+                    <li class="custom-menu-li " id="cat"><label for="gender">Gender:</label>
+                        <select id="gender">
+                            <option value="1" selected>Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Unisex</option>
+                        </select></li>
+
+                    <li class="custom-menu-li" id="cat"><label for="subcategory">Categories:</label>
+                        <select id="subcategory">
+                            <option value="0" selected>All</option>
+                            <optgroup label="Clothes">
+                                <option value="1">TShirt</option>
+                                <option value="2">Sweatshirt</option>
+                                <option value="3">Jacket</option>
+                            </optgroup>
+                            <optgroup label="Accessories">
+                                <option value="4">Keychain</option>
+                            </optgroup>
+                        </select></li>
+                    <li class="custom-menu-li" id="cat">OTHER</li>
                 </ul>
             </div>
             <div id="categories_menu"></div>
@@ -74,14 +114,18 @@
                 <div class="social_footer">
 
                     <div class="follow_us">Follow us </div>
-                    <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
-                    <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
-                    <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                    <div class="socials_div">
+                        <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
+                        <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
     </body>
+    <script src="${pageContext.request.contextPath}/js/burger.js"></script>
+    <script src="${pageContext.request.contextPath}/js/burger_shop.js"></script>
 
     <script>
         fetch("http://localhost:8084/JsonProducts")
@@ -187,7 +231,7 @@
         const selectedPriceVal = document.querySelector("#selected_price");
         price.addEventListener("input", handlePriceInput);
         price.addEventListener("change", handlePriceChange);
-        let selectedPrice = 100;
+        let selectedPrice = 1500;
 
         function handlePriceInput(event) {
             selectedPriceVal.innerText = event.target.value;
@@ -204,7 +248,7 @@
         // Gender Filtering
         const gender = document.querySelector("#gender");
         gender.addEventListener("change", handleGenderChange);
-        let selectedGender = 1;
+        let selectedGender = 0;
 
         function handleGenderChange(event) {
             selectedGender = parseInt(event.target.value);
@@ -212,16 +256,37 @@
         }
 
         function byGender(product) {
+            if (selectedGender === 0) {
+                return product.genderId.genderId;
+            }
             return product.genderId.genderId === selectedGender;
+        }
+
+        //Subcategory Filtering
+        const subcategory = document.querySelector("#subcategory");
+        subcategory.addEventListener("change", handleSubcategoryChange);
+        let selectedSubcategory = 0;
+
+        function handleSubcategoryChange(event) {
+            selectedSubcategory = parseInt(event.target.value);
+            filterProducts();
+        }
+
+        function bySubcategory(product) {
+            if (selectedSubcategory === 0) {
+                return product.subcategoryId.subcategoryId;
+            }
+            return product.subcategoryId.subcategoryId === selectedSubcategory;
         }
 
         // Final Filtering
         function filterProducts() {
             console.log("selected price:", selectedPrice);
             console.log("selected gender:", selectedGender);
+            console.log("selected subcategory", selectedSubcategory);
             for (let i = 0; i < allproducts.length; i++) {
                 filteredProducts[i] = allproducts[i].filter(function (product) {
-                    return byPrice(product) && byGender(product);
+                    return byPrice(product) && byGender(product) && bySubcategory(product);
                 });
             }
             console.log("All products: ", allproducts);

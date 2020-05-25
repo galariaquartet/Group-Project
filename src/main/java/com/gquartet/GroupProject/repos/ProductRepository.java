@@ -8,10 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-
-    //  @Query("SELECT new com.gquartet.GroupProject.dtos.ProductCategoryImageDto(p.productId , p.productName, p.productDescription, p.productStock, p.productPrice, c.categoryId, c.categoryName) FROM Product p, Category c WHERE p.categoryId = c.categoryId") //native query opou epistrefei mia lista me ta onomata
-//    @Query("SELECT new com.gquartet.GroupProject.dtos.ProductCategoryImageDto(p.productId , p.productName, p.productDescription, p.productStock, p.productPrice, c.categoryId, c.categoryName, pi.productFilename) FROM Product p, Category c, ProductImage pi WHERE p.categoryId = c.categoryId AND p.productId = pi.productId") //native query opou epistrefei mia lista me ta onomata
-//    List<ProductCategoryImageDto> getProductCategoryImage();
     
     @Query(value ="SELECT DISTINCT (product_name) FROM product;" , nativeQuery = true)
     List<String> getDistinctNames();

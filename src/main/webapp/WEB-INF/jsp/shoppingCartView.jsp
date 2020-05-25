@@ -26,23 +26,25 @@
     </head>
     <body>
 
-        <header id="header">
-            <nav class="headernav">
-                <ul class="nav-links">
-                    <li><a href="/aboutUs"> About us </a></li>
-                    <li><a href="/preGame"> Game </a></li>
-                    <li><a href="/products"> Shop </a></li>
-                    <li><a href="/contact"> Contact </a></li>
-                </ul>
-                <ul class="nav-links">
-                    <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
-                    <li><a href="#"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
-                </ul>
-            </nav>
-            <div id="logo" class="mask">
-                <span class="logo-text masked"><a href="/home"><img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
-            </div> 
-        </header>
+        <nav class="headernav">
+            <ul class="nav-links">
+                <li><a href="/aboutUs"> About us </a></li>
+                <li><a href="/preGame"> Game </a></li>
+                <li><a href="/products"> Shop </a></li>
+                <li><a href="/contact"> Contact </a></li>
+
+                <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
+                <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
+            </ul>
+            <div class="burger" >
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+        <div id="logo" class="mask">
+            <span class="logo-text masked"><a href="/home"> <img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
+        </div> 
         <div class="ShopingCart_countainer">
             <div class="space"></div>
 
@@ -51,13 +53,11 @@
                 <div>Shopping Cart</div>
                 <div>Checkout</div>
                 <div>Order Complete</div>
-
             </div>
 
 
             <div align="center">
                 <br/>
-                
                 <br/>
                 <table style="width: 100%" cellpadding="10">
                     <thead>
@@ -116,9 +116,11 @@
                 <div class="footercontainer">
                     <div class="social_footer">
                         <div class="follow_us">Follow us </div>
-                        <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
-                        <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
-                        <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                        <div class="socials_div">
+                            <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
+                            <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
+                            <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                        </div>
                     </div>
                 </div>
             </div>

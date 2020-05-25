@@ -19,13 +19,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     @Override
     public void saveOrderDetails(OrderDetails orderDetails) {
-        //public void saveOrderDetails(CustomerOrder customerOrder, Product pr, Payment payment, ShippingInformation shippingInformation) {
-
-//        orderDetails.setOrderDetailsId(null);
-//            orderDetails.setOrderNumber(customerOrder);
-//            orderDetails.setProductId(pr);
-//            orderDetails.setPaymentId(payment);
-//            orderDetails.setShippingInformationId(shippingInformation);
         repo.save(orderDetails);
     }
 
@@ -33,10 +26,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     public List<OrderDetails> getOrderDetails(CustomerOrder id) {
         return repo.findByOrderNumber(id);
     }
-//    @Override
-//    public List<OrderDetailsDTO> getOrderDetails(CustomerOrder id) {
-//        return repo.findByOrderNumber(id);
-//    }
 
     @Override
     public OrderDetails getOrderDetailsTakeId(Integer id) {

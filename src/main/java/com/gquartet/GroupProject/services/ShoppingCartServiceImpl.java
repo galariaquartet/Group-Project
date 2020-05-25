@@ -33,14 +33,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     }
 
-//    @Override
-//    public boolean checkIfShoppingCartQuantityOverflowProductStock(int shoppingCartProductId, int customerId) {
-//       if(repo.checkShoppingCartQuantityAndProductStock(shoppingCartProductId, customerId) == null){
-//           return false; //ena den epistrepsei kapoio proion shmainei oti h quantity tou shopping cart einai megaluterh apo to product stock
-//       }
-//        return true;
-//               
-//    }
     @Override
     public ShoppingCart getCart(Integer id) {
         return repo.findById(id).get();

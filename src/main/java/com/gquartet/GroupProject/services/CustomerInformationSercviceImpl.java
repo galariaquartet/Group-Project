@@ -17,10 +17,6 @@ public class CustomerInformationSercviceImpl implements CustomerInformationSercv
         return repo.findAll();
     }
 
-//    @Override
-//    public CustomerInformation getCustomerInformation(Integer id) {
-//        return repo.findById(id).get();
-//    }
     @Override
     public CustomerInformation getCustomerInformation(Integer id) {
         return repo.getOne(id);

@@ -35,11 +35,8 @@ public class OrderStatusServiceImpl implements OrderStatusService {
     @Override
     public void update(OrderStatus orderStatus) {
         OrderStatus os = repo.getOne(orderStatus.getOrderStatusId());
-
         os.setOrderStatusId(orderStatus.getOrderStatusId());
         os.setOrderStatusName(orderStatus.getOrderStatusName());
-        os.setTrackingNo(orderStatus.getTrackingNo());
-
         repo.save(os);
     }
 

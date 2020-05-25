@@ -17,7 +17,7 @@
             <nav class="headernav">
                 <ul class="nav-links">
                     <li><a href="/aboutUs"> About us </a></li>
-                    <li><a href="#"> Game </a></li>
+                    <li><a href="/preGame"> Game </a></li>
                     <li><a href="/products"> Shop </a></li>
                     <li><a href="/contact"> Contact </a></li>
                     <li><a href="/adminMain"> Admin </a></li>
@@ -40,7 +40,7 @@
                     <form:input path="categoryName" type="text"/>
                     <form:label path="categoryFilepath">Category Image Filepath</form:label>
                     <form:input path="categoryFilepath" type="text" />
-                    <input  type="submit" value="Save Product"/>
+                    <input  type="submit" value="Save Category"/>
                 </form:form>
                 <br/>
                 <table border='1' cellpadding="10">
@@ -55,7 +55,7 @@
                         <c:forEach var="c" items="${listcategory}">  
                             <tr>
                                 <td>${c.categoryName}</td>
-                                <td> <a href="/subCategory/${c.categoryId}"><img src="${c.categoryImageFilepath}" width="100px" height="100px"></a></td>   
+                                <td> <img src="${c.categoryImageFilepath}" width="100px" height="100px"></td>   
                                 <td>
                                     <a href="/editCategory/${c.categoryId}" onclick="show1();" id="show">Edit</a>
                                     <a href="/deleteCategory/${c.categoryId}">Delete</a>

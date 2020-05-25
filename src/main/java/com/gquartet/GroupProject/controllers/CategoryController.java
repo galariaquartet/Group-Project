@@ -17,13 +17,6 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/category")
-    public String viewHomePage(ModelMap mm) {
-        List<Category> list = categoryService.listAll();
-        mm.addAttribute("listcategory", list);
-        return "categoryView";
-    }
-
     @RequestMapping("/adminCategory")
     public String adminCategory(ModelMap mm) {
         List<Category> list = categoryService.listAll();

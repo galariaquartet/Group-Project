@@ -35,7 +35,6 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public void update(Subcategory subcategory) {
         Subcategory s = repo.getOne(subcategory.getSubcategoryId());
-
         s.setSubcategoryId(subcategory.getSubcategoryId());
         s.setSubcategoryName(subcategory.getSubcategoryName());
         s.setSubcategoryImageFilepath(subcategory.getSubcategoryImageFilepath());

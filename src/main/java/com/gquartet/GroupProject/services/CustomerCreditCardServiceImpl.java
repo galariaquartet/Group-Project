@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerCreditCardServiceImpl implements CustomerCreditCardService {
 
-    @Autowired //h spring kalei automata to antikeimeno me olew tis idiothtes me to autowired
+    @Autowired
     private CustomerCreditCardRepository repo;
 
     @Override

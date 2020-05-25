@@ -17,12 +17,10 @@
             <nav class="headernav">
                 <ul class="nav-links">
                     <li><a href="/aboutUs"> About us </a></li>
-                    <li><a href="#"> Game </a></li>
+                    <li><a href="/preGame"> Game </a></li>
                     <li><a href="/products"> Shop </a></li>
                     <li><a href="/contact"> Contact </a></li>
                     <li><a href="/adminMain"> Admin </a></li>
-                </ul>
-                <ul class="nav-links">
                     <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
                     <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
                 </ul>
@@ -37,10 +35,10 @@
                 <h2>Create New Subcategory</h2>
                 <form:form method="POST" action="saveSubcategory" modelAttribute="subcategory">
 
-                    <form:label path="subcategoryName">subcategory Name </form:label>
+                    <form:label path="subcategoryName">Subcategory Name </form:label>
                     <form:input path="subcategoryName" type="text"/>
 
-                    <form:label path="subcategoryImageFilepath">subcategoryImageFilepath</form:label>
+                    <form:label path="subcategoryImageFilepath">Subcategory ImageFilepath</form:label>
                     <form:input path="subcategoryImageFilepath" type="text"/>
 
                     <form:label path="categoryId">Category</form:label>
@@ -86,15 +84,12 @@
         <div class="footer">
             <div class="footercontainer">
                 <div class="social_footer">
-
                     <div class="follow_us">Follow us </div>
-
-                    <div class="social_icon"><img src="./assets/img/facebook-icon.png"></div>
-                    <div class="social_icon"><img src="./assets/img/instagram-icons.png"></div>
-                    <div class="social_icon"><img src="./assets/img/white-github-icon-813505.png"></div>
-
-                </div>  
-            </div>  
+                    <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
+                    <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
+                    <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                </div>
+            </div>
         </div>
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
 

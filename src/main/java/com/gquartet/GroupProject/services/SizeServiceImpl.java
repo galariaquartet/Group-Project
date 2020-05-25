@@ -35,10 +35,8 @@ public class SizeServiceImpl implements SizeService {
     @Override
     public void update(ProductSize productSize) {
         ProductSize ps = new ProductSize();
-
         ps.setSizeId(productSize.getSizeId());
         ps.setSizeName(productSize.getSizeName());
-
         repo.save(ps);
     }
 

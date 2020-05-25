@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/order.css">
 
         <script
             src="https://code.jquery.com/jquery-2.2.4.js"
@@ -23,18 +23,22 @@
 
             .center {
                 margin: auto;
-                width: 60%;
+                width: min-content;
                 padding: 20px;
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+            .center1 {
+                margin: auto;
+         
             }
 
 
 
             body{font:14px Arial, Helvetica, sans-serif;}
-            .formSection{padding:10px;margin-bottom:10px;border:2px solid #ccc;transition: background 0.4s ease;}
+            .formSection{padding:10px;margin-bottom:10px;border:2px solid #ccc;transition: background 0.4s ease; }
             .formSection *{transition: opacity 0.4s ease;}
             label, input, button{display:block;margin:5px;}
-            input{background:transparent;border:1px solid #ccc;padding:2px 1px;}
+            input{background:transparent;border:1px solid #ccc;padding:2px 1px;color: white;}
             label{padding-left:2px;font-weight:bold;font-size:12px;text-transform:uppercase;}
 
             .actionButtons{margin:5px 5px 0;}
@@ -44,7 +48,7 @@
             .editButton{display:none;margin-top:10px;padding:8px 16px;background:#9db0a3;color:#fff;border:2px solid #fff;transition: background 0.4s ease;}
 
 
-            .formSection.readOnly {background:#e5f6ea;}
+            .formSection.readOnly {background:#BE1629;}
             input[disabled]{color:#000;border-color:transparent;}
             .readOnly .actionButtons{display:none;}
             .readOnly .editButton{display:block;cursor:pointer;}
@@ -72,161 +76,107 @@
 
     </head>
     <body>
+         <nav class="headernav">
+            <ul class="nav-links">
+                <li><a href="/aboutUs"> About us </a></li>
+<!--                <li><a href="/chat"> chat </a></li>-->
+                <li><a href="/preGame"> Game </a></li>
+                <li><a href="/products"> Shop </a></li>
+                <li><a href="/contact"> Contact </a></li>
+                
+<!--                            <sec:authorize access="hasAuthority('admin')">-->
+<!--                               <li><a href="/adminMain"> admin </a></li>-->
+<!--                    </sec:authorize>-->
+         
+                
+<!--                <li><a href="/adminMain"> admin </a></li>-->
+                <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
+                <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
+            </ul>
+            <div class="burger" >
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+         <div id="logo" class="mask">
+                <span class="logo-text masked"><a href="index.html"> <img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
+            </div> 
+        <div class="ShopingCart_countainer">
+            <div class="space"></div>
 
-        <div class="formSection readOnly">
+            <div class="shoping-cart-nav">
 
-            <form:form method="POST" action="/saveChangesToCustomerInfo/${checkedproducts}" modelAttribute="customerInformation"  >
-                <form:input path="customerId" type="hidden" value=""/>
+                <div>Shoping Cart</div>
+                <div><a href="Checkout.html"> Checkout </a></div>
+                <div>Order Complete</div>
+
+            </div>
+            <div class="row">
+                <div class="shiping_checkout">
+
+                    <div class="formSection readOnly">
+
+                        <form:form method="POST" action="/saveChangesToCustomerInfo/${checkedproducts}/${totalPrice}" modelAttribute="customerInformation"  >
+                            <form:input path="customerId" type="hidden" value=""/>
 
 
-                <form:label path="firstName">first Name</form:label>
-                <form:input path="firstName" id="firstName"  type="text" value="${customerInformation.firstName}" disabled="true"/>
+                            <form:label path="firstName">First Name</form:label>
+                            <form:input path="firstName" id="firstName"  type="text" value="${customerInformation.firstName}" disabled="true"/>
+                            <form:errors path="firstName" />
 
-                <form:label path="lastName">last Name</form:label>
-                <form:input path="lastName" id="lastName" type="text" value="${customerInformation.lastName}" disabled="true" />
+                            <form:label path="lastName">Last Name</form:label>
+                            <form:input path="lastName" id="lastName" type="text" value="${customerInformation.lastName}" disabled="true" />
 
-                <form:label path="country">country</form:label>
-                <form:input path="country" type="text" value="${customerInformation.country}" disabled="true"/>
+                            <form:label path="country">Country</form:label>
+                            <form:input path="country" type="text" value="${customerInformation.country}" disabled="true"/>
 
-                <form:label path="state">state</form:label>
-                <form:input path="state" type="text" value="${customerInformation.state}" disabled="true"/>
+                            <form:label path="state">State</form:label>
+                            <form:input path="state" type="text" value="${customerInformation.state}" disabled="true"/>
 
-                <form:label path="city">city</form:label>
-                <form:input path="city" type="text" value="${customerInformation.city}" disabled="true"/>
+                            <form:label path="city">City</form:label>
+                            <form:input path="city" type="text" value="${customerInformation.city}" disabled="true"/>
 
-                <form:label path="street">street</form:label>
-                <form:input path="street" type="text" value="${customerInformation.street}" disabled="true"/>
+                            <form:label path="street">Street</form:label>
+                            <form:input path="street" type="text" value="${customerInformation.street}" disabled="true"/>
 
-                <form:label path="zip">zip</form:label>
-                <form:input path="zip" type="text" value="${customerInformation.zip}" disabled="true"/>
+                            <form:label path="zip">ZIP</form:label>
+                            <form:input path="zip" type="text" value="${customerInformation.zip}" disabled="true"/>
 
-                <form:label path="phone">phone</form:label>
-                <form:input path="phone" type="number" value="${customerInformation.phone}" disabled="true"/>
+                            <form:label path="phone">Phone</form:label>
+                            <form:input path="phone" type="number" value="${customerInformation.phone}" disabled="true"/>
 
-                <button type="button" class="editButton">Edit</button>
-                <div class="actionButtons">
-                    <a href="#" class="cancelButton">Cancel</a>
-                    <button class="saveButton" type="submit">Save</button>
+                            <button type="button" class="editButton">Edit</button>
+                            <div class="actionButtons">
+                                <a href="#" class="cancelButton">Cancel</a>
+                                <form:button class="saveButton" type="submit">Save</form:button>
+                            </div>
+                        </form:form>
+                    </div>
                 </div>
-            </form:form>
-        </div>
-
-
-        <form:form method="POST" action="/process/${checkedproducts}" modelAttribute="sicipDTO"  >
-
-
-            <hr>    
-            <form:checkbox  path="check" value="" id="myCheck"  onclick="myFunction()" checked="checked"/> h dieu8unsh apostolhs 8es na einai idia me thn dieu8unsh tou customer information????
-            <!--            <input path="check" type="checkbox" id="myCheck"  onclick="myFunction()">-->
-            <div id="text" style="display:none">
-                <hr>
-                <form:input path="shippingInformation.shippingInformationId" type="hidden" value=""/>
-
-                <form:label path="shippingInformation.shippingCountry">shippingCountry</form:label>
-                <form:input path="shippingInformation.shippingCountry" type="text"/>
-
-                <form:label path="shippingInformation.shippingState">shippingState</form:label>
-                <form:input path="shippingInformation.shippingState" type="text"/>
-
-                <form:label path="shippingInformation.shippingCity">shippingCity</form:label>
-                <form:input path="shippingInformation.shippingCity" type="text"/>
-
-                <form:label path="shippingInformation.shippingStreet">shippingStreet</form:label>
-                <form:input path="shippingInformation.shippingStreet" type="text"/>
-
-                <form:label path="shippingInformation.shippingZip">shippingZip</form:label>
-                <form:input path="shippingInformation.shippingZip" type="text"/>
-
-                <form:label path="shippingInformation.recipientFirstName">recipientFirstName</form:label>
-                <form:input path="shippingInformation.recipientFirstName" type="text"/>
-
-                <form:label path="shippingInformation.recipientLastName">recipientLastName</form:label>
-                <form:input path="shippingInformation.recipientLastName" type="text"/>
-
-                <form:label path="shippingInformation.recipientPhone">recipientPhone</form:label>
-                <form:input path="shippingInformation.recipientPhone" type="number"/>
-            </div>
-
-            <hr>
-
-            <!--            piswtikh <form:radiobutton path="payment" value="1" onclick="showCardInformation();"/>  -->
-            piswtikh <form:radiobutton path="payment" value="1" onclick="showCardInformation();" id="show"/>  
-            xrewstikh <form:radiobutton path="payment" value="2" onclick="show1();" checked="checked"/> 
-
-
-
-            <input type="submit" value="Submit"/>
-        </form:form>
-        <!--            gia thn pop up payment forma-->
-        <div id="showPopupForm" class="hide">
-            <div class="center hideform">
-                <button id="close" style="float: right;">X</button>
-
-                <div class="formSection readOnly">
-
-                    <form:form action="/updateCustomerCreditCard/${checkedproducts}" method="POST" modelAttribute="customerCreditCardSavedDataFromDB">
-
-                        <form:label path="ownerFirstName">ownerFirstName</form:label>            
-                        <form:input path="ownerFirstName" type="text" />
-
-                        <form:label path="ownerLastName">ownerLastName</form:label>               
-                        <form:input path="ownerLastName"  type="text" />
-
-                        <form:label path="cardNumber">cardNumber</form:label>
-                        <form:input path="cardNumber"  type="text" />
-
-                        <form:label path="cardNumberLastDigits">cardNumberLastDigits</form:label>
-                        <form:input path="cardNumberLastDigits"  type="text" />
-
-                        <form:label path="cvv">cvv</form:label>
-                        <form:input path="cvv"  type="text" />
-
-                        <form:label path="expirationDate">expirationDate</form:label>
-                        <form:input path="expirationDate"  type="text" />
-                        <button type="button" class="editButton">Edit</button>
-                        <div class="actionButtons">
-                            <a href="#" class="cancelButton">Cancel</a>
-                            <button class="saveButton" type="submit">Save</button>
-                        </div>
-                    </form:form>
+                <div class="order_checout">   
                 </div>
-                <a href="#" onclick="showPaymentCardInformation();"> Add new Card</a>
+                
+                
+                    
+            </div>
+            <div class="footer">
+            <div class="footercontainer">
+                <div class="social_footer">
 
+                    <div class="follow_us">Follow us </div>
+                    <div class="socials_div">
+                    <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
+                    <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
+                    <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                    </div>
+                </div>
             </div>
         </div>
+            
 
-        <div id="cardPaymentForm" class="hide">
-            <div class="center hideform">
-                <button id="closePaymentForm" style="float: right;">X</button>               
-                <form:form action="/cardInfo/${checkedproducts}" method="POST" modelAttribute="customerCreditCard">
 
-                    <form:label path="ownerFirstName">ownerFirstName</form:label>            
-                    <form:input path="ownerFirstName" type="text" />
-
-                    <form:label path="ownerLastName">ownerLastName</form:label>               
-                    <form:input path="ownerLastName"  type="text" />
-
-                    <form:label path="cardNumber">cardNumber</form:label>
-                    <form:input path="cardNumber"  type="text" />
-
-                    <form:label path="cardNumberLastDigits">cardNumberLastDigits</form:label>
-                    <form:input path="cardNumberLastDigits"  type="text" />
-
-                    <form:label path="cvv">cvv</form:label>
-                    <form:input path="cvv"  type="text" />
-
-                    <form:label path="expirationDate">expirationDate</form:label>
-                    <form:input path="expirationDate"  type="text" />
-
-                    <br><br>
-                    <input type="submit" value="Submit"/>
-                </form:form>
-
-            </div>
-        </div>
-
-        ${checkedproducts};
-
+<script src="${pageContext.request.contextPath}/js/burger.js"></script>
 
         <script>
             //otan patame ta radio button to ena den emfanizei tipota enw to allo mas emafanizei to CustomerCreditCard pop up
@@ -253,7 +203,7 @@
                 $('#show').show();
             })
             $('#closePaymentForm').on('click', function () {
-                $('.center').hide();
+                $('.center1').hide();
                 $('#show').show();
 
             })

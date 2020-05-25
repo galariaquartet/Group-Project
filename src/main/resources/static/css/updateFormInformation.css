@@ -44,8 +44,7 @@ a{
 /* line 39, D:/WEB/Projects/Slider/assets/scss/style.scss */
 
 body {
-    overflow: hidden;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     font-size: 16px;
 }
@@ -54,6 +53,10 @@ body {
 body {
     font-family: "Muli", sans-serif;
     color: #030303;
+}
+.space{
+    width: 100%;
+    height: 6rem;
 }
 
 .headernav{
@@ -113,7 +116,19 @@ body {
     cursor: pointer;
 }
 
+.update_info_container{
+    width: 100%;
+    margin: auto;
+    background-color: black;
+    color: white;
 
+}
+.update_info_form_container{
+    width: 80%;
+    margin: auto;
+
+
+}
 
 
 
@@ -139,12 +154,13 @@ body {
 
 
 .footer{
-    position: absolute;
+    position: relative;
     height: 15vh;
     color: white;
     bottom: 0;
     width: 100%;
     z-index: 300;
+    background-color: black;
 }
 .footercontainer{
     position: absolute;
@@ -1170,6 +1186,7 @@ input[type=submit] {
     cursor: pointer;
     width: 100%;
     height: 2rem;
+    margin-top: 0.5rem;
 
 }
 #ap{
@@ -1989,54 +2006,54 @@ input[type=submit]:hover {
 
 }
 
-     .height90{
-     height: 90vh;
- }
+.height90{
+    height: 90vh;
+}
 @media only screen and (max-width: 812px)  {
     body{
         overflow-x: hidden;
     }
-     .account_all{
-    flex-direction: column;
-  }
-  .account_left, .account_right {
-    max-width: 100%;
-    z-index: 5;
-    margin-top: 0.5rem;
-  }
-  .acount_title{
-    padding: 0;
-  }
-.social_footer{
-      display: block;
-  }
-  .socials_div {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    margin: auto;
+    .account_all{
+        flex-direction: column;
+    }
+    .account_left, .account_right {
+        max-width: 100%;
+        z-index: 5;
+        margin-top: 0.5rem;
+    }
+    .acount_title{
+        padding: 0;
+    }
+    .social_footer{
+        display: block;
+    }
+    .socials_div {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin: auto;
     }
     .footer{
-       
+
         height: 7rem;
     }
 
-#subject{
-    height: 75px;
-}
+    #subject{
+        height: 75px;
+    }
 
 
 
- .about_text{
-  left: 5% ;
-  width: 90%; 
- }
+    .about_text{
+        left: 5% ;
+        width: 90%; 
+    }
 
-     .height90{
-     height: 90vh !important;
- }
+    .height90{
+        height: 90vh !important;
+    }
     .space{
-        height: 2rem;
+        height: 5rem;
     }
     /*ABOUT US*/
     .about_text{
@@ -2069,31 +2086,31 @@ input[type=submit]:hover {
         transition: transform 0.5s ease-in;
         z-index: 500;
     }
-   .footer{
-  width: 100%;
-  height: 10rem;
- }
-.follow_us {
-    text-align: center;
-}
-  .footercontainer{
-    position: absolute;
-top: unset;
-left: 0;
-bottom: 0;
-width: 100%;
-  }
+    .footer{
+        width: 100%;
+        height: 10rem;
+    }
+    .follow_us {
+        text-align: center;
+    }
+    .footercontainer{
+        position: absolute;
+        top: unset;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
 
 
-.socials_div {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    margin: auto;
-}
-.social_footer {
-    display: block;
-}
+    .socials_div {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin: auto;
+    }
+    .social_footer {
+        display: block;
+    }
     .burger{
         position: absolute;
         display: block;
@@ -2111,7 +2128,7 @@ width: 100%;
     }
 
 
-    
+
     .nav-active{
         transform: translateX(0);
     }

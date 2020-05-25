@@ -1,8 +1,6 @@
 package com.gquartet.GroupProject.controllers;
 
-import com.gquartet.GroupProject.dtos.CategoryDto;
 import com.gquartet.GroupProject.dtos.SubcategoryDto;
-import com.gquartet.GroupProject.models.Category;
 import com.gquartet.GroupProject.models.Subcategory;
 import com.gquartet.GroupProject.services.CategoryService;
 import com.gquartet.GroupProject.services.SubCategoryService;
@@ -22,14 +20,6 @@ public class SubCategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/subCategory/{categoryId}")
-    public String viewFilteredSubcategory(@PathVariable("categoryId") int categoryId, ModelMap mm) {
-        List<Subcategory> list = subCategoryService.findSubcategories(categoryId);
-        mm.addAttribute("listsubCategory", list);
-        return "subcategoryView";
-    }
-
-    //******************************ADMIN SUBCATEGORY***************************************   
 
     @RequestMapping("/adminSubategory")
     public String viewAdminAllSubcategories(ModelMap mm) {
@@ -42,14 +32,6 @@ public class SubCategoryController {
         
         return "adminSubcategory";
     }
-
-//    @RequestMapping("/newSubcategory")
-//    public String viewNewSubcategoryForm(ModelMap mm) {
-//        SubcategoryDto subcategoryDto = new SubcategoryDto();
-//        mm.addAttribute("subcategory", subcategoryDto);
-//        mm.addAttribute("categoryList", categoryService.listAll());
-//        return "newSubcategory";
-//    }
 
     @RequestMapping("/saveSubcategory")
     public String saveCategory(ModelMap mm, @ModelAttribute("subcategory") SubcategoryDto subcategoryDto) {

@@ -21,18 +21,13 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author User
- */
 @Entity
 @Table(name = "order_status")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrderStatus.findAll", query = "SELECT o FROM OrderStatus o"),
     @NamedQuery(name = "OrderStatus.findByOrderStatusId", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusId = :orderStatusId"),
-    @NamedQuery(name = "OrderStatus.findByOrderStatusName", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusName = :orderStatusName"),
-    @NamedQuery(name = "OrderStatus.findByTrackingNo", query = "SELECT o FROM OrderStatus o WHERE o.trackingNo = :trackingNo")})
+    @NamedQuery(name = "OrderStatus.findByOrderStatusName", query = "SELECT o FROM OrderStatus o WHERE o.orderStatusName = :orderStatusName")})
 public class OrderStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,11 +41,7 @@ public class OrderStatus implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "order_status_name")
     private String orderStatusName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "tracking_no")
-    private String trackingNo;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderStatusId")
     private List<CustomerOrder> customerOrderList;
 
@@ -61,10 +52,9 @@ public class OrderStatus implements Serializable {
         this.orderStatusId = orderStatusId;
     }
 
-    public OrderStatus(Integer orderStatusId, String orderStatusName, String trackingNo) {
+    public OrderStatus(Integer orderStatusId, String orderStatusName) {
         this.orderStatusId = orderStatusId;
         this.orderStatusName = orderStatusName;
-        this.trackingNo = trackingNo;
     }
 
     public Integer getOrderStatusId() {
@@ -81,14 +71,6 @@ public class OrderStatus implements Serializable {
 
     public void setOrderStatusName(String orderStatusName) {
         this.orderStatusName = orderStatusName;
-    }
-
-    public String getTrackingNo() {
-        return trackingNo;
-    }
-
-    public void setTrackingNo(String trackingNo) {
-        this.trackingNo = trackingNo;
     }
 
     @XmlTransient

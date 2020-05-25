@@ -18,10 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author User
- */
 @Entity
 @Table(name = "customer_information")
 @XmlRootElement

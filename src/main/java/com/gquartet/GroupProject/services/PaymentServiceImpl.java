@@ -35,10 +35,8 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void update(Payment payment) {
         Payment p = repo.getOne(payment.getPaymentId());
-
         p.setPaymentId(payment.getPaymentId());
         p.setPaymentName(payment.getPaymentName());
-
         repo.save(p);
     }
 

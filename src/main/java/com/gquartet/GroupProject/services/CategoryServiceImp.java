@@ -37,6 +37,7 @@ public class CategoryServiceImp implements CategoryService {
         Category c = repo.getOne(category.getCategoryId());
         c.setCategoryId(category.getCategoryId());
         c.setCategoryName(category.getCategoryName());
+        c.setCategoryImageFilepath(category.getCategoryImageFilepath());
         repo.save(c);
     }
 
