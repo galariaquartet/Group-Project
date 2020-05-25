@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Checkout</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/order.css">
 
         <script
@@ -15,7 +15,6 @@
 
         <style>
 
-            /*            to xrhsimopoihsame sthn pop up forma*/
             .hide {
                 display: none;
             }
@@ -29,10 +28,8 @@
             }
             .center1 {
                 margin: auto;
-         
+
             }
-
-
 
             body{font:14px Arial, Helvetica, sans-serif;}
             .formSection{padding:10px;margin-bottom:10px;border:2px solid #ccc;transition: background 0.4s ease; }
@@ -76,31 +73,30 @@
 
     </head>
     <body>
-         <nav class="headernav">
-            <ul class="nav-links">
-                <li><a href="/aboutUs"> About us </a></li>
-                <li><a href="/preGame"> Game </a></li>
-                <li><a href="/products"> Shop </a></li>
-                <li><a href="/contact"> Contact </a></li>
-                <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
-                <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
-            </ul>
-            <div class="burger" >
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
-         <div id="logo" class="mask">
-                <span class="logo-text masked"><a href="/home"> <img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
+        <header id="header">
+            <nav class="headernav">
+                <ul class="nav-links">
+                    <li><a href="/aboutUs"> About us </a></li>
+                    <li><a href="/preGame"> Game </a></li>
+                    <li><a href="/products"> Shop </a></li>
+                    <li><a href="/contact"> Contact </a></li>
+                </ul>
+                <ul class="nav-links">
+                    <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
+                    <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
+                </ul>
+            </nav>
+            <div id="logo" class="mask">
+                <span class="logo-text masked"><a href="/home"><img src="https://i.ibb.co/87qghMy/LOGO33.png"></a></span>
             </div> 
+        </header>
         <div class="ShopingCart_countainer">
             <div class="space"></div>
 
             <div class="shoping-cart-nav">
 
+                <div>Shopping Cart</div>
                 <div>Checkout</div>
-                <div><a href="Checkout.html"> Checkout </a></div>
                 <div>Order Complete</div>
 
             </div>
@@ -111,7 +107,6 @@
 
                         <form:form method="POST" action="/saveChangesToCustomerInfo/${checkedproducts}/${totalPrice}" modelAttribute="customerInformation"  >
                             <form:input path="customerId" type="hidden" value=""/>
-
 
                             <form:label path="firstName">First Name</form:label>
                             <form:input path="firstName" id="firstName"  type="text" value="${customerInformation.firstName}" disabled="true"/>
@@ -142,33 +137,104 @@
                             <div class="actionButtons">
                                 <a href="#" class="cancelButton">Cancel</a>
                                 <form:button class="saveButton" type="submit">Save</form:button>
-                            </div>
+                                </div>
                         </form:form>
                     </div>
                 </div>
-                <div class="order_checout">   
-                </div>
-                
-                
-                    
-            </div>
-            <div class="footer">
-            <div class="footercontainer">
-                <div class="social_footer">
+                <div class="order_checout">     
 
-                    <div class="follow_us">Follow us </div>
-                    <div class="socials_div">
-                    <div class="social_icon"><img src="https://i.ibb.co/1LbHv7c/facebook-icon.png"></div>
-                    <div class="social_icon"><img src="https://i.ibb.co/37ymrym/instagram-icons.png"></div>
-                    <div class="social_icon"><img src="https://i.ibb.co/P6dSF3w/white-github-icon-813505.png"></div>
+                    <form:form method="POST" action="/process/${checkedproducts}/${totalPrice}" modelAttribute="sicipDTO"  >
+
+
+                        <hr>    
+                        <form:checkbox  path="check" value="" id="myCheck"  onclick="myFunction()" checked="checked"/>Unckeck to use a different shipping address
+                        <!--            <input path="check" type="checkbox" id="myCheck"  onclick="myFunction()">-->
+                        <div id="text" style="display:none">
+                            <hr>
+                            <form:input path="shippingInformation.shippingInformationId" type="hidden" value=""/>
+
+                            <form:label path="shippingInformation.shippingCountry">Shipping Country</form:label>
+                            <form:input path="shippingInformation.shippingCountry" type="text"/>
+
+                            <form:label path="shippingInformation.shippingState">Shipping State</form:label>
+                            <form:input path="shippingInformation.shippingState" type="text"/>
+
+                            <form:label path="shippingInformation.shippingCity">Shipping City</form:label>
+                            <form:input path="shippingInformation.shippingCity" type="text"/>
+
+                            <form:label path="shippingInformation.shippingStreet">Shipping Street</form:label>
+                            <form:input path="shippingInformation.shippingStreet" type="text"/>
+
+                            <form:label path="shippingInformation.shippingZip">Shipping Zip</form:label>
+                            <form:input path="shippingInformation.shippingZip" type="text"/>
+
+                            <form:label path="shippingInformation.recipientFirstName">Recipient First Name</form:label>
+                            <form:input path="shippingInformation.recipientFirstName" type="text"/>
+
+                            <form:label path="shippingInformation.recipientLastName">Recipient Last Name</form:label>
+                            <form:input path="shippingInformation.recipientLastName" type="text"/>
+
+                            <form:label path="shippingInformation.recipientPhone">Recipient Phone</form:label>
+                            <form:input path="shippingInformation.recipientPhone" type="number"/>
+                        </div>
+                    </div>
+
+
+
+                    <hr>
+                    <div class="payment_radios"> 
+                        Credit/Debit Card <form:radiobutton checked="checked" path="payment" value="1" onclick="showCardInformation();" id="show"  />  
+                        Pay on delivery <form:radiobutton path="payment" value="2" onclick="show1();" /> </div>
+
+
+                    <div class="submit_checkout"><input type="submit" value="Submit Order"/></div>
+
+
+                </form:form>
+                <!--            gia thn pop up payment forma-->
+                <div id="showPopupForm" class="hide">
+                    <div class="center hideform">
+                        <button id="close" style="float: right;">X</button>
+
+                        <div class="formSection extraform readOnly">
+
+                            <form:form action="/updateCustomerCreditCard/${checkedproducts}/${totalPrice}" method="POST" modelAttribute="customerCreditCardSavedDataFromDB">
+                                <form:input path="cardId" type="hidden" value=""/>
+                                <form:label path="ownerFirstName">Owner First Name</form:label>            
+                                <form:input path="ownerFirstName" type="text" />
+
+                                <form:label path="ownerLastName">Owner Last Name</form:label>               
+                                <form:input path="ownerLastName"  type="text" />
+
+                                <form:label path="cardNumber">Card Number</form:label>
+                                <form:input path="cardNumber"  type="text" />
+
+                                <form:label path="cardNumberLastDigits">Card Number Last Digits</form:label>
+                                <form:input path="cardNumberLastDigits"  type="text" />
+
+                                <form:label path="cvv">CVV</form:label>
+                                <form:input path="cvv"  type="text" />
+
+                                <form:label path="expirationDate">Expiration Date</form:label>
+                                <form:input path="expirationDate"  type="text" />
+                                <button type="button" class="editButton">Edit</button>
+                                <div class="actionButtons">
+                                    <a href="#" class="cancelButton">Cancel</a>
+                                    <button class="saveButton" type="submit">Save</button>
+                                </div>
+                            </form:form>
+                        </div>
+
                     </div>
                 </div>
+
+
+
             </div>
         </div>
-            
 
+        ${checkedproducts};
 
-<script src="${pageContext.request.contextPath}/js/burger.js"></script>
 
         <script>
             //otan patame ta radio button to ena den emfanizei tipota enw to allo mas emafanizei to CustomerCreditCard pop up
@@ -177,13 +243,13 @@
             }
             function showCardInformation() {
                 document.getElementById('showPopupForm').style.display = 'block';
-                document.getElementById('cardPaymentForm').style.display = 'none';
+//                document.getElementById('cardPaymentForm').style.display = 'none';
             }
 
-            function showPaymentCardInformation() {
-                document.getElementById('showPopupForm').style.display = 'none';
-                document.getElementById('cardPaymentForm').style.display = 'block';
-            }
+//            function showPaymentCardInformation() {
+//                document.getElementById('showPopupForm').style.display = 'none';
+//                document.getElementById('cardPaymentForm').style.display = 'block';
+//            }
             //afora thn pop up forma        
             $('#show').on('click', function () {
                 $('.center').show();
@@ -194,11 +260,7 @@
                 $('.center').hide();
                 $('#show').show();
             })
-            $('#closePaymentForm').on('click', function () {
-                $('.center1').hide();
-                $('#show').show();
 
-            })
             //*************************************************************************************************************************************
             function myFunction() {
                 var checkBox = document.getElementById("myCheck");

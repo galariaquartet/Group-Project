@@ -116,7 +116,7 @@
     <script src="${pageContext.request.contextPath}/js/burger_shop.js"></script>
 
     <script>
-        fetch("http://localhost:8080/JsonProducts")
+        fetch("http://localhost:8084/JsonProducts")
                 .then(function (response) {
                     return response.json();
                 })

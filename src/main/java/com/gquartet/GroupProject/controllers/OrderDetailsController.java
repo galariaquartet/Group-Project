@@ -21,7 +21,7 @@ public class OrderDetailsController {
     public String orderDetails(@PathVariable("ordernumber") CustomerOrder customerOrder, ModelMap mm) {
         List<OrderDetails> orderDetails = orderDetailsService.getOrderDetails(customerOrder);
         mm.addAttribute("orderDetails", orderDetails);
-        return "orderDetalsView";
+        return "orderDetailsView";
     }
 
 }

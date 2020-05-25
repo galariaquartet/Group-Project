@@ -17,17 +17,9 @@
         <nav class="headernav">
             <ul class="nav-links">
                 <li><a href="/aboutUs"> About us </a></li>
-                <!--                <li><a href="/chat"> chat </a></li>-->
                 <li><a href="/preGame"> Game </a></li>
                 <li><a href="/products"> Shop </a></li>
                 <li><a href="/contact"> Contact </a></li>
-
-                <!--                            <sec:authorize access="hasAuthority('admin')">-->
-                <!--                               <li><a href="/adminMain"> admin </a></li>-->
-                <!--                    </sec:authorize>-->
-
-
-                <!--                <li><a href="/adminMain"> admin </a></li>-->
                 <li><a href="/account"><img class="acount_icon" src="https://i.ibb.co/ydgtt5p/acount.png"></a></li>
                 <li><a href="/shoppingCart"><img class="basket_icon" src="https://i.ibb.co/Fkr4Ddv/basket4.png"></a></li>
             </ul>
@@ -78,8 +70,6 @@
                                 <dir id="order" >
                                 <c:forEach var="co" items="${listCustomerOrder}">
                                     <p> <strong>Order Number : </strong> ${co.orderNumber}</p>
-
-
                                     <p><strong> Order date :</strong> ${co.orderDate} </p>
                                     <p> <strong>Order status :</strong> ${co.orderStatusId.orderStatusName} </p>
                                     <a href="/orderdetails/${co.orderNumber}">  Order Details </a>

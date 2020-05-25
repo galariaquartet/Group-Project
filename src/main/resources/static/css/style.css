@@ -138,8 +138,11 @@ body {
     margin: auto;
     height: 80vh;
 overflow: scroll;
-}
 
+}
+.order_details_form::-webkit-scrollbar {
+  display: none;
+}
 
 
 @keyframes navanimate {
