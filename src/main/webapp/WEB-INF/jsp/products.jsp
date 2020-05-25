@@ -58,6 +58,12 @@
                             <optgroup label="Accessories">
                                 <option value="4">Keychain</option>
                             </optgroup>
+                            <optgroup label="Mousepad">
+                                <option value="5">Mousepad</option>
+                            </optgroup>
+                            <optgroup label="Chess Board Game">
+                                <option value="6">Chess Board Game</option>
+                            </optgroup>
                         </select>
                     </div>
                     <div class="burger_shoppage" >
@@ -67,11 +73,11 @@
                     </div>
                 </div>
             </div>
-
+<!--
             <div class="custom-menu">
                 <ul class="custom-menu-list" >
                     <li class="custom-menu-li " id="cat"><label for="price">Price: <span id="selected_price">100</span>&euro;</label>
-                        <input id="price" type="range" min=5 max=100 value=100 step=5></li>
+                        <input id="price" type="range" min=5 max=1500 value=1500 step=10>
                     <li class="custom-menu-li " id="cat"><label for="gender">Gender:</label>
                         <select id="gender">
                             <option value="1" selected>Male</option>
@@ -90,10 +96,17 @@
                             <optgroup label="Accessories">
                                 <option value="4">Keychain</option>
                             </optgroup>
-                        </select></li>
+                            <optgroup label="Mousepad">
+                                <option value="5">Mousepad</option>
+                            </optgroup>
+                            <optgroup label="Chess Board Game">
+                                <option value="6">Chess Board Game</option>
+                            </optgroup>
+                        </select>
+                    </li>
                     <li class="custom-menu-li" id="cat">OTHER</li>
                 </ul>
-            </div>
+            </div>-->
             <div id="categories_menu"></div>
             <div id="products" class="products_container"></div>
         </div>
@@ -116,7 +129,7 @@
     <script src="${pageContext.request.contextPath}/js/burger_shop.js"></script>
 
     <script>
-        fetch("http://localhost:8084/JsonProducts")
+        fetch("http://localhost:8080/JsonProducts")
                 .then(function (response) {
                     return response.json();
                 })

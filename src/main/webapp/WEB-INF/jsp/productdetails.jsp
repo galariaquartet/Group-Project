@@ -48,7 +48,7 @@
     </body>
 
     <script>
-        fetch("http://localhost:8084/JsonProducts")
+        fetch("http://localhost:8080/JsonProducts")
                 .then(function (response) {
                     return response.json();
                 })
